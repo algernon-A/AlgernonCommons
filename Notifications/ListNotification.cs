@@ -5,6 +5,7 @@
 
 namespace AlgernonCommons.Notifications
 {
+    using System.Collections.Generic;
     using AlgernonCommons.Translation;
     using ColossalFramework.UI;
     using UnityEngine;
@@ -86,6 +87,24 @@ namespace AlgernonCommons.Notifications
                 ListItem listItem = ScrollableContent.AddUIComponent<ListItem>();
                 listItem.width = ContentWidth;
                 listItem.Text = listItems[i];
+            }
+
+            // Add spacer at end of list.
+            AddSpacer();
+        }
+
+        /// <summary>
+        /// Add dot pointed list.
+        /// </summary>
+        /// <param name="listItems">List of messages for display as separate dot points.</param>
+        public void AddList(List<string> listItems)
+        {
+            // Iterate through each provided message string and create separate dot point for each item.
+            foreach (string item in listItems)
+            {
+                ListItem listItem = ScrollableContent.AddUIComponent<ListItem>();
+                listItem.width = ContentWidth;
+                listItem.Text = item;
             }
 
             // Add spacer at end of list.

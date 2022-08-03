@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\WhatsNew\WhatsNew.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\WhatsNew\WhatsNewMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\WhatsNew\WhatsNewNotification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Notifications\YesNoNotification.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Language.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Translations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Translator.cs" />

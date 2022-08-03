@@ -86,7 +86,22 @@ namespace AlgernonCommons.UI
         /// </summary>
         /// <param name="fileName">Atlas file name (".png" will be appended to make the filename).</param>
         /// <returns>New texture atlas containing four sprites (disabled, normal, pressed, hovered).</returns>
-        public static UITextureAtlas LoadSpriteAtlas(string fileName)
+        public static UITextureAtlas LoadQuadSpriteAtlas(string fileName) => LoadSpriteAtlas(fileName, new string[] { "disabled", "normal", "pressed", "hovered" });
+
+        /// <summary>
+        /// Loads a single-sprite texture atlas from a given .png file.
+        /// </summary>
+        /// <param name="fileName">Atlas file name (".png" will be appended to make the filename).</param>
+        /// <returns>New texture atlas.</returns>
+        public static UITextureAtlas LoadSingleSpriteAtlas(string fileName) => LoadSpriteAtlas(fileName, new string[] { "normal" });
+
+        /// <summary>
+        /// Loads a texture atlas from a given .png file.
+        /// </summary>
+        /// <param name="fileName">Atlas file name (".png" will be appended to make the filename).</param>
+        /// <param name="spriteNames">Array of sprite names (in single row, read in equally-spaced columns from left to right).</param>
+        /// <returns>New texture atlas.</returns>
+        public static UITextureAtlas LoadSpriteAtlas(string fileName, string[] spriteNames)
         {
             // Check if we've already cached this file.
             if (FileCache.ContainsKey(fileName))
@@ -105,7 +120,6 @@ namespace AlgernonCommons.UI
             newAtlas.material.mainTexture = newTexture;
 
             // Setup sprites.
-            string[] spriteNames = new string[] { "disabled", "normal", "pressed", "hovered" };
             int numSprites = spriteNames.Length;
             float spriteWidth = 1f / spriteNames.Length;
 
@@ -154,7 +168,7 @@ namespace AlgernonCommons.UI
                 }
             }
 
-            // IF we got here, we couldn't find the specified atlas.
+            // If we got here, we couldn't find the specified atlas.
             return null;
         }
 

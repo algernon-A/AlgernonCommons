@@ -175,6 +175,11 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Gets the number of currently displayed rows.
+        /// </summary>
+        public int RowCount => _rows?.m_size ?? 0;
+
+        /// <summary>
         /// Gets or sets the list of data objects to display.
         /// Retains current list position where possible.
         /// </summary>
@@ -307,6 +312,27 @@ namespace AlgernonCommons.UI
 
             // If we got here, we didn't find a match; clear the selection.
             SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Clears the list.
+        /// </summary>
+        public void Clear()
+        {
+            // Reset selected index.
+            SelectedIndex = -1;
+
+            // Clear data.
+            Data.Clear();
+
+            // Disable all rows.
+            for (int i = 0; i < _rows.m_size; ++i)
+            {
+                _rows[i].enabled = false;
+            }
+
+            // Update the scrollbar to reflect the new empty state.
+            UpdateScrollbar();
         }
 
         /// <summary>

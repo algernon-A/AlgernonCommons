@@ -24,7 +24,7 @@ namespace AlgernonCommons
         public static string Name => Assembly.GetExecutingAssembly().GetName().Name;
 
         /// <summary>
-        /// Gets urrent mod assembly version.
+        /// Gets current mod assembly version.
         /// </summary>
         public static Version CurrentVersion => Assembly.GetExecutingAssembly().GetName().Version;
 

@@ -62,9 +62,6 @@ namespace AlgernonCommons.UI
                     else
                     {
                         Close();
-
-                        // Save settings on close.
-                        ModBase.Instance?.SaveSettings();
                     }
                 };
 

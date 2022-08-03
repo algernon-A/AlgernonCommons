@@ -54,5 +54,38 @@ namespace AlgernonCommons.UI
 
             return label;
         }
+
+        /// <summary>
+        /// Dynamically resizes a text label by shrinking the text scale until it fits within the desired maximum width.
+        /// </summary>
+        /// <param name="label">Label to resize.</param>
+        /// <param name="maxWidth">Maximum acceptable label width.</param>
+        /// <param name="minScale">Minimum acceptible label scale (to nearest increment of 0.05f).</param>
+        public static void ResizeLabel(UILabel label, float maxWidth, float minScale)
+        {
+            // Don't do anything with negative widths or scales.
+            if (maxWidth < 10f || minScale < 0.5f)
+            {
+                return;
+            }
+
+            // Make sure label is autosizeable and up-to-date.
+            label.autoSize = true;
+            label.PerformLayout();
+
+            // Iterate through text scales until minimum is reached.
+            while (label.width > maxWidth && label.textScale > minScale)
+            {
+                label.textScale -= 0.01f;
+                label.PerformLayout();
+            }
+
+            // Finally, clamp label size.
+            label.autoSize = false;
+            if (label.width > maxWidth)
+            {
+                label.width = maxWidth;
+            }
+        }
     }
 }
