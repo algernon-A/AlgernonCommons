@@ -14,6 +14,7 @@
 	  <Compile Remove="Keybinding\**" />
 	  <Compile Remove="Notifications\**" />
 	  <Compile Remove="Patching\**" />
+	  <Compile Remove="Translations\**" />
 	  <Compile Remove="Translation\**" />
 	  <Compile Remove="UI\**" />
 	  <Compile Remove="XML\**" />
@@ -21,6 +22,7 @@
 	  <EmbeddedResource Remove="Keybinding\**" />
 	  <EmbeddedResource Remove="Notifications\**" />
 	  <EmbeddedResource Remove="Patching\**" />
+	  <EmbeddedResource Remove="Translations\**" />
 	  <EmbeddedResource Remove="Translation\**" />
 	  <EmbeddedResource Remove="UI\**" />
 	  <EmbeddedResource Remove="XML\**" />
@@ -28,6 +30,7 @@
 	  <None Remove="Keybinding\**" />
 	  <None Remove="Notifications\**" />
 	  <None Remove="Patching\**" />
+	  <None Remove="Translations\**" />
 	  <None Remove="Translation\**" />
 	  <None Remove="UI\**" />
 	  <None Remove="XML\**" />
@@ -64,6 +67,7 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNew.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNewMessage.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNewNotification.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\YesNoNotification.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherBase.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherMod.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Language.cs" />
@@ -94,6 +98,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="AlgernonCommonsShared.projitems" />
+	  <None Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translations\en-EN.csv" />
 	  <None Remove="LICENSE.txt" />
 	  <None Remove="stylecop.json" />
 	</ItemGroup>
