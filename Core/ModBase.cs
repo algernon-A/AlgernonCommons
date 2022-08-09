@@ -27,19 +27,24 @@ namespace AlgernonCommons
         public static ModBase Instance { get; private set; }
 
         /// <summary>
-        /// Gets the mod's display name.
+        /// Gets the mod's base display name (name only).
         /// </summary>
-        public abstract string Name { get; }
+        public abstract string BaseName { get; }
+
+        /// <summary>
+        /// Gets the mod's full display name, including version.
+        /// </summary>
+        public virtual string Name => BaseName + ' ' + AssemblyUtils.TrimmedCurrentVersion;
+
+        /// <summary>
+        /// Gets the mod's name for logging purposes.
+        /// </summary>
+        public virtual string LogName => BaseName;
 
         /// <summary>
         /// Gets the mod's what's new message array.
         /// </summary>
         public virtual WhatsNewMessage[] WhatsNewMessages => null;
-
-        /// <summary>
-        /// Gets the mod's name for logging purposes.
-        /// </summary>
-        public abstract string LogName { get; }
 
         /// <summary>
         /// Load mod settings.

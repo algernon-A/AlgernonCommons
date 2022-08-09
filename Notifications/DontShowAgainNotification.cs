@@ -34,7 +34,7 @@ namespace AlgernonCommons.Notifications
             base.AddButtons();
 
             // Add don't show again button.
-            _dsaButton = this.AddButton(2, this.NumButtons, Translations.Translate("NOT_DSA"), this.Close);
+            _dsaButton = this.AddButton(2, this.NumButtons, Translations.Translate("NOTE_DONTSHOWAGAIN"), this.Close);
         }
     }
 }

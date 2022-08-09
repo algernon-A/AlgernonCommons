@@ -34,8 +34,8 @@ namespace AlgernonCommons.UI
             // Tab container (the panels underneath each tab).
             UITabContainer tabContainer = parent.AddUIComponent<UITabContainer>();
             tabContainer.relativePosition = new Vector2(posX, posY + 30f);
-            tabContainer.width = tabStrip.width;
-            tabContainer.height = tabStrip.height;
+            tabContainer.width = width;
+            tabContainer.height = height;
             tabContainer.clipChildren = false;
             tabStrip.tabPages = tabContainer;
 

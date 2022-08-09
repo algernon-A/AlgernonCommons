@@ -16,7 +16,7 @@ namespace AlgernonCommons.Notifications
         /// <summary>
         /// Gets or sets the last notified version.
         /// </summary>
-        internal static Version LastNotifiedVersion { get; set; }
+        internal static Version LastNotifiedVersion { get; set; } = new Version("0.0");
 
         /// <summary>
         /// Gets or sets the last notified version as a string (empty string if none).
@@ -58,7 +58,7 @@ namespace AlgernonCommons.Notifications
                 {
                     // Show notification.
                     WhatsNewNotification notification = NotificationBase.ShowNotification<WhatsNewNotification>();
-                    notification.Title = Translations.Translate("MOD_NAME") + " " + AssemblyUtils.TrimmedCurrentVersion;
+                    notification.Title = ModBase.Instance.Name;
                     notification.DSAButton.eventClicked += (component, clickEvent) => DontShowAgain();
                     notification.SetMessages(LastNotifiedVersion, messages);
                 }

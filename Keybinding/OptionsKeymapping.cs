@@ -177,7 +177,7 @@ namespace AlgernonCommons.Keybinding
                     | UIMouseButton.Special1
                     | UIMouseButton.Special2
                     | UIMouseButton.Special3;
-                _button.text = Translations.Translate("KEY_PRS");
+                _button.text = Translations.Translate("PRESS_ANY_KEY");
                 _button.Focus();
 
                 // Prime for new keybinding entry.

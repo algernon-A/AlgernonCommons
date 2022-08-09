@@ -32,10 +32,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIButtons.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UICheckBoxes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIDropDowns.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\UIList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIFonts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UILabels.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UILayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\UIList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIListRow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIScrollbars.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UISliders.cs" />
@@ -52,5 +52,11 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)LICENSE.txt" />
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Translations\en-EN.csv" />
   </ItemGroup>
 </Project>

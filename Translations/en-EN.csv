@@ -1,0 +1,7 @@
+﻿"LANGUAGE","English","Language name (in native language)."
+"LANGUAGE_GAME","Use game language","Default selection in language selection menu."
+"NOTE_CLOSE","Close","Notification button text - closes the notification."
+"NOTE_DONTSHOWAGAIN","Don't show again","Notification button text - don't show this notification again."
+"NO","No","Notification button text - don't perform this action."
+"YES","Yes","Notification button text - perfom this action."
+"PRESS_ANY_KEY","Press any key","Shown when awaiting user input when changing a key setting."

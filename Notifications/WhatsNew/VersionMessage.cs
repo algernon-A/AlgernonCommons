@@ -70,7 +70,7 @@ namespace AlgernonCommons.Notifications
         public void SetText(WhatsNewMessage message)
         {
             // Set version header and message text.
-            _versionTitle = Translations.Translate("MOD_NAME") + " " + message.Version.ToString(message.Version.Build > 0 ? 3 : 2);
+            _versionTitle = ModBase.Instance.BaseName + ' ' + AssemblyUtils.TrimVersion(message.Version);
 
             // Add message elements as separate list items.
             for (int i = 0; i < message.Messages.Length; ++i)

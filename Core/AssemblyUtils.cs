@@ -31,33 +31,7 @@ namespace AlgernonCommons
         /// <summary>
         /// Gets the current mod assembly version as a string, leaving off any trailing zero versions for build and revision.
         /// </summary>
-        public static string TrimmedCurrentVersion
-        {
-            get
-            {
-                // Excuting assembly version.
-                Version currentVersion = CurrentVersion;
-
-                // Trim off trailing zeros.
-                if (currentVersion.Revision != 0)
-                {
-                    // If any revision other than zero, we return the full version.
-                    return currentVersion.ToString(4);
-                }
-                else if (currentVersion.Build != 0)
-                {
-                    // Revision is zero; if build is nonzero, return major.minor.build.
-                    // 1.0.1.0 => 1.0.1
-                    return currentVersion.ToString(3);
-                }
-                else
-                {
-                    // Revision and build are zero; return major.minor.
-                    // 1.0.0.0 => 1.0
-                    return currentVersion.ToString(2);
-                }
-            }
-        }
+        public static string TrimmedCurrentVersion => TrimVersion(CurrentVersion);
 
         /// <summary>
         /// Gets the mod directory filepath of the currently executing mod assembly.
@@ -108,6 +82,33 @@ namespace AlgernonCommons
                 // If we got here, then we didn't find the assembly.
                 Logging.Error("assembly path not found");
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns the provided version as a string, leaving off any trailing zeros versions for build and revision.
+        /// </summary>
+        /// <param name="version">Version to display.</param>
+        /// <returns>Trimmed version text.</returns>
+        public static string TrimVersion(Version version)
+        {
+            // Trim off trailing zeros.
+            if (version.Revision != 0)
+            {
+                // If any revision other than zero, we return the full version.
+                return version.ToString(4);
+            }
+            else if (version.Build != 0)
+            {
+                // Revision is zero; if build is nonzero, return major.minor.build.
+                // 1.0.1.0 => 1.0.1
+                return version.ToString(3);
+            }
+            else
+            {
+                // Revision and build are zero; return major.minor.
+                // 1.0.0.0 => 1.0
+                return version.ToString(2);
             }
         }
     }

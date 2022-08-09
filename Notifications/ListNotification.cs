@@ -35,7 +35,7 @@ namespace AlgernonCommons.Notifications
         /// <summary>
         /// Adds buttons to the notification.
         /// </summary>
-        public virtual void AddButtons() => AddButton(1, NumButtons, Translations.Translate("NOT_CLOSE"), Close);
+        public virtual void AddButtons() => AddButton(1, NumButtons, Translations.Translate("NOTE_CLOSE"), Close);
 
         /// <summary>
         /// Add paragraphs to the notification.

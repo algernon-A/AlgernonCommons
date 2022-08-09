@@ -197,6 +197,9 @@ namespace AlgernonCommons.UI
                     // Update the scrollbar to reflect the new data size.
                     UpdateScrollbar();
 
+                    // Clear selection.
+                    _selectedIndex = -1;
+
                     // Refresh the list.
                     Display(_currentPosition);
                 }

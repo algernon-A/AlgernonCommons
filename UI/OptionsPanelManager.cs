@@ -27,6 +27,16 @@ namespace AlgernonCommons.UI
         private static TPanel s_panel;
 
         /// <summary>
+        /// Gets the paanel width.
+        /// </summary>
+        public static float PanelWidth => s_optionsParentPanel?.width ?? 0f;
+
+        /// <summary>
+        /// Gets the paanel height.
+        /// </summary>
+        public static float PanelHeight => 725f;
+
+        /// <summary>
         /// Options panel setup.
         /// </summary>
         /// <param name="helper">UIHelperBase parent.</param>
@@ -100,9 +110,8 @@ namespace AlgernonCommons.UI
 
                     // Create a base panel attached to our game object, perfectly overlaying the game options panel.
                     s_panel = s_optionsGameObject.AddComponent<TPanel>();
-                    s_panel.width = s_panel.width - 10f;
-                    s_panel.width = s_optionsParentPanel.width;
-                    s_panel.height = 725f;
+                    s_panel.width = PanelWidth;
+                    s_panel.height = PanelHeight;
 
                     // Needed to ensure position is consistent if we regenerate after initial opening (e.g. on language change).
                     s_panel.relativePosition = new Vector2(10f, 10f);
