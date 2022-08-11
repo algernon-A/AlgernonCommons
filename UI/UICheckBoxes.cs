@@ -62,12 +62,13 @@ namespace AlgernonCommons.UI
             checkBox.clipChildren = false;
             checkBox.relativePosition = new Vector2(xPos, yPos);
 
-            // Sprites.
+            // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
             sprite.spriteName = "check-unchecked";
-            sprite.size = new Vector2(size, size);
+            sprite.size = checkBox.size;
             sprite.relativePosition = Vector2.zero;
 
+            // Checked sprite.
             checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
             ((UISprite)checkBox.checkedBoxObject).spriteName = "check-checked";
             checkBox.checkedBoxObject.size = new Vector2(size, size);
@@ -83,7 +84,7 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
-        /// Creates a plain checkbox using the game's option panel checkbox template.
+        /// Adds a plain checkbox using the game's option panel checkbox template.
         /// </summary>
         /// <param name="parent">Parent component.</param>
         /// <param name="text">Descriptive label text.</param>
@@ -99,10 +100,10 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
-        /// Creates a plain checkbox using the game's option panel checkbox template.
+        /// Adds a plain checkbox using the game's option panel checkbox template.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Descriptive label text.</param>
         /// <returns>New checkbox using the game's option panel template.</returns>
@@ -120,10 +121,10 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
-        /// Creates a plain checkbox using the game's option panel checkbox template, with word wrapping for the label.
+        /// Adss a plain checkbox using the game's option panel checkbox template, with word wrapping for the label.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Descriptive label text.</param>
         /// <param name="labelWidth">Label width.</param>
@@ -152,6 +153,61 @@ namespace AlgernonCommons.UI
                     checkBox.height = label.height + 2f;
                 }
             }
+
+            return checkBox;
+        }
+
+        /// <summary>
+        /// Adds an icon toggle checkbox.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
+        /// <param name="atlas">Icon atlas.</param>
+        /// <param name="checkedSpriteName">Checked sprite name.</param>
+        /// <param name="uncheckedSpriteName">Unchecked sprite name.</param>
+        /// <param name="width">Toggle width (default 35).</param>
+        /// <param name="height">Toggle height (default 35).</param>
+        /// <param name="tooltip">Tooltip, if any.</param>
+        /// <returns>New UICheckbox.</returns>
+        public static UICheckBox AddIconToggle(UIComponent parent, float xPos, float yPos, string atlas, string checkedSpriteName, string uncheckedSpriteName, float width = 35f, float height = 35f, string tooltip = null)
+        {
+            // Create checkbox.
+            UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
+
+            // Set size.
+            checkBox.width = width;
+            checkBox.height = height;
+            checkBox.clipChildren = true;
+
+            // Add background panel.
+            UIPanel panel = checkBox.AddUIComponent<UIPanel>();
+            panel.backgroundSprite = "IconPolicyBaseRect";
+            panel.size = checkBox.size;
+            panel.relativePosition = Vector2.zero;
+
+            // Event handler to toggle background state on check change.
+            checkBox.eventCheckChanged += (c, isChecked) => panel.backgroundSprite = isChecked ? "IconPolicyBaseRect" : "IconPolicyBaseRectDisabled";
+
+            // Event handler to toggle background state on hover.
+            checkBox.eventMouseEnter += (c, p) => panel.backgroundSprite = "IconPolicyBaseRectHovered";
+
+            // Event handler to toggle background state on de-hover.
+            checkBox.eventMouseLeave += (c, p) => panel.backgroundSprite = checkBox.isChecked ? "IconPolicyBaseRect" : "IconPolicyBaseRectDisabled";
+
+            // Unchecked sprite.
+            UISprite sprite = checkBox.AddUIComponent<UISprite>();
+            sprite.atlas = UITextures.GetTextureAtlas(atlas);
+            sprite.spriteName = "check-unchecked";
+            sprite.size = checkBox.size;
+            sprite.relativePosition = Vector2.zero;
+
+            // Checked sprite.
+            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite)checkBox.checkedBoxObject).atlas = UITextures.GetTextureAtlas(atlas);
+            ((UISprite)checkBox.checkedBoxObject).spriteName = uncheckedSpriteName;
+            checkBox.checkedBoxObject.size = checkBox.size;
+            checkBox.checkedBoxObject.relativePosition = Vector2.zero;
 
             return checkBox;
         }

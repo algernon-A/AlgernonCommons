@@ -63,6 +63,7 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNew.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNewMessage.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNewNotification.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\YesNoNotification.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Language.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translations.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translator.cs" />
@@ -78,6 +79,7 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIScrollbars.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISliders.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISpacers.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISprites.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITabstrips.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITextFields.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITextures.cs" />

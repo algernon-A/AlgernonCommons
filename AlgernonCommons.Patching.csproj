@@ -85,6 +85,7 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIScrollbars.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISliders.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISpacers.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UISprites.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITabstrips.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITextFields.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UITextures.cs" />

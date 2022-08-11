@@ -73,7 +73,7 @@ namespace AlgernonCommons.UI
             label.autoSize = true;
             label.PerformLayout();
 
-            // Iterate through text scales until minimum is reached.
+            // Iterate through text scales until acceptible width is reached, or we reach the minimum permitted scale.
             while (label.width > maxWidth && label.textScale > minScale)
             {
                 label.textScale -= 0.01f;
@@ -85,6 +85,31 @@ namespace AlgernonCommons.UI
             if (label.width > maxWidth)
             {
                 label.width = maxWidth;
+            }
+        }
+
+        /// <summary>
+        /// Truncates a text label by reducing the number of characters displayed and appending an ellipsis.
+        /// </summary>
+        /// <param name="label">Label to truncate.</param>
+        /// <param name="maxWidth">Maximum acceptable label width (minimum 20).</param>
+        public static void TruncateLabel(UILabel label, float maxWidth)
+        {
+            // Don't do anything with maximum widths below 20f.
+            if (maxWidth < 20f)
+            {
+                return;
+            }
+
+            // Make sure label is autosizeable and up-to-date.
+            label.autoSize = true;
+            label.PerformLayout();
+
+            // Iterativly remove the last remaining letter through text scales until acceptible width is reached.
+            while (label.width > maxWidth)
+            {
+                label.text = label.text.Substring(0, label.text.Length - 4) + "...";
+                label.PerformLayout();
             }
         }
     }

@@ -318,6 +318,11 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Regenerates the list display.
+        /// </summary>
+        public void Refresh() => Display(_currentPosition);
+
+        /// <summary>
         /// Clears the list.
         /// </summary>
         public void Clear()

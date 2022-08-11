@@ -37,6 +37,11 @@ namespace AlgernonCommons.UI
         public static float PanelHeight => 725f;
 
         /// <summary>
+        /// Gets a value indicating whether the options panel is currently active.
+        /// </summary>
+        public static bool IsOpen => s_panel != null;
+
+        /// <summary>
         /// Options panel setup.
         /// </summary>
         /// <param name="helper">UIHelperBase parent.</param>
