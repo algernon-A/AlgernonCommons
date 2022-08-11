@@ -111,13 +111,12 @@ namespace AlgernonCommons.UI
         public static UISlider AddBudgetSlider(UIComponent parent, float xPos, float yPos, float width, float maxValue, string tooltip = null)
         {
             // Layout constants.
-            const float SliderY = 18f;
             const float SliderHeight = 18f;
 
             // Slider control.
             UISlider newSlider = parent.AddUIComponent<UISlider>();
             newSlider.size = new Vector2(width, SliderHeight);
-            newSlider.relativePosition = new Vector2(xPos, yPos + SliderY);
+            newSlider.relativePosition = new Vector2(xPos, yPos);
 
             // Tooltip.
             if (tooltip != null)

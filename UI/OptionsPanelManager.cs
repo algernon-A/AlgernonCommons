@@ -27,7 +27,7 @@ namespace AlgernonCommons.UI
         private static TPanel s_panel;
 
         /// <summary>
-        /// Gets the paanel width.
+        /// Gets the panel width.
         /// </summary>
         public static float PanelWidth => s_optionsParentPanel?.width ?? 0f;
 

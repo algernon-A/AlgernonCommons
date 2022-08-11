@@ -5,6 +5,7 @@
 
 namespace AlgernonCommons.Keybinding
 {
+    using System.Xml.Serialization;
     using ColossalFramework;
     using UnityEngine;
 
@@ -13,6 +14,23 @@ namespace AlgernonCommons.Keybinding
     /// </summary>
     public class KeyOnlyBinding : KeybindingBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyOnlyBinding"/> class.
+        /// </summary>
+        public KeyOnlyBinding()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyOnlyBinding"/> class.
+        /// </summary>
+        /// <param name="keyCode">Key code to set.</param>
+        public KeyOnlyBinding(KeyCode keyCode)
+            : base(keyCode)
+        {
+        }
+
         /// <summary>
         /// Encode keybinding as saved input key for UUI.
         /// </summary>

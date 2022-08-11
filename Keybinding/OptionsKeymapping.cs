@@ -13,7 +13,7 @@ namespace AlgernonCommons.Keybinding
     /// <summary>
     /// Keycode setting control for mod hotkeys.
     /// </summary>
-    public abstract class OptionsKeymapping : UICustomControl
+    public class OptionsKeymapping : UICustomControl
     {
         // Components.
         private readonly UIButton _button;

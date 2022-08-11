@@ -14,6 +14,16 @@ namespace AlgernonCommons.UI
     public static class UITextFields
     {
         /// <summary>
+        /// Adds a tiny input text field at the specified coordinates.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="posX">Relative X postion.</param>
+        /// <param name="posY">Relative Y position.</param>
+        /// <param name="width">Textfield width (default 200).</param>
+        /// <returns>New large textfield with attached label.</returns>
+        public static UITextField AddTinyTextField(UIComponent parent, float posX, float posY, float width = 200f) => AddTextField(parent, posX, posY, width, 16f, 0.8f, 3);
+
+        /// <summary>
         /// Adds a small textfield with an attached label to the left.
         /// </summary>
         /// <param name="parent">Parent component.</param>
@@ -61,7 +71,7 @@ namespace AlgernonCommons.UI
             label.wordWrap = false;
 
             // Event handler to set position on text change.
-            label.eventTextChanged += (control, newText) => { label.relativePosition = new Vector2(-(label.width + 5f), (height - label.height) / 2); };
+            label.eventTextChanged += (c, newText) => { label.relativePosition = new Vector2(-(label.width + 5f), (height - label.height) / 2); };
 
             // Set text.
             label.text = text;

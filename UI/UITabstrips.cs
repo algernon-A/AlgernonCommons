@@ -20,9 +20,10 @@ namespace AlgernonCommons.UI
         /// <param name="posX">Relative X postion.</param>
         /// <param name="posY">Relative Y position.</param>
         /// <param name="width">Tabstrip panel width.</param>
-        /// <param name="height">Tabstrup panel height (including tabs).</param>
+        /// <param name="height">Tabstrip panel height (including tabs).</param>
+        /// <param name="container">Tabstrip tab container instance.</param>
         /// <returns>New tabstrip.</returns>
-        public static UITabstrip AddTabStrip(UIComponent parent, float posX, float posY, float width, float height)
+        public static UITabstrip AddTabStrip(UIComponent parent, float posX, float posY, float width, float height, out UITabContainer container)
         {
             // Basic setup.
             UITabstrip tabStrip = parent.AddUIComponent<UITabstrip>();
@@ -33,12 +34,14 @@ namespace AlgernonCommons.UI
 
             // Tab container (the panels underneath each tab).
             UITabContainer tabContainer = parent.AddUIComponent<UITabContainer>();
+            tabContainer.name = "TabContainer";
             tabContainer.relativePosition = new Vector2(posX, posY + 30f);
             tabContainer.width = width;
             tabContainer.height = height;
             tabContainer.clipChildren = false;
             tabStrip.tabPages = tabContainer;
 
+            container = tabContainer;
             return tabStrip;
         }
 
@@ -48,7 +51,7 @@ namespace AlgernonCommons.UI
         /// <param name="tabStrip">UIT tabstrip to add to.</param>
         /// <param name="tabName">Name of this tab.</param>
         /// <param name="tabIndex">Index number of this tab.</param>
-        /// <param name="button">Tab button instance reference.</param>
+        /// <param name="button">Tab button instance.</param>
         /// <param name="width">Tab width.</param>
         /// <param name="autoLayout">Default autoLayout setting.</param>
         /// <returns>UIPanel instance for the new tab panel.</returns>
