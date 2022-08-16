@@ -67,7 +67,7 @@ namespace AlgernonCommons.UI
             else
             {
                 // Simple event hook to create/destroy GameObject based on appropriate visibility.
-                s_gameOptionsPanel.eventVisibilityChanged += (control, isVisible) =>
+                s_gameOptionsPanel.eventVisibilityChanged += (c, isVisible) =>
                 {
                     // Create/destroy based on whether or not we're now visible.
                     if (isVisible)

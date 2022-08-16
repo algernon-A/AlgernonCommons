@@ -15,6 +15,9 @@ namespace AlgernonCommons.Notifications
     /// </summary>
     public class ListNotification : NotificationBase
     {
+        // Close button.
+        private UIButton _closeButton;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ListNotification"/> class.
         /// </summary>
@@ -28,6 +31,11 @@ namespace AlgernonCommons.Notifications
         }
 
         /// <summary>
+        /// Gets the close button instance.
+        /// </summary>
+        public UIButton CloseButton => _closeButton;
+
+        /// <summary>
         /// Gets the number of buttons for this panel (for layout).
         /// </summary>
         protected virtual int NumButtons => 1;
@@ -35,7 +43,10 @@ namespace AlgernonCommons.Notifications
         /// <summary>
         /// Adds buttons to the notification.
         /// </summary>
-        public virtual void AddButtons() => AddButton(1, NumButtons, Translations.Translate("NOTE_CLOSE"), Close);
+        public virtual void AddButtons()
+        {
+            _closeButton = AddButton(1, NumButtons, Translations.Translate("NOTE_CLOSE"), Close);
+        }
 
         /// <summary>
         /// Add paragraphs to the notification.

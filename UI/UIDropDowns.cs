@@ -126,7 +126,7 @@ namespace AlgernonCommons.UI
         /// Creates a plain dropdown using the game's option panel dropdown template.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Descriptive label text.</param>
         /// <param name="items">Dropdown menu item list.</param>

@@ -68,6 +68,8 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translations.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translator.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\OptionsPanelManager.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanel.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanelManager.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIButtons.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UICheckBoxes.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIDropDowns.cs" />

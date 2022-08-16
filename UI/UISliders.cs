@@ -17,7 +17,7 @@ namespace AlgernonCommons.UI
         /// Adds an options panel-style slider with a descriptive text label above.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Descriptive label text.</param>
         /// <param name="min">Slider minimum value.</param>
@@ -68,7 +68,7 @@ namespace AlgernonCommons.UI
         /// Adds an options panel-style slider with a descriptive text label above and an automatically updating value label immediately to the right.
         /// </summary>
         /// <param name="parent">Panel to add the control to.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Descriptive label text.</param>
         /// <param name="min">Slider minimum value.</param>

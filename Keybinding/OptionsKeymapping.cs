@@ -37,8 +37,8 @@ namespace AlgernonCommons.Keybinding
             _button = _panel.Find<UIButton>("Binding");
 
             // Attach our event handlers.
-            _button.eventKeyDown += (control, keyEvent) => OnKeyDown(keyEvent);
-            _button.eventMouseDown += (control, mouseEvent) => OnMouseDown(mouseEvent);
+            _button.eventKeyDown += (c, keyEvent) => OnKeyDown(keyEvent);
+            _button.eventMouseDown += (c, mouseEvent) => OnMouseDown(mouseEvent);
         }
 
         /// <summary>

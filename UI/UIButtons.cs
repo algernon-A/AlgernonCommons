@@ -81,6 +81,27 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Adds a simple pushbutton, even smaller than the others.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="posX">Relative X postion.</param>
+        /// <param name="posY">Relative Y position.</param>
+        /// <param name="text">Button text.</param>
+        /// <param name="width">Button width (default 200).</param>
+        /// <param name="height">Button height (default 20).</param>
+        /// <param name="scale">Text scale (default 0.7).</param>
+        /// <returns>New UIButton.</returns>
+        public static UIButton AddEvenSmallerButton(UIComponent parent, float posX, float posY, string text, float width = 200f, float height = 20f, float scale = 0.7f)
+        {
+            UIButton button = AddButton(parent, posX, posY, text, width, height, scale);
+
+            // Adjust bounding box to center 0.7 text in a 20-high button.
+            button.textPadding = new RectOffset(3, 3, 3, 0);
+
+            return button;
+        }
+
+        /// <summary>
         /// Adds an icon-style button to the specified component at the specified coordinates.
         /// </summary>
         /// <param name="parent">Parent UIComponent.</param>

@@ -14,17 +14,12 @@ namespace AlgernonCommons.UI
     public abstract class UIListRow : UIPanel
     {
         /// <summary>
-        /// Default row height.
-        /// </summary>
-        public const float DefaultRowHeight = 20f;
-
-        /// <summary>
         /// Default display margin.
         /// </summary>
         public const float Margin = 5f;
 
         // UI components.
-        private UISprite _background;
+        private readonly UISprite _background;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIListRow"/> class.
@@ -41,14 +36,12 @@ namespace AlgernonCommons.UI
             _background.relativePosition = Vector2.zero;
             _background.autoSize = false;
             _background.zOrder = 0;
-
-            height = RowHeight;
         }
 
         /// <summary>
         /// Gets the height for this row.
         /// </summary>
-        public virtual float RowHeight => DefaultRowHeight;
+        public virtual float RowHeight => UIList.DefaultRowHeight;
 
         /// <summary>
         /// Generates and displays a row.

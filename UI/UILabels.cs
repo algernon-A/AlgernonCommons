@@ -17,13 +17,14 @@ namespace AlgernonCommons.UI
         /// Adds a plain text label to the specified UI component.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position).</param>
+        /// <param name="xPos">Relative x position.</param>
         /// <param name="yPos">Relative y position.</param>
         /// <param name="text">Label text.</param>
         /// <param name="width">Label width (-1 (default) for autosize).</param>
         /// <param name="textScale">Text scale (default 1.0).</param>
+        /// <param name="alignment">Text alignement (default left).</param>
         /// <returns>New text label.</returns>
-        public static UILabel AddLabel(UIComponent parent, float xPos, float yPos, string text, float width = -1f, float textScale = 1.0f)
+        public static UILabel AddLabel(UIComponent parent, float xPos, float yPos, string text, float width = -1f, float textScale = 1.0f, UIHorizontalAlignment alignment = UIHorizontalAlignment.Left)
         {
             // Add label.
             UILabel label = parent.AddUIComponent<UILabel>();
@@ -44,6 +45,9 @@ namespace AlgernonCommons.UI
                 label.autoHeight = false;
                 label.wordWrap = false;
             }
+
+            // Alignment.
+            label.textAlignment = alignment;
 
             // Text.
             label.textScale = textScale;

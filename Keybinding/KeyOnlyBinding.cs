@@ -5,7 +5,6 @@
 
 namespace AlgernonCommons.Keybinding
 {
-    using System.Xml.Serialization;
     using ColossalFramework;
     using UnityEngine;
 

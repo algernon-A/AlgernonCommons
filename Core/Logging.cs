@@ -14,12 +14,23 @@ namespace AlgernonCommons
     /// </summary>
     public static class Logging
     {
+        // Stringbuilder for messaging.
+        private static readonly StringBuilder MessageBuilder = new StringBuilder(128);
+
         // Private fields.
         private static bool s_detailLogging = true;
         private static string s_modName;
 
-        // Stringbuilder for messaging.
-        private static StringBuilder s_message = new StringBuilder(128);
+        /// <summary>
+        /// Exception event handler delegate.
+        /// </summary>
+        /// <param name="exceptionMessage">Exception message.</param>
+        public delegate void ExceptionEventHandler(string exceptionMessage);
+
+        /// <summary>
+        /// Exception occured event.
+        /// </summary>
+        public static event ExceptionEventHandler EventExceptionOccured;
 
         /// <summary>
         /// Gets or sets a value indicating whether more detailed logging should be provided.
@@ -78,34 +89,37 @@ namespace AlgernonCommons
         {
             // Use StringBuilder for efficiency since we're doing a lot of manipulation here.
             // Start with mod name (to easily identify relevant messages), followed by colon to indicate start of actual message.
-            s_message.Length = 0;
-            s_message.Append(ModName);
-            s_message.Append(": ");
+            MessageBuilder.Length = 0;
+            MessageBuilder.Append(ModName);
+            MessageBuilder.Append(": ");
 
             // Add each message parameter.
             for (int i = 0; i < messages.Length; ++i)
             {
-                s_message.Append(messages[i]);
+                MessageBuilder.Append(messages[i]);
             }
 
             // Finish with a new line and the exception information.
-            s_message.AppendLine();
-            s_message.AppendLine("Exception: ");
-            s_message.AppendLine(exception.Message);
-            s_message.AppendLine(exception.Source);
-            s_message.AppendLine(exception.StackTrace);
+            MessageBuilder.AppendLine();
+            MessageBuilder.AppendLine("Exception: ");
+            MessageBuilder.AppendLine(exception.Message);
+            MessageBuilder.AppendLine(exception.Source);
+            MessageBuilder.AppendLine(exception.StackTrace);
 
             // Log inner exception as well, if there is one.
             if (exception.InnerException != null)
             {
-                s_message.AppendLine("Inner exception:");
-                s_message.AppendLine(exception.InnerException.Message);
-                s_message.AppendLine(exception.InnerException.Source);
-                s_message.AppendLine(exception.InnerException.StackTrace);
+                MessageBuilder.AppendLine("Inner exception:");
+                MessageBuilder.AppendLine(exception.InnerException.Message);
+                MessageBuilder.AppendLine(exception.InnerException.Source);
+                MessageBuilder.AppendLine(exception.InnerException.StackTrace);
             }
 
             // Write to log.
-            Debug.Log(s_message);
+            Debug.Log(MessageBuilder);
+
+            // Invoke exception occured event.
+            EventExceptionOccured?.Invoke(MessageBuilder.ToString());
         }
 
         /// <summary>
@@ -117,23 +131,23 @@ namespace AlgernonCommons
         {
             // Use StringBuilder for efficiency since we're doing a lot of manipulation here.
             // Start with mod name (to easily identify relevant messages), followed by colon to indicate start of actual message.
-            s_message.Length = 0;
-            s_message.Append(ModName);
-            s_message.Append(": ");
+            MessageBuilder.Length = 0;
+            MessageBuilder.Append(ModName);
+            MessageBuilder.Append(": ");
 
             // Append prefix.
-            s_message.Append(prefix);
+            MessageBuilder.Append(prefix);
 
             // Add each message parameter.
             for (int i = 0; i < messages.Length; ++i)
             {
-                s_message.Append(messages[i]);
+                MessageBuilder.Append(messages[i]);
             }
 
             // Terminating period to confirm end of message.
-            s_message.Append(".");
+            MessageBuilder.Append(".");
 
-            Debug.Log(s_message);
+            Debug.Log(MessageBuilder);
         }
     }
 }

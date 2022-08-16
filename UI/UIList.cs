@@ -14,7 +14,12 @@ namespace AlgernonCommons.UI
     /// </summary>
     public class UIList : UIComponent
     {
-        // Layout constants.
+        /// <summary>
+        /// Default row height.
+        /// </summary>
+        public const float DefaultRowHeight = 20f;
+
+        // Private layout constants.
         private const float ScrollBarWidth = 10f;
 
         // UI components.
@@ -26,7 +31,7 @@ namespace AlgernonCommons.UI
         private Type _rowType;
 
         // Layout variables.
-        private float _rowHeight = 20f;
+        private float _rowHeight;
 
         // Current selection.
         private int _selectedIndex = -1;
@@ -82,15 +87,24 @@ namespace AlgernonCommons.UI
             {
                 // Can't move to a position past the last full screen of rows.
                 int newPosition = value;
-                int maxPosition = _data.m_size - _rows.m_size;
-                if (newPosition > maxPosition)
-                {
-                    newPosition = maxPosition;
-                }
 
-                // Can't move below zero, either (this also catches underflows from maxPosition adjustment above).
-                if (newPosition < 0)
+                if (_data != null)
                 {
+                    int maxPosition = _data.m_size - _rows.m_size;
+                    if (newPosition > maxPosition)
+                    {
+                        newPosition = maxPosition;
+                    }
+
+                    // Can't move below zero, either (this also catches underflows from maxPosition adjustment above).
+                    if (newPosition < 0)
+                    {
+                        newPosition = 0;
+                    }
+                }
+                else
+                {
+                    // No data - can't do anything other than position 0.
                     newPosition = 0;
                 }
 
@@ -223,9 +237,14 @@ namespace AlgernonCommons.UI
         /// </summary>
         /// <typeparam name="TRow">Row type.</typeparam>
         /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
+        /// <param name="width">List width.</param>
+        /// <param name="height">List height.</param>
+        /// <param name="rowHeight">Row height.</param>
         /// <returns>New UIList.</returns>
-        public static UIList AddUIList<TRow>(UIComponent parent)
-            where TRow : UIListRow => AddUIList<UIList, TRow>(parent);
+        public static UIList AddUIList<TRow>(UIComponent parent, float xPos, float yPos, float width, float height, float rowHeight = DefaultRowHeight)
+            where TRow : UIListRow => AddUIList<UIList, TRow>(parent, xPos, yPos, width, height, rowHeight);
 
         /// <summary>
         /// Adds a UIList of the specified type to the specified parent and peforms intial setup.
@@ -235,14 +254,22 @@ namespace AlgernonCommons.UI
         /// <typeparam name="TList">List type.</typeparam>
         /// <typeparam name="TRow">Row type.</typeparam>
         /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
+        /// <param name="width">List width.</param>
+        /// <param name="height">List height.</param>
+        /// <param name="rowHeight">Row height.</param>
         /// <returns>New UIList of specified type.</returns>
-        public static TList AddUIList<TList, TRow>(UIComponent parent)
+        public static TList AddUIList<TList, TRow>(UIComponent parent, float xPos, float yPos, float width, float height, float rowHeight = DefaultRowHeight)
             where TList : UIList
             where TRow : UIListRow
         {
             TList uiList = parent.AddUIComponent<TList>();
             uiList._rowType = typeof(TRow);
-            uiList.Setup();
+            uiList.width = width;
+            uiList.height = height;
+            uiList.relativePosition = new Vector2(xPos, yPos);
+            uiList.Setup(rowHeight);
             return uiList;
         }
 
@@ -318,6 +345,32 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Sets the selection according to a search using the given predicate.
+        /// If no item is found, clears the selection.
+        /// </summary>
+        /// <typeparam name="TItem">Item type.</typeparam>
+        /// <param name="predicate">Predicate to use.</param>
+        public void FindItem<TItem>(Predicate<TItem> predicate)
+        {
+            // Iterate through the rows list.
+            for (int i = 0; i < _data.m_buffer.Length; ++i)
+            {
+                // Look for a match.
+                if (_data.m_buffer[i] is TItem thisItem && predicate(thisItem))
+                {
+                    // Found a match; set the selected index to this one.
+                    SelectedIndex = i;
+
+                    // Done here; return.
+                    return;
+                }
+            }
+
+            // If we got here, we didn't find a match; clear the selection.
+            SelectedIndex = -1;
+        }
+
+        /// <summary>
         /// Regenerates the list display.
         /// </summary>
         public void Refresh() => Display(_currentPosition);
@@ -331,12 +384,15 @@ namespace AlgernonCommons.UI
             SelectedIndex = -1;
 
             // Clear data.
-            Data.Clear();
+            Data?.Clear();
 
             // Disable all rows.
-            for (int i = 0; i < _rows.m_size; ++i)
+            if (_rows != null)
             {
-                _rows[i].enabled = false;
+                for (int i = 0; i < _rows.m_size; ++i)
+                {
+                    _rows[i].enabled = false;
+                }
             }
 
             // Update the scrollbar to reflect the new empty state.
@@ -509,9 +565,11 @@ namespace AlgernonCommons.UI
                 _rows = new FastList<UIListRow>();
                 _rows.SetCapacity(requiredRows);
             }
-            else if (_rows.m_size < requiredRows)
+
+            // Chacek existing numbe of rows against required capacity.
+            if (_rows.m_size < requiredRows)
             {
-                // Existing row list, but we need to add more.
+                // Need more rows - add them.
                 for (int i = _rows.m_size; i < requiredRows; ++i)
                 {
                     // Add new row and event handler.
@@ -522,7 +580,7 @@ namespace AlgernonCommons.UI
             }
             else if (_rows.m_size > requiredRows)
             {
-                // Existing row list, but we need to remove some.
+                // Too many rows - remove the excess.
                 for (int i = requiredRows; i < _rows.m_size; ++i)
                 {
                     Destroy(_rows[i]);
@@ -532,6 +590,12 @@ namespace AlgernonCommons.UI
                 _rows.SetCapacity(requiredRows);
             }
 
+            // Ensure size of all rows.
+            foreach (UIListRow row in _rows)
+            {
+                row.height = _rowHeight;
+            }
+
             // Update the scrollbar.
             UpdateScrollbar();
         }
@@ -539,7 +603,8 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Sets up the UI components.
         /// </summary>
-        private void Setup()
+        /// <param name="rowHeight">Initial row height.</param>
+        private void Setup(float rowHeight)
         {
             // Don't do anything if we're already setup.
             if (_contentPanel != null)
@@ -553,16 +618,20 @@ namespace AlgernonCommons.UI
             _contentPanel.autoLayout = false;
             _contentPanel.relativePosition = Vector2.zero;
             _contentPanel.clipChildren = true;
+            _contentPanel.backgroundSprite = "UnlockingPanel";
 
             // Scrollbar.
             _scrollbar = UIScrollbars.AddScrollbar(this);
             _scrollbar.autoHide = false;
 
+            // Set initial row height.
+            _rowHeight = rowHeight;
+
             // Set up size and positioning.
             OnSizeChanged();
 
             // Update scrolled position.
-            _scrollbar.eventValueChanged += (control, value) => Scroll(value);
+            _scrollbar.eventValueChanged += (c, value) => Scroll(value);
         }
     }
 }
