@@ -54,8 +54,10 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\AssemblyUtils.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\LoadingBase.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\Logging.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\ModBase.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\OptionsMod.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\Keybinding.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\KeybindingBase.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\KeyOnlyBinding.cs" />
@@ -69,11 +71,15 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\WhatsNew\WhatsNewNotification.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Notifications\YesNoNotification.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherBase.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherLoadingBase.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherManager.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Patching\PatcherMod.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Language.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translations.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translator.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\OptionsPanelManager.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanel.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanelManager.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIButtons.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UICheckBoxes.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\UIDropDowns.cs" />
