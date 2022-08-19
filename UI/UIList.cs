@@ -288,6 +288,10 @@ namespace AlgernonCommons.UI
             // Iterate through each row and set its display.
             for (int i = 0; i < _rows.m_size; ++i)
             {
+                // Set row relative position and width.
+                _rows[i].relativePosition = new Vector2(0f, i * _rowHeight);
+                _rows[i].width = _contentPanel.width;
+
                 // Do we have data for this row?
                 int dataIndex = i + listPosition;
                 if (dataIndex < _data.m_size)
@@ -301,15 +305,11 @@ namespace AlgernonCommons.UI
                     // Data not available; disable this row.
                     _rows[i].enabled = false;
                 }
-
-                // Set row relative position and width.
-                _rows[i].relativePosition = new Vector2(0f, i * _rowHeight);
-                _rows[i].width = width;
             }
 
             // Highlight selected row.
             int selectedRow = _selectedIndex - _currentPosition;
-            if (selectedRow > 0 & selectedRow < _rows.m_size)
+            if (selectedRow >= 0 & selectedRow < _rows.m_size)
             {
                 _rows[selectedRow].Select();
             }

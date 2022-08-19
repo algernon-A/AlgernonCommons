@@ -6,6 +6,8 @@
 namespace AlgernonCommons.Patching
 {
     using System;
+    using System.Reflection;
+    using System.Text;
     using CitiesHarmony.API;
     using HarmonyLib;
 
@@ -14,52 +16,13 @@ namespace AlgernonCommons.Patching
     /// </summary>
     public class PatcherBase
     {
-        /// <summary>
-        /// Instance reference.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1401:Fields should be private", Justification = "Protected internal field")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1307:Accessible fields should begin with upper-case letter", Justification = "Protected internal field")]
-        protected internal static PatcherBase s_instance;
-
         // Unique Harmony ID.
-        private readonly string _harmonyID;
+        private string _harmonyID;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PatcherBase"/> class.
+        /// Gets or sets this patcher instance's unique Harmony identifier.
         /// </summary>
-        /// <param name="harmonyID">This mod's unique Harmony identifier.</param>
-        public PatcherBase(string harmonyID)
-        {
-            // Ensure valid HarmonyID before proceeding.
-            if (string.IsNullOrEmpty(harmonyID))
-            {
-                throw new NullReferenceException("HarmonyID cannot be null");
-            }
-
-            _harmonyID = harmonyID;
-        }
-
-        /// <summary>
-        /// Gets the active instance reference.
-        /// </summary>
-        public static PatcherBase Instance
-        {
-            get
-            {
-                // Auto-initializing getter.
-                if (s_instance == null)
-                {
-                    s_instance = new PatcherBase(PatcherMod.Instance.HarmonyID);
-                }
-
-                return s_instance;
-            }
-        }
-
-        /// <summary>
-        /// Gets this patcher instance's unique Harmony identifier.
-        /// </summary>
-        public string HarmonyID => _harmonyID;
+        public string HarmonyID { get => _harmonyID; set => _harmonyID = value; }
 
         /// <summary>
         /// Gets or sets a value indicating whether patches are currently applied (true) or not (false).
@@ -82,6 +45,10 @@ namespace AlgernonCommons.Patching
                     // Apply all annotated patches and update flag.
                     Harmony harmonyInstance = new Harmony(_harmonyID);
                     harmonyInstance.PatchAll();
+
+                    // Perform any additional patching actions.
+                    OnPatchAll(harmonyInstance);
+
                     Patched = true;
                 }
                 else
@@ -104,8 +71,103 @@ namespace AlgernonCommons.Patching
                 // Unapply patches, but only with our HarmonyID.
                 Harmony harmonyInstance = new Harmony(_harmonyID);
                 harmonyInstance.UnpatchAll(_harmonyID);
+
                 Patched = false;
             }
+        }
+
+        /// <summary>
+        /// Applies a Harmony prefix to the specified method.
+        /// </summary>
+        /// <param name="target">Target method.</param>
+        /// <param name="patch">Harmony Prefix patch.</param>
+        public void PrefixMethod(MethodInfo target, MethodInfo patch)
+        {
+            Harmony harmonyInstance = new Harmony(HarmonyID);
+            harmonyInstance.Patch(target, prefix: new HarmonyMethod(patch));
+
+            Logging.Message("patched ", PrintMethod(target), " to ", PrintMethod(patch));
+        }
+
+        /// <summary>
+        /// Applies a Harmony prefix to the given type and method name, with a patch of the same name from a different type.
+        /// </summary>
+        /// <param name="targetType">Target type to patch.</param>
+        /// <param name="patchType">Type containing patch method.</param>
+        /// <param name="methodName">Method name.</param>
+        public void PrefixMethod(Type targetType, Type patchType, string methodName)
+        {
+            PrefixMethod(
+                targetType.GetMethod(
+                methodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
+                patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+        }
+
+        /// <summary>
+        /// Reverts a Harmony ptach to the specified method.
+        /// </summary>
+        /// <param name="target">Target method.</param>
+        /// <param name="patch">Patch to revert.</param>
+        public void UnpatchMethod(MethodInfo target, MethodInfo patch)
+        {
+            Harmony harmonyInstance = new Harmony(HarmonyID);
+            harmonyInstance.Unpatch(target, patch);
+        }
+
+        /// <summary>
+        /// Reverts a Harmony prefix to the given type and method name, with a patch of the same name from a different type.
+        /// </summary>
+        /// <param name="targetType">Target type to patch.</param>
+        /// <param name="patchType">Type containing patch method.</param>
+        /// <param name="methodName">Method name.</param>
+        public void UnpatchMethod(Type targetType, Type patchType, string methodName)
+        {
+            UnpatchMethod(
+                targetType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
+                patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+        }
+
+        /// <summary>
+        /// Peforms any additional actions (such as custom patching) after PatchAll is called.
+        /// </summary>
+        /// <param name="harmonyInstance">Haromny instance for patching.</param>
+        protected virtual void OnPatchAll(Harmony harmonyInstance)
+        {
+        }
+
+        /// <summary>
+        /// Prints MethodInfo data as a a nicely-formatted string.
+        /// </summary>
+        /// <param name="method">MethodInfo to log.</param>
+        /// <returns>MethodInfo data as human-readable string.</returns>
+        private string PrintMethod(MethodInfo method)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(method.DeclaringType);
+            sb.Append(".");
+            sb.Append(method.Name);
+            sb.Append("(");
+            bool firstParam = true;
+            foreach (ParameterInfo param in method.GetParameters())
+            {
+                // Separate by comma and space for everything after the first parameter.
+                if (firstParam)
+                {
+                    firstParam = false;
+                }
+                else
+                {
+                    sb.Append(", ");
+                }
+
+                sb.Append(param.ParameterType.Name);
+                sb.Append(" ");
+                sb.Append(param.Name);
+            }
+
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }

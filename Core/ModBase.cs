@@ -8,7 +8,7 @@ namespace AlgernonCommons
     using AlgernonCommons.Notifications;
 
     /// <summary>
-    /// Base mod class.
+    /// Base mod class, with settings file and optional what's new notifications.
     /// </summary>
     public abstract class ModBase
     {
@@ -17,7 +17,7 @@ namespace AlgernonCommons
         /// </summary>
         public ModBase()
         {
-            // Set instance reference.
+            // Set base instance reference.
             Instance = this;
         }
 
@@ -47,6 +47,11 @@ namespace AlgernonCommons
         public virtual WhatsNewMessage[] WhatsNewMessages => null;
 
         /// <summary>
+        /// Called by the game when the mod is enabled.
+        /// </summary>
+        public virtual void OnEnabled() => LoadSettings();
+
+        /// <summary>
         /// Load mod settings.
         /// </summary>
         public abstract void LoadSettings();
@@ -55,11 +60,5 @@ namespace AlgernonCommons
         /// Saves mod settings.
         /// </summary>
         public abstract void SaveSettings();
-
-        /// <summary>
-        /// Called by the game when the mod is enabled.
-        /// Loads the settings file.
-        /// </summary>
-        public virtual void OnEnabled() => LoadSettings();
     }
 }

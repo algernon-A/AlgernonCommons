@@ -14,7 +14,7 @@ namespace AlgernonCommons.UI
     public static class UISpacers
     {
         /// <summary>
-        /// Adds an options-panel-style spacer bar across the specified UIComponent.
+        /// Adds an options-panel-style spacer bar.
         /// </summary>
         /// <param name="parent">Parent component.</param>
         /// <param name="xPos">Relative x-position.</param>
@@ -27,6 +27,23 @@ namespace AlgernonCommons.UI
             spacerPanel.height = 5f;
             spacerPanel.relativePosition = new Vector2(xPos, yPos);
             spacerPanel.backgroundSprite = "ContentManagerItemBackground";
+        }
+
+        /// <summary>
+        /// Adds an options-panel-style spacer bar with an attached title label.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x-position.</param>
+        /// <param name="yPos">Relative y-position.</param>
+        /// <param name="width">Spacer width.</param>
+        /// <param name="title">Title text.</param>
+        /// <returns>Title label.</returns>
+        public static UILabel AddTitleSpacer(UIComponent parent, float xPos, float yPos, float width, string title)
+        {
+            AddOptionsSpacer(parent, xPos, yPos, width);
+            UILabel label = UILabels.AddLabel(parent, xPos, yPos + 20f, title, textScale: 1.2f);
+            label.font = UIFonts.SemiBold;
+            return label;
         }
     }
 }

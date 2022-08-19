@@ -46,12 +46,11 @@
 	</ItemGroup>
 	<Import Project="AlgernonCommonsShared.projitems" Label="Shared" />
 	<ItemGroup>
-	  <AdditionalFiles Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\stylecop.json" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\AssemblyUtils.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\LoadingBase.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\Logging.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\ModBase.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Core\OptionsMod.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\Keybinding.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\KeybindingBase.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Keybinding\KeyOnlyBinding.cs" />
@@ -97,5 +96,8 @@
 	  <None Remove="AlgernonCommonsPatchingShared.projitems" />
 	  <None Remove="LICENSE.txt" />
 	  <None Remove="stylecop.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 </Project>

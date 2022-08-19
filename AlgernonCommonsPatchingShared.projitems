@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Core\AssemblyUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\LoadingBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ModBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\OptionsMod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalSuppressions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Keybinding\Keybinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Keybinding\KeybindingBase.cs" />
@@ -25,6 +27,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\WhatsNew\WhatsNewMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\WhatsNew\WhatsNewNotification.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\YesNoNotification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Patching\PatcherLoadingBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Patching\PatcherManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Language.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Translations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Translation\Translator.cs" />

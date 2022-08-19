@@ -232,21 +232,29 @@ namespace AlgernonCommons.Notifications
         /// </summary>
         private void Resize()
         {
-            // Set height.
-            height = _titleBar.height + _mainPanel.height + _buttonPanel.height + (Padding * 2f);
-
-            // Position main panel under title bar and set width.
-            _mainPanel.relativePosition = new Vector2(0, _titleBar.height);
-            _mainPanel.width = width - (_mainPanel?.verticalScrollbar?.width ?? 0) - 3f;
-
-            // Position button panel under main panel.
-            _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
+            // Main panel height indicator.
+            float maximumY = 0f;
 
             // Set width of each component in main panel to panel width (less padding on either side).
             foreach (UIComponent component in _mainPanel.components)
             {
-                component.width = _mainPanel.width - (2 * Padding);
+                component.width = _mainPanel.width - (Padding * 2f);
+
+                // Calculate component bottom relative Y-position.
+                float componentBottom = component.relativePosition.y + component.height;
+                if (componentBottom > maximumY)
+                {
+                    // Update panel height indicator.
+                    maximumY = componentBottom;
+                }
             }
+
+            // Set height.
+            _mainPanel.height = Mathf.Min(maximumY, MaxContentHeight);
+            height = _titleBar.height + _mainPanel.height + _buttonPanel.height + (Padding * 2f);
+
+            // Position button panel under main panel.
+            _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
         }
 
         /// <summary>
@@ -294,21 +302,24 @@ namespace AlgernonCommons.Notifications
         {
             // Basic setup.
             _mainPanel = AddUIComponent<UIScrollablePanel>();
-            _mainPanel.width = Width;
-            _mainPanel.autoLayout = true;
+            _mainPanel.relativePosition = new Vector2(0, _titleBar.height);
+            _mainPanel.minimumSize = new Vector2(Width, 5f);
+            _mainPanel.maximumSize = new Vector2(Width, MaxContentHeight);
+            _mainPanel.autoSize = true;
+            _mainPanel.autoLayoutStart = LayoutStart.TopLeft;
             _mainPanel.autoLayoutDirection = LayoutDirection.Vertical;
             _mainPanel.autoLayoutPadding = new RectOffset((int)Padding, (int)Padding, 0, 0);
+            _mainPanel.autoLayout = true;
             _mainPanel.clipChildren = true;
             _mainPanel.builtinKeyNavigation = true;
             _mainPanel.scrollWheelDirection = UIOrientation.Vertical;
-            _mainPanel.maximumSize = new Vector2(Width, MaxContentHeight);
 
             // Add scrollbar.
             UIScrollbars.AddScrollbar(this, _mainPanel);
 
             // Event handlers to add/remove event handlers for resizing when child components re resized.
-            ScrollableContent.eventComponentAdded += (container, child) => AddChildEvents(child);
-            ScrollableContent.eventComponentRemoved += (container, child) => RemoveChildEvents(child);
+            _mainPanel.eventComponentAdded += (container, child) => AddChildEvents(child);
+            _mainPanel.eventComponentRemoved += (container, child) => RemoveChildEvents(child);
         }
 
         /// <summary>

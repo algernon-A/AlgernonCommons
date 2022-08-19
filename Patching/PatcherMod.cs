@@ -6,14 +6,19 @@
 namespace AlgernonCommons.Patching
 {
     using CitiesHarmony.API;
+    using ColossalFramework.UI;
 
     /// <summary>
-    /// Harmony patching mod base.
+    /// Base mod class with Harmony patching, settings file, and an options panel.
     /// </summary>
-    public abstract class PatcherMod : ModBase
+    /// <typeparam name="TOptionsPanel">Options panel type for main menu.</typeparam>
+    /// <typeparam name="TPatcher">Harmony patcher type.</typeparam>
+    public abstract class PatcherMod<TOptionsPanel, TPatcher> : OptionsMod<TOptionsPanel>
+        where TOptionsPanel : UIPanel
+        where TPatcher : PatcherBase, new()
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PatcherMod"/> class.
+        /// Initializes a new instance of the <see cref="PatcherMod{TOptionsPanel, TPatcher}"/> class.
         /// </summary>
         public PatcherMod()
         {
@@ -23,7 +28,7 @@ namespace AlgernonCommons.Patching
         /// <summary>
         /// Gets the active instance as PatcherMod.
         /// </summary>
-        public static new PatcherMod Instance { get; private set; }
+        public static new PatcherMod<TOptionsPanel, TPatcher> Instance { get; private set; }
 
         /// <summary>
         /// Gets the mod's unique Harmony identfier.
@@ -35,6 +40,9 @@ namespace AlgernonCommons.Patching
         /// </summary>
         public override void OnEnabled()
         {
+            // Register mod's harmony ID.
+            PatcherManager<TPatcher>.HarmonyID = HarmonyID;
+
             // Apply Harmony patches via Cities Harmony.
             // Called here instead of OnCreated to allow the auto-downloader to do its work prior to launch.
             HarmonyHelper.DoOnHarmonyReady(ApplyPatches);
@@ -57,11 +65,11 @@ namespace AlgernonCommons.Patching
         /// <summary>
         /// Apply Harmony patches.
         /// </summary>
-        protected virtual void ApplyPatches() => PatcherBase.Instance?.PatchAll();
+        protected virtual void ApplyPatches() => PatcherManager<TPatcher>.Instance?.PatchAll();
 
         /// <summary>
         /// Remove Harmony patches.
         /// </summary>
-        protected virtual void RemovePatches() => PatcherBase.Instance?.UnpatchAll();
+        protected virtual void RemovePatches() => PatcherManager<TPatcher>.Instance?.UnpatchAll();
     }
 }

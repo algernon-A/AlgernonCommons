@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Core\AssemblyUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\LoadingBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ModBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\OptionsMod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalSuppressions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Keybinding\Keybinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Keybinding\KeybindingBase.cs" />
