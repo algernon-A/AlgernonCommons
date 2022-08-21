@@ -214,6 +214,9 @@ namespace AlgernonCommons.UI
                     // Clear selection.
                     _selectedIndex = -1;
 
+                    // Force a check of the current position (to reset the position if the new data is shorter than any existing scroll position).
+                    CurrentPosition = _currentPosition;
+
                     // Refresh the list.
                     Display(_currentPosition);
                 }
@@ -352,17 +355,21 @@ namespace AlgernonCommons.UI
         /// <param name="predicate">Predicate to use.</param>
         public void FindItem<TItem>(Predicate<TItem> predicate)
         {
-            // Iterate through the rows list.
-            for (int i = 0; i < _data.m_buffer.Length; ++i)
+            // Don't do anything if no data.
+            if (_data != null)
             {
-                // Look for a match.
-                if (_data.m_buffer[i] is TItem thisItem && predicate(thisItem))
+                // Iterate through the rows list.
+                for (int i = 0; i < _data.m_buffer.Length; ++i)
                 {
-                    // Found a match; set the selected index to this one.
-                    SelectedIndex = i;
+                    // Look for a match.
+                    if (_data.m_buffer[i] is TItem thisItem && predicate(thisItem))
+                    {
+                        // Found a match; set the selected index to this one.
+                        SelectedIndex = i;
 
-                    // Done here; return.
-                    return;
+                        // Done here; return.
+                        return;
+                    }
                 }
             }
 

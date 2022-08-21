@@ -133,6 +133,9 @@ namespace AlgernonCommons
             // Set up options panel event handler (need to redo this now that options panel has been reset after loading into game).
             OptionsPanelManager<TOptionsPanel>.OptionsEventHook();
 
+            // Display update notification.
+            WhatsNew.ShowWhatsNew();
+
             // Set loaded status flag.
             s_isLoaded = true;
 

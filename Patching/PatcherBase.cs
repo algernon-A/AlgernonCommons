@@ -86,7 +86,20 @@ namespace AlgernonCommons.Patching
             Harmony harmonyInstance = new Harmony(HarmonyID);
             harmonyInstance.Patch(target, prefix: new HarmonyMethod(patch));
 
-            Logging.Message("patched ", PrintMethod(target), " to ", PrintMethod(patch));
+            Logging.Message("prefixed ", PrintMethod(target), " to ", PrintMethod(patch));
+        }
+
+        /// <summary>
+        /// Applies a Harmony prefix to the specified method.
+        /// </summary>
+        /// <param name="target">Target method.</param>
+        /// <param name="patch">Harmony Prefix patch.</param>
+        public void PostfixMethod(MethodInfo target, MethodInfo patch)
+        {
+            Harmony harmonyInstance = new Harmony(HarmonyID);
+            harmonyInstance.Patch(target, postfix: new HarmonyMethod(patch));
+
+            Logging.Message("postfixed ", PrintMethod(target), " to ", PrintMethod(patch));
         }
 
         /// <summary>
@@ -98,6 +111,21 @@ namespace AlgernonCommons.Patching
         public void PrefixMethod(Type targetType, Type patchType, string methodName)
         {
             PrefixMethod(
+                targetType.GetMethod(
+                methodName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
+                patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+        }
+
+        /// <summary>
+        /// Applies a Harmony postfix to the given type and method name, with a patch of the same name from a different type.
+        /// </summary>
+        /// <param name="targetType">Target type to patch.</param>
+        /// <param name="patchType">Type containing patch method.</param>
+        /// <param name="methodName">Method name.</param>
+        public void PostfixMethod(Type targetType, Type patchType, string methodName)
+        {
+            PostfixMethod(
                 targetType.GetMethod(
                 methodName,
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
