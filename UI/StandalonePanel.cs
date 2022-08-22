@@ -35,7 +35,7 @@ namespace AlgernonCommons.UI
             isInteractive = true;
 
             // Appearance.
-            backgroundSprite = "MenuPanel2";
+            backgroundSprite = "UnlockingPanel2";
             opacity = PanelOpacity;
 
             // Size.
