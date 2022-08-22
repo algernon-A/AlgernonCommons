@@ -55,12 +55,6 @@ namespace AlgernonCommons
                 {
                     try
                     {
-                        // Ignore disabled or built-in plugins.
-                        if (!plugin.isEnabled | plugin.isBuiltin)
-                        {
-                            continue;
-                        }
-
                         // Iterate through each assembly in plugins
                         foreach (Assembly assembly in plugin.GetAssemblies())
                         {
