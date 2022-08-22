@@ -175,10 +175,11 @@ namespace AlgernonCommons.UI
             // Create checkbox.
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
 
-            // Set size.
+            // Set size and position.
             checkBox.width = width;
             checkBox.height = height;
             checkBox.clipChildren = true;
+            checkBox.relativePosition = new Vector2(xPos, yPos);
 
             // Add background panel.
             UIPanel panel = checkBox.AddUIComponent<UIPanel>();
@@ -198,16 +199,22 @@ namespace AlgernonCommons.UI
             // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
             sprite.atlas = UITextures.GetTextureAtlas(atlas);
-            sprite.spriteName = "check-unchecked";
+            sprite.spriteName = uncheckedSpriteName;
             sprite.size = checkBox.size;
             sprite.relativePosition = Vector2.zero;
 
             // Checked sprite.
             checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
             ((UISprite)checkBox.checkedBoxObject).atlas = UITextures.GetTextureAtlas(atlas);
-            ((UISprite)checkBox.checkedBoxObject).spriteName = uncheckedSpriteName;
+            ((UISprite)checkBox.checkedBoxObject).spriteName = checkedSpriteName;
             checkBox.checkedBoxObject.size = checkBox.size;
             checkBox.checkedBoxObject.relativePosition = Vector2.zero;
+
+            // Tooltip.
+            if (tooltip != null)
+            {
+                checkBox.tooltip = tooltip;
+            }
 
             return checkBox;
         }
