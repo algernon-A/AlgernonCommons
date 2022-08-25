@@ -504,23 +504,19 @@ namespace AlgernonCommons.UI
                 return;
             }
 
-            // Number of rows outside the visible area.
-            int extraRows = _data.m_size - _rows.m_size;
-
-            if (extraRows > 0)
+            // Check if data size is greater than the number of visible rows.
+            if (_data.m_size > _rows.m_size)
             {
-                // Show scrollbar.
+                // Data size exceeds visible range - show scrollbar.
                 _scrollbar.Show();
 
-                // Set scrollbar thumb size - ratio of visible rows to total rows..
-                float fullDataHeight = _data.m_size * _rowHeight;
-                _scrollbar.scrollSize = height * height / fullDataHeight;
-                _scrollbar.minValue = 0f;
-                _scrollbar.maxValue = height;
-                _scrollbar.incrementAmount = Mathf.Max(1f, (height - _scrollbar.scrollSize) / extraRows);
+                // Set visble and maximum values.
+                _scrollbar.scrollSize = _rows.m_size;
+                _scrollbar.maxValue = _data.m_size;
             }
             else
             {
+                // Data size fits within visible range - hide the scrollbar.
                 _scrollbar.Hide();
             }
 
@@ -537,7 +533,7 @@ namespace AlgernonCommons.UI
             {
                 // Ignore scrolling events while we update.
                 _ignoreScrolling = true;
-                _scrollbar.value = _scrollbar.incrementAmount * _currentPosition;
+                _scrollbar.value = _currentPosition;
                 _ignoreScrolling = false;
             }
         }
@@ -553,7 +549,7 @@ namespace AlgernonCommons.UI
             {
                 // Ignore scrolling events while we update.
                 _ignoreScrolling = true;
-                CurrentPosition = Mathf.RoundToInt(value / _scrollbar.incrementAmount);
+                CurrentPosition = Mathf.RoundToInt(value);
                 _ignoreScrolling = false;
             }
         }
@@ -630,6 +626,9 @@ namespace AlgernonCommons.UI
             // Scrollbar.
             _scrollbar = UIScrollbars.AddScrollbar(this);
             _scrollbar.autoHide = false;
+            _scrollbar.minValue = 0f;
+            _scrollbar.incrementAmount = 1f;
+            _scrollbar.stepSize = 1f;
 
             // Set initial row height.
             _rowHeight = rowHeight;
