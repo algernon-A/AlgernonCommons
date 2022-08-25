@@ -38,6 +38,11 @@ namespace AlgernonCommons
         protected virtual string ConflictRemovedText => string.Empty;
 
         /// <summary>
+        /// Gets a value indicating whether a mod conflict was detected.
+        /// </summary>
+        protected bool WasModConflict => _conflictingMods != null && _conflictingMods.Count > 0;
+
+        /// <summary>
         /// Called by the game when the mod is initialised at the start of the loading process.
         /// This is also called in other cases, e.g. when a mod is subscribed in-game (in which case OnCreated will be called again for *all* mods).
         /// </summary>

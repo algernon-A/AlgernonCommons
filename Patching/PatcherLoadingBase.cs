@@ -29,7 +29,8 @@ namespace AlgernonCommons.Patching
         public override void OnLevelLoaded(LoadMode mode)
         {
             // Check to see that Harmony 2 was properly loaded.
-            if (!_harmonyLoaded)
+            // If any mod conflicts were encountered, though, we skip this notification and fall through to base to display the conflict notification instead.
+            if (!_harmonyLoaded && !WasModConflict)
             {
                 // Harmony 2 wasn't loaded; display warning notification and exit.
                 ListNotification harmonyNotification = NotificationBase.ShowNotification<ListNotification>();
@@ -44,7 +45,7 @@ namespace AlgernonCommons.Patching
                 return;
             }
 
-            // If Harmony was fine, then continue as normal.
+            // If Harmony was fine (or the issue was a mod conflict), then continue as normal.
             base.OnLevelLoaded(mode);
         }
 
