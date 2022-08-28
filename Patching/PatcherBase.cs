@@ -30,6 +30,40 @@ namespace AlgernonCommons.Patching
         public bool Patched { get; protected set; }
 
         /// <summary>
+        /// Prints MethodInfo data as a a nicely-formatted string.
+        /// </summary>
+        /// <param name="method">MethodInfo to log.</param>
+        /// <returns>MethodInfo data as human-readable string.</returns>
+        public static string PrintMethod(MethodBase method)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(method.DeclaringType);
+            sb.Append(".");
+            sb.Append(method.Name);
+            sb.Append("(");
+            bool firstParam = true;
+            foreach (ParameterInfo param in method.GetParameters())
+            {
+                // Separate by comma and space for everything after the first parameter.
+                if (firstParam)
+                {
+                    firstParam = false;
+                }
+                else
+                {
+                    sb.Append(", ");
+                }
+
+                sb.Append(param.ParameterType.Name);
+                sb.Append(" ");
+                sb.Append(param.Name);
+            }
+
+            sb.Append(")");
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// Apply all Harmony patches.
         /// </summary>
         public virtual void PatchAll()
@@ -162,40 +196,6 @@ namespace AlgernonCommons.Patching
         /// <param name="harmonyInstance">Haromny instance for patching.</param>
         protected virtual void OnPatchAll(Harmony harmonyInstance)
         {
-        }
-
-        /// <summary>
-        /// Prints MethodInfo data as a a nicely-formatted string.
-        /// </summary>
-        /// <param name="method">MethodInfo to log.</param>
-        /// <returns>MethodInfo data as human-readable string.</returns>
-        private string PrintMethod(MethodInfo method)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(method.DeclaringType);
-            sb.Append(".");
-            sb.Append(method.Name);
-            sb.Append("(");
-            bool firstParam = true;
-            foreach (ParameterInfo param in method.GetParameters())
-            {
-                // Separate by comma and space for everything after the first parameter.
-                if (firstParam)
-                {
-                    firstParam = false;
-                }
-                else
-                {
-                    sb.Append(", ");
-                }
-
-                sb.Append(param.ParameterType.Name);
-                sb.Append(" ");
-                sb.Append(param.Name);
-            }
-
-            sb.Append(")");
-            return sb.ToString();
         }
     }
 }
