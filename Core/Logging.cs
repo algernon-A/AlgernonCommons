@@ -96,7 +96,8 @@ namespace AlgernonCommons
             // Add each message parameter.
             for (int i = 0; i < messages.Length; ++i)
             {
-                MessageBuilder.Append(messages[i]);
+                // Append "null" in place of any null values.
+                MessageBuilder.Append(messages[i] ?? "null");
             }
 
             // Finish with a new line and the exception information.
@@ -141,7 +142,8 @@ namespace AlgernonCommons
             // Add each message parameter.
             for (int i = 0; i < messages.Length; ++i)
             {
-                MessageBuilder.Append(messages[i]);
+                // Append "null" in place of any null values.
+                MessageBuilder.Append(messages[i] ?? "null");
             }
 
             // Terminating period to confirm end of message.
