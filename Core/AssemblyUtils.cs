@@ -87,12 +87,12 @@ namespace AlgernonCommons
         public static string TrimVersion(Version version)
         {
             // Trim off trailing zeros.
-            if (version.Revision != 0)
+            if (version.Revision > 0)
             {
                 // If any revision other than zero, we return the full version.
                 return version.ToString(4);
             }
-            else if (version.Build != 0)
+            else if (version.Build > 0)
             {
                 // Revision is zero; if build is nonzero, return major.minor.build.
                 // 1.0.1.0 => 1.0.1
