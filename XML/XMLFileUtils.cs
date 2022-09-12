@@ -70,7 +70,7 @@ namespace AlgernonCommons.XML
             {
                 Logging.Message("saving XML file ", fileName);
 
-                // Pretty straightforward.  Serialisation is within GBRSettingsFile class.
+                // Pretty straightforward.
                 using (StreamWriter writer = new StreamWriter(fileName))
                 {
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(TFile));
@@ -80,6 +80,60 @@ namespace AlgernonCommons.XML
             catch (Exception e)
             {
                 Logging.LogException(e, "exception saving XML settings file");
+            }
+        }
+
+        /// <summary>
+        /// Serializes settings as XML to a byte array.
+        /// </summary>
+        /// <typeparam name="TFile">XML file type.</typeparam>
+        /// <returns>Byte array containing XML file as binary data (empty array if error occured).</returns>
+        public static byte[] SerializeBinary<TFile>()
+            where TFile : new()
+        {
+            try
+            {
+                Logging.Message("serializing embedded XML file");
+
+                // Pretty straightforward.  Serialisation is within class.
+                using (StringWriter writer = new StringWriter())
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(TFile));
+                    xmlSerializer.Serialize(writer, new TFile());
+                    return System.Text.Encoding.UTF8.GetBytes(writer.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                Logging.LogException(e, "exception saving embedded XML file");
+            }
+
+            return new byte[0];
+        }
+
+        /// <summary>
+        /// Deserializes settings as XML from a byte array.
+        /// </summary>
+        /// <typeparam name="TFile">XML file type.</typeparam>
+        /// <param name="binaryData">Byte array to deserialize.</param>
+        public static void DeserializeBinary<TFile>(byte[] binaryData)
+            where TFile : new()
+        {
+            if (binaryData == null || binaryData.Length == 0)
+            {
+                Logging.Message("no binary data to deserialize embedded XML file");
+                return;
+            }
+
+            using (StringReader reader = new StringReader(System.Text.Encoding.UTF8.GetString(binaryData)))
+            {
+                Logging.Message("deserializing XML file");
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(TFile));
+                if (!(xmlSerializer.Deserialize(reader) is TFile xmlSettingsFile))
+                {
+                    Logging.Error("couldn't deserialize embedded XML file");
+                }
             }
         }
     }
