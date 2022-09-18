@@ -166,11 +166,13 @@ namespace AlgernonCommons.UI
         /// <param name="atlas">Icon atlas.</param>
         /// <param name="checkedSpriteName">Checked sprite name.</param>
         /// <param name="uncheckedSpriteName">Unchecked sprite name.</param>
+        /// <param name="backgroundAtlas">Background atlas.</param>
+        /// <param name="backgroundSprite">Background sprite name.</param>
         /// <param name="width">Toggle width (default 35).</param>
         /// <param name="height">Toggle height (default 35).</param>
         /// <param name="tooltip">Tooltip, if any.</param>
         /// <returns>New UICheckbox.</returns>
-        public static UICheckBox AddIconToggle(UIComponent parent, float xPos, float yPos, string atlas, string checkedSpriteName, string uncheckedSpriteName, float width = 35f, float height = 35f, string tooltip = null)
+        public static UICheckBox AddIconToggle(UIComponent parent, float xPos, float yPos, string atlas, string checkedSpriteName, string uncheckedSpriteName, string backgroundAtlas = "InGame", string backgroundSprite = "IconPolicyBaseRect", float width = 35f, float height = 35f, string tooltip = null)
         {
             // Create checkbox.
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
@@ -183,18 +185,18 @@ namespace AlgernonCommons.UI
 
             // Add background panel.
             UIPanel panel = checkBox.AddUIComponent<UIPanel>();
-            panel.backgroundSprite = "IconPolicyBaseRect";
+            panel.backgroundSprite = backgroundSprite;
             panel.size = checkBox.size;
             panel.relativePosition = Vector2.zero;
 
             // Event handler to toggle background state on check change.
-            checkBox.eventCheckChanged += (c, isChecked) => panel.backgroundSprite = isChecked ? "IconPolicyBaseRect" : "IconPolicyBaseRectDisabled";
+            checkBox.eventCheckChanged += (c, isChecked) => panel.backgroundSprite = isChecked ? $"{backgroundSprite}Focused" : $"{backgroundSprite}Disabled";
 
             // Event handler to toggle background state on hover.
-            checkBox.eventMouseEnter += (c, p) => panel.backgroundSprite = "IconPolicyBaseRectHovered";
+            checkBox.eventMouseEnter += (c, p) => panel.backgroundSprite = $"{backgroundSprite}Hovered";
 
             // Event handler to toggle background state on de-hover.
-            checkBox.eventMouseLeave += (c, p) => panel.backgroundSprite = checkBox.isChecked ? "IconPolicyBaseRect" : "IconPolicyBaseRectDisabled";
+            checkBox.eventMouseLeave += (c, p) => panel.backgroundSprite = checkBox.isChecked ? $"{backgroundSprite}Focused" : $"{backgroundSprite}Disabled";
 
             // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
