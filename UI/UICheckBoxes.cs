@@ -185,18 +185,39 @@ namespace AlgernonCommons.UI
 
             // Add background panel.
             UIPanel panel = checkBox.AddUIComponent<UIPanel>();
+            panel.atlas = UITextures.GetTextureAtlas(backgroundAtlas);
             panel.backgroundSprite = backgroundSprite;
             panel.size = checkBox.size;
             panel.relativePosition = Vector2.zero;
 
             // Event handler to toggle background state on check change.
-            checkBox.eventCheckChanged += (c, isChecked) => panel.backgroundSprite = isChecked ? $"{backgroundSprite}Focused" : $"{backgroundSprite}Disabled";
+            checkBox.eventCheckChanged += (c, isChecked) => panel.backgroundSprite = isChecked ? $"{backgroundSprite}Focused" : backgroundSprite;
 
             // Event handler to toggle background state on hover.
-            checkBox.eventMouseEnter += (c, p) => panel.backgroundSprite = $"{backgroundSprite}Hovered";
+            checkBox.eventMouseEnter += (c, p) =>
+                                        {
+                                            // We don't have to change anything if we're in a disabled state
+                                            if (!checkBox.isEnabled)
+                                                return;
+                                            panel.backgroundSprite = $"{backgroundSprite}Hovered";
+                                        };
 
             // Event handler to toggle background state on de-hover.
-            checkBox.eventMouseLeave += (c, p) => panel.backgroundSprite = checkBox.isChecked ? $"{backgroundSprite}Focused" : $"{backgroundSprite}Disabled";
+            checkBox.eventMouseLeave += (c, p) =>
+                                        {
+                                            // We don't have to change anything if we're in a disabled state
+                                            if (!checkBox.isEnabled)
+                                                return;
+
+                                            panel.backgroundSprite = checkBox.isChecked ? $"{backgroundSprite}Focused" : backgroundSprite;
+                                        };
+
+            // Event handler to toggle background state on isEnabled change.
+            checkBox.eventIsEnabledChanged += (c, p) =>
+                                              {
+                                                  panel.backgroundSprite = !p ? $"{backgroundSprite}Disabled" : backgroundSprite;
+                                                  panel.isEnabled = p;
+                                              };
 
             // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
