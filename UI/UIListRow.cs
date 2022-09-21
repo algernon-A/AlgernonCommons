@@ -19,7 +19,7 @@ namespace AlgernonCommons.UI
         public const float Margin = 5f;
 
         // UI components.
-        private readonly UISprite _background;
+        protected readonly UISprite Background;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIListRow"/> class.
@@ -32,10 +32,10 @@ namespace AlgernonCommons.UI
             isInteractive = true;
 
             // Add background panel.
-            _background = AddUIComponent<UISprite>();
-            _background.relativePosition = Vector2.zero;
-            _background.autoSize = false;
-            _background.zOrder = 0;
+            Background = AddUIComponent<UISprite>();
+            Background.relativePosition = Vector2.zero;
+            Background.autoSize = false;
+            Background.zOrder = 0;
         }
 
         /// <summary>
@@ -53,28 +53,27 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Sets the row display to the selected state (highlighted).
         /// </summary>
-        public void Select()
+        public virtual void Select()
         {
-            _background.spriteName = "ListItemHighlight";
-            _background.color = new Color32(255, 255, 255, 255);
+            Background.color = new Color32(255, 255, 255, 255);
         }
 
         /// <summary>
         /// Sets the row display to the deselected state.
         /// </summary>
         /// <param name="rowIndex">Row index number (for background banding).</param>
-        public void Deselect(int rowIndex)
+        public virtual void Deselect(int rowIndex)
         {
             if (rowIndex % 2 == 0)
             {
                 // Darker background for even rows.
-                _background.spriteName = null;
+                Background.spriteName = null;
             }
             else
             {
                 // Lighter background for odd rows.
-                _background.spriteName = "UnlockingItemBackground";
-                _background.color = new Color32(0, 0, 0, 128);
+                Background.spriteName = "UnlockingItemBackground";
+                Background.color = new Color32(0, 0, 0, 128);
             }
         }
 
@@ -86,7 +85,7 @@ namespace AlgernonCommons.UI
             base.OnSizeChanged();
 
             // Resize background panel to match current size.
-            _background.size = this.size;
+            Background.size = this.size;
         }
 
         /// <summary>
