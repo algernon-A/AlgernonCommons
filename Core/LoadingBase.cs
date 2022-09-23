@@ -33,6 +33,11 @@ namespace AlgernonCommons
         public static bool IsLoaded => s_isLoaded;
 
         /// <summary>
+        /// Gets a list of permitted loading modes.
+        /// </summary>
+        protected virtual List<AppMode> PermittedModes => new List<AppMode> { AppMode.Game };
+
+        /// <summary>
         /// Gets any text for a trailing confict notification paragraph (e.g. "These mods must be removed before this mod can operate").
         /// </summary>
         protected virtual string ConflictRemovedText => string.Empty;
@@ -60,10 +65,10 @@ namespace AlgernonCommons
             _isModEnabled = true;
 
             // Check eligible loading mode.
-            if (loading.currentMode != AppMode.Game && loading.currentMode != AppMode.MapEditor)
+            if (!PermittedModes.Contains(loading.currentMode))
             {
                 _isModEnabled = false;
-                Logging.KeyMessage("loading mode ", loading.currentMode, " detected; skipping activation");
+                Logging.KeyMessage("ineligible loading mode ", loading.currentMode, " detected; skipping activation");
             }
             else
             {

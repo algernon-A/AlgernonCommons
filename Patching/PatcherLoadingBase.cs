@@ -20,7 +20,7 @@ namespace AlgernonCommons.Patching
         where TPatcher : PatcherBase, new()
     {
         // Harmony status flag.
-        private bool _harmonyLoaded;
+        private bool _harmonyError;
 
         /// <summary>
         /// Called by the game when level loading is complete.
@@ -30,7 +30,7 @@ namespace AlgernonCommons.Patching
         {
             // Check to see that Harmony 2 was properly loaded.
             // If any mod conflicts were encountered, though, we skip this notification and fall through to base to display the conflict notification instead.
-            if (!_harmonyLoaded && !WasModConflict)
+            if (_harmonyError && !WasModConflict)
             {
                 // Harmony 2 wasn't loaded; display warning notification and exit.
                 ListNotification harmonyNotification = NotificationBase.ShowNotification<ListNotification>();
@@ -56,8 +56,8 @@ namespace AlgernonCommons.Patching
         /// <returns>True if mod is okay to proceed with OnCreated, false otherwise.</returns>
         protected override bool CreatedChecksPassed()
         {
-            _harmonyLoaded = PatcherManager<TPatcher>.Instance?.Patched ?? false;
-            if (!_harmonyLoaded)
+            _harmonyError = PatcherManager<TPatcher>.Instance?.Patched ?? true;
+            if (_harmonyError)
             {
                 Logging.Error("Harmony patches not applied");
                 return false;
