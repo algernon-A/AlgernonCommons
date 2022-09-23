@@ -56,7 +56,7 @@ namespace AlgernonCommons.Patching
         /// <returns>True if mod is okay to proceed with OnCreated, false otherwise.</returns>
         protected override bool CreatedChecksPassed()
         {
-            _harmonyError = PatcherManager<TPatcher>.Instance?.Patched ?? true;
+            _harmonyError = !PatcherManager<TPatcher>.Instance?.Patched ?? true;
             if (_harmonyError)
             {
                 Logging.Error("Harmony patches not applied");
