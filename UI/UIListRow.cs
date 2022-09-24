@@ -19,7 +19,7 @@ namespace AlgernonCommons.UI
         public const float Margin = 5f;
 
         // UI components.
-        protected readonly UISprite Background;
+        private readonly UISprite _background;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIListRow"/> class.
@@ -32,16 +32,43 @@ namespace AlgernonCommons.UI
             isInteractive = true;
 
             // Add background panel.
-            Background = AddUIComponent<UISprite>();
-            Background.relativePosition = Vector2.zero;
-            Background.autoSize = false;
-            Background.zOrder = 0;
+            _background = AddUIComponent<UISprite>();
+            _background.relativePosition = Vector2.zero;
+            _background.autoSize = false;
+            _background.zOrder = 0;
         }
 
         /// <summary>
         /// Gets the height for this row.
         /// </summary>
         public virtual float RowHeight => UIList.DefaultRowHeight;
+
+        /// <summary>
+        /// Sprite name to be used for the internal <see cref="UISprite"/> background.
+        /// </summary>
+        public string BackgroundSpriteName
+        {
+            get => _background.spriteName;
+            set => _background.spriteName = value;
+        }
+
+        /// <summary>
+        /// <see cref="Color"/> to be used for the internal <see cref="UISprite"/> background.
+        /// </summary>
+        public Color BackgroundColor
+        {
+            get => _background.color;
+            set => _background.color = value;
+        }
+
+        /// <summary>
+        /// Opacity to be used for the internal <see cref="UISprite"/> background.
+        /// </summary>
+        public float BackgroundOpacity
+        {
+            get => _background.opacity;
+            set => _background.opacity = value;
+        }
 
         /// <summary>
         /// Generates and displays a row.
@@ -55,7 +82,7 @@ namespace AlgernonCommons.UI
         /// </summary>
         public virtual void Select()
         {
-            Background.color = new Color32(255, 255, 255, 255);
+            _background.color = new Color32(255, 255, 255, 255);
         }
 
         /// <summary>
@@ -67,13 +94,13 @@ namespace AlgernonCommons.UI
             if (rowIndex % 2 == 0)
             {
                 // Darker background for even rows.
-                Background.spriteName = null;
+                _background.spriteName = null;
             }
             else
             {
                 // Lighter background for odd rows.
-                Background.spriteName = "UnlockingItemBackground";
-                Background.color = new Color32(0, 0, 0, 128);
+                _background.spriteName = "UnlockingItemBackground";
+                _background.color = new Color32(0, 0, 0, 128);
             }
         }
 
@@ -85,7 +112,7 @@ namespace AlgernonCommons.UI
             base.OnSizeChanged();
 
             // Resize background panel to match current size.
-            Background.size = this.size;
+            _background.size = this.size;
         }
 
         /// <summary>
