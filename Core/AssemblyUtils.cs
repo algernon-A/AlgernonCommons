@@ -108,9 +108,9 @@ namespace AlgernonCommons
 
         /// <summary>
         /// Checks to see if another mod is installed and enabled, based on a provided assembly name, and if so, returns the assembly reference.
-        /// Case-sensitive!  PloppableRICO is not the same as ploppablerico!
+        /// Case-sensitive!  PloppableRICO is not the same as ploppablerico.
         /// </summary>
-        /// <param name="assemblyName">Name of the mod assembl.y</param>
+        /// <param name="assemblyName">Name of the mod assembly.</param>
         /// <returns>Assembly reference if target is found and enabled, null otherwise.</returns>
         public static Assembly GetEnabledAssembly(string assemblyName)
         {
