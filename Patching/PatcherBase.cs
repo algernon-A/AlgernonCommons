@@ -6,6 +6,7 @@
 namespace AlgernonCommons.Patching
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
     using CitiesHarmony.API;
@@ -145,10 +146,8 @@ namespace AlgernonCommons.Patching
         public void PrefixMethod(Type targetType, Type patchType, string methodName)
         {
             PrefixMethod(
-                targetType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
-                patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+                AccessTools.Method(targetType, methodName),
+                AccessTools.Method(patchType, methodName));
         }
 
         /// <summary>
@@ -160,10 +159,8 @@ namespace AlgernonCommons.Patching
         public void PostfixMethod(Type targetType, Type patchType, string methodName)
         {
             PostfixMethod(
-                targetType.GetMethod(
-                methodName,
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
-                patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+                AccessTools.Method(targetType, methodName),
+                AccessTools.Method(patchType, methodName));
         }
 
         /// <summary>
@@ -188,6 +185,71 @@ namespace AlgernonCommons.Patching
             UnpatchMethod(
                 targetType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance),
                 patchType.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance));
+        }
+
+        /// <summary>
+        /// Lists all methods patched by Harmony.
+        /// </summary>
+        public void ListMethods()
+        {
+            Harmony harmonyInstance = new Harmony(HarmonyID);
+            StringBuilder logMessage = new StringBuilder("Listing Harmony patches:");
+
+            // Get all patched methods via Harmony instance and iterate through.
+            IEnumerable<MethodBase> patchedMethods = harmonyInstance.GetPatchedMethods();
+            foreach (MethodBase patchedMethod in patchedMethods)
+            {
+                // Add the method info as header.
+                logMessage.Append(patchedMethod.DeclaringType);
+                logMessage.Append(".");
+                logMessage.AppendLine(patchedMethod.Name);
+
+                // Get Harmony patch info for this method and log details.
+                Patches patches = Harmony.GetPatchInfo(patchedMethod);
+
+                // Print out patch owners.
+                foreach (string owner in patches.Owners)
+                {
+                    logMessage.Append("    ");
+                    logMessage.AppendLine(owner);
+                }
+
+                // Print out patch indexes and types.
+                foreach (var prefix in patches.Prefixes)
+                {
+                    logMessage.Append("        Prefix ");
+                    logMessage.Append(prefix.index);
+                    logMessage.Append(": ");
+                    logMessage.AppendLine(prefix.owner);
+                }
+
+                foreach (var postfix in patches.Prefixes)
+                {
+                    logMessage.Append("        Prefix ");
+                    logMessage.Append(postfix.index);
+                    logMessage.Append(": ");
+                    logMessage.AppendLine(postfix.owner);
+                }
+
+                foreach (var transpiler in patches.Prefixes)
+                {
+                    logMessage.Append("        Transpiler ");
+                    logMessage.Append(transpiler.index);
+                    logMessage.Append(": ");
+                    logMessage.AppendLine(transpiler.owner);
+                }
+
+                foreach (var finalizer in patches.Finalizers)
+                {
+                    logMessage.Append("        Finalizer ");
+                    logMessage.Append(finalizer.index);
+                    logMessage.Append(": ");
+                    logMessage.AppendLine(finalizer.owner);
+                }
+            }
+
+            // Write message to log.
+            Logging.Message(logMessage);
         }
 
         /// <summary>
