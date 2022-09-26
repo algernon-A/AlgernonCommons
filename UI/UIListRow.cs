@@ -10,6 +10,7 @@ namespace AlgernonCommons.UI
 
     /// <summary>
     /// An individual UIList row.
+    /// Additions kindly provided by ST-Apps (Stefano Tenuta).
     /// </summary>
     public abstract class UIListRow : UIPanel
     {
@@ -44,29 +45,32 @@ namespace AlgernonCommons.UI
         public virtual float RowHeight => UIList.DefaultRowHeight;
 
         /// <summary>
-        /// Sprite name to be used for the internal <see cref="UISprite"/> background.
+        /// Gets or sets the sprite name to be used for the internal <see cref="UISprite"/> background.
         /// </summary>
         public string BackgroundSpriteName
         {
             get => _background.spriteName;
+
             set => _background.spriteName = value;
         }
 
         /// <summary>
-        /// <see cref="Color"/> to be used for the internal <see cref="UISprite"/> background.
+        /// Gets or sets the <see cref="Color"/> to be used for the internal <see cref="UISprite"/> background.
         /// </summary>
         public Color BackgroundColor
         {
             get => _background.color;
+
             set => _background.color = value;
         }
 
         /// <summary>
-        /// Opacity to be used for the internal <see cref="UISprite"/> background.
+        /// Gets or sets the opacity to be used for the internal <see cref="UISprite"/> background.
         /// </summary>
         public float BackgroundOpacity
         {
             get => _background.opacity;
+
             set => _background.opacity = value;
         }
 

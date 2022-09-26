@@ -159,6 +159,7 @@ namespace AlgernonCommons.UI
 
         /// <summary>
         /// Adds an icon toggle checkbox.
+        /// Additions kindly provided by ST-Apps (Stefano Tenuta).
         /// </summary>
         /// <param name="parent">Parent component.</param>
         /// <param name="xPos">Relative x position.</param>
@@ -195,29 +196,30 @@ namespace AlgernonCommons.UI
 
             // Event handler to toggle background state on hover.
             checkBox.eventMouseEnter += (c, p) =>
-                                        {
-                                            // We don't have to change anything if we're in a disabled state
-                                            if (!checkBox.isEnabled)
-                                                return;
-                                            panel.backgroundSprite = $"{backgroundSprite}Hovered";
-                                        };
+            {
+                // We don't have to change anything if we're in a disabled state.
+                if (checkBox.isEnabled)
+                {
+                    panel.backgroundSprite = $"{backgroundSprite}Hovered";
+                }
+            };
 
             // Event handler to toggle background state on de-hover.
             checkBox.eventMouseLeave += (c, p) =>
-                                        {
-                                            // We don't have to change anything if we're in a disabled state
-                                            if (!checkBox.isEnabled)
-                                                return;
-
-                                            panel.backgroundSprite = checkBox.isChecked ? $"{backgroundSprite}Focused" : backgroundSprite;
-                                        };
+            {
+                // We don't have to change anything if we're in a disabled state.
+                if (checkBox.isEnabled)
+                {
+                    panel.backgroundSprite = checkBox.isChecked ? $"{backgroundSprite}Focused" : backgroundSprite;
+                }
+            };
 
             // Event handler to toggle background state on isEnabled change.
             checkBox.eventIsEnabledChanged += (c, p) =>
-                                              {
-                                                  panel.backgroundSprite = !p ? $"{backgroundSprite}Disabled" : backgroundSprite;
-                                                  panel.isEnabled = p;
-                                              };
+            {
+                panel.backgroundSprite = !p ? $"{backgroundSprite}Disabled" : backgroundSprite;
+                panel.isEnabled = p;
+            };
 
             // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
