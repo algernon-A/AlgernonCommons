@@ -22,6 +22,10 @@ namespace AlgernonCommons.UI
         // UI components.
         private readonly UISprite _background;
 
+        // Selected item appearance.
+        private string _selectedSpriteName = "ListItemHighlight";
+        private Color _selectedColor = new Color(1f, 1f, 1f);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UIListRow"/> class.
         /// </summary>
@@ -45,7 +49,27 @@ namespace AlgernonCommons.UI
         public virtual float RowHeight => UIList.DefaultRowHeight;
 
         /// <summary>
-        /// Gets or sets the sprite name to be used for the internal <see cref="UISprite"/> background.
+        /// Gets or sets the sprite name to be used for the <see cref="UISprite"/> background for selected items.
+        /// </summary>
+        public string SelectedSpriteName
+        {
+            get => _selectedSpriteName;
+
+            set => _selectedSpriteName = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Color"/> to be used for the <see cref="UISprite"/> background for selected items.
+        /// </summary>
+        public Color SelectedColor
+        {
+            get => _selectedColor;
+
+            set => _selectedColor = value;
+        }
+
+        /// <summary>
+        /// Gets or sets the sprite name to be used for the <see cref="UISprite"/> background for deselected items.
         /// </summary>
         public string BackgroundSpriteName
         {
@@ -55,7 +79,7 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Color"/> to be used for the internal <see cref="UISprite"/> background.
+        /// Gets or sets the <see cref="Color"/> to be used for the <see cref="UISprite"/> background for deselected items.
         /// </summary>
         public Color BackgroundColor
         {
@@ -86,7 +110,8 @@ namespace AlgernonCommons.UI
         /// </summary>
         public virtual void Select()
         {
-            _background.color = new Color32(255, 255, 255, 255);
+            _background.spriteName = _selectedSpriteName;
+            _background.color = _selectedColor;
         }
 
         /// <summary>
