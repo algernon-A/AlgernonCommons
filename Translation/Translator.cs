@@ -349,37 +349,40 @@ namespace AlgernonCommons.Translation
                 return;
             }
 
-            string localePath = Path.Combine(assemblyPath, "Translations");
+            string translationsPath = Path.Combine(assemblyPath, "Translations");
 
             // Ensure that the directory exists before proceeding.
-            if (!Directory.Exists(localePath))
+            if (!Directory.Exists(translationsPath))
             {
                 Logging.Error("translations directory not found");
                 return;
             }
 
             // Load each file in directory and attempt to deserialise as a translation file.
-            string[] translationFiles = Directory.GetFiles(localePath);
+            string[] translationFiles = Directory.GetFiles(translationsPath, "*.csv", SearchOption.AllDirectories);
             foreach (string translationFile in translationFiles)
             {
-                // Skip anything that's not marked as a .csv file.
-                if (!translationFile.EndsWith(".csv"))
-                {
-                    continue;
-                }
-
                 // Read file.
                 try
                 {
                     FileStream fileStream = new FileStream(translationFile, FileMode.Open, FileAccess.Read);
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
-                        // Create new language instance for this file.
-                        Language thisLanguage = new Language
+                        // Language code is filename.
+                        string languageCode = Path.GetFileNameWithoutExtension(translationFile);
+
+                        // Check for existing entry for this language.
+                        if (!_languages.TryGetValue(languageCode, out Language thisLanguage))
                         {
-                            // Language code is filename.
-                            Code = Path.GetFileNameWithoutExtension(translationFile),
-                        };
+                            // No existing language - create a new language instance for this file.
+                            thisLanguage = new Language
+                            {
+                                Code = languageCode,
+                            };
+                        }
+
+                        // Entry counter.
+                        int addedEntries = 0;
 
                         // Parsing fields.
                         StringBuilder builder = new StringBuilder();
@@ -494,10 +497,15 @@ namespace AlgernonCommons.Translation
                                 if (!thisLanguage.TranslationDictionary.ContainsKey(key))
                                 {
                                     thisLanguage.TranslationDictionary.Add(key, value);
+                                    ++addedEntries;
                                 }
                                 else
                                 {
-                                    Logging.Error("duplicate translation key ", key, " in file ", translationFile);
+                                    // Ignore duplicates for language name key.
+                                    if (key != Language.NameKey)
+                                    {
+                                        Logging.Error("duplicate translation key ", key, " in file ", translationFile);
+                                    }
                                 }
                             }
 
@@ -513,25 +521,23 @@ namespace AlgernonCommons.Translation
                         }
 
                         // Did we get a valid dictionary from this?
-                        if (thisLanguage.Code != null && thisLanguage.TranslationDictionary.Count > 0)
+                        if (thisLanguage.Code != null && addedEntries > 0)
                         {
-                            // Yes - add to languages dictionary.
+                            Logging.Message("read translation file ", translationFile, " with language ", thisLanguage.Code, " (", thisLanguage.Name, ") with ", addedEntries, " added entries");
 
-                            // If we didn't get a readable name, use the key instead.
-                            if (thisLanguage.Name.IsNullOrWhiteSpace())
-                            {
-                                thisLanguage.Name = thisLanguage.Code;
-                            }
-
-                            // Check for duplicates.
+                            // If there's no existing entry for this language, add it (done here instead of earlier to avoid adding any languages without any valid translations).
                             if (!_languages.ContainsKey(thisLanguage.Code))
                             {
-                                Logging.Message("read translation file ", translationFile, " with language ", thisLanguage.Code, " (", thisLanguage.Name, ") with ", thisLanguage.TranslationDictionary.Count, " entries");
+                                Logging.Message("adding new language entry");
+
+                                // If we didn't get a readable name, use the key instead.
+                                if (thisLanguage.Name.IsNullOrWhiteSpace())
+                                {
+                                    Logging.Error("no language name provided; using language code instead");
+                                    thisLanguage.Name = thisLanguage.Code;
+                                }
+
                                 _languages.Add(thisLanguage.Code, thisLanguage);
-                            }
-                            else
-                            {
-                                Logging.Error("duplicate translation file for language ", thisLanguage.Code);
                             }
                         }
                         else
