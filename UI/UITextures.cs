@@ -26,7 +26,7 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Gets the "ingame" atlas.
         /// </summary>
-        public static UITextureAtlas InGameAtlas => GetTextureAtlas("ingame");
+        public static UITextureAtlas InGameAtlas => GetTextureAtlas("Ingame");
 
         /// <summary>
         /// Loads a cursor texture.
