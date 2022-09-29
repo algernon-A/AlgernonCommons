@@ -71,13 +71,35 @@ namespace AlgernonCommons.Keybinding
         public UIPanel Panel => _panel;
 
         /// <summary>
+        /// Sets the current keybinding as a ColossalFramework InputKey.
+        /// </summary>
+        public virtual InputKey InputKey
+        {
+            set
+            {
+                // Update key binding.
+                KeySetting = value;
+
+                // Update display.
+                _button.text = SavedInputKey.ToLocalizedString("KEYNAME", KeySetting);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the current keybinding as a ColossalFramework InputKey.
         /// </summary>
-        protected virtual InputKey KeySetting
+        public virtual InputKey KeySetting
         {
             get => Binding.Encode();
 
-            set => Binding.SetKey(value);
+            set
+            {
+                // Update key binding.
+                Binding.SetKey(value);
+
+                // Update display.
+                _button.text = SavedInputKey.ToLocalizedString("KEYNAME", KeySetting);
+            }
         }
 
         /// <summary>
@@ -194,9 +216,6 @@ namespace AlgernonCommons.Keybinding
         {
             // Apply key to current settings.
             KeySetting = key;
-
-            // Set the label for the new hotkey.
-            _button.text = SavedInputKey.ToLocalizedString("KEYNAME", KeySetting);
 
             // Remove priming.
             UIView.PopModal();
