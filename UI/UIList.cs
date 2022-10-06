@@ -163,7 +163,10 @@ namespace AlgernonCommons.UI
 
                     // Select new item.
                     selectedRow = value - _currentPosition;
-                    _rows[selectedRow].Select();
+                    if (selectedRow >= 0 & selectedRow < _rows.m_size)
+                    {
+                        _rows[selectedRow].Select();
+                    }
                 }
 
                 // Invoke selection changed event.
