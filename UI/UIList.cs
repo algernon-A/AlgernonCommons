@@ -156,7 +156,7 @@ namespace AlgernonCommons.UI
                 if (value >= 0)
                 {
                     // Yes - if the selected index is outside the current visibility range, move the list position to show it.
-                    if (value < _currentPosition | value > _currentPosition + _rows.m_size)
+                    if (value < _currentPosition | value >= _currentPosition + _rows.m_size)
                     {
                         CurrentPosition = value;
                     }
