@@ -121,7 +121,7 @@ namespace AlgernonCommons.UI
 
             // Text settings.
             textField.textScale = scale;
-            textField.padding = new RectOffset(6, 6, vertPad, 3);
+            textField.padding = new RectOffset(6, 6, vertPad, 1);
             textField.horizontalAlignment = UIHorizontalAlignment.Center;
 
             // Behaviour.
