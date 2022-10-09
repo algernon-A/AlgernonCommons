@@ -52,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\UITextures.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UITextFields.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIToolTips.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\PrefabUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XML\SettingsXMLBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XML\XMLFileUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patching\PatcherBase.cs" />
