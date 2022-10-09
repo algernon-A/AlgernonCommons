@@ -18,6 +18,9 @@ namespace AlgernonCommons.UI
     public abstract class OptionsPanelManager<TPanel>
         where TPanel : UIPanel
     {
+        // Panel margin.
+        private const float PanelMargin = 10f;
+
         // Parent UI panel references.
         private static UIScrollablePanel s_optionsParentPanel;
         private static UIPanel s_gameOptionsPanel;
@@ -29,12 +32,12 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Gets the panel width.
         /// </summary>
-        public static float PanelWidth => s_optionsParentPanel?.width ?? 0f;
+        public static float PanelWidth => s_optionsParentPanel?.width - (PanelMargin * 2f) ?? 744f;
 
         /// <summary>
         /// Gets the paanel height.
         /// </summary>
-        public static float PanelHeight => 725f;
+        public static float PanelHeight => s_optionsParentPanel?.height - (PanelMargin * 2f) ?? 753f;
 
         /// <summary>
         /// Gets a value indicating whether the options panel is currently active.
@@ -119,7 +122,7 @@ namespace AlgernonCommons.UI
                     s_panel.height = PanelHeight;
 
                     // Needed to ensure position is consistent if we regenerate after initial opening (e.g. on language change).
-                    s_panel.relativePosition = new Vector2(10f, 10f);
+                    s_panel.relativePosition = new Vector2(PanelMargin, PanelMargin);
                 }
             }
             catch (Exception e)
