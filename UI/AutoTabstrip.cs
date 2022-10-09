@@ -66,9 +66,11 @@ namespace AlgernonCommons.UI
             base.OnComponentAdded(child);
 
             // Resize tabs if appropriate.
-            if (child is UIButton)
+            if (child is UIButton newButton)
             {
-                child.height = _tabHeight;
+                // Assign height and enable wordwrapping.
+                newButton.height = _tabHeight;
+                newButton.wordWrap = true;
 
                 // Calculate new width.
                 float targetWidth = Mathf.Floor(width / tabCount);
