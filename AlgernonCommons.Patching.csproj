@@ -77,6 +77,7 @@
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Language.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translations.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\Translation\Translator.cs" />
+	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\AutoTabstrip.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\OptionsPanelManager.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanel.cs" />
 	  <Compile Remove="C:\Users\Karl\OneDrive\repos\AlgernonCommons\UI\StandalonePanelManager.cs" />

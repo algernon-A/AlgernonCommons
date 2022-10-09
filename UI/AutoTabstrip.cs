@@ -16,12 +16,12 @@ namespace AlgernonCommons.UI
     public class AutoTabstrip : UITabstrip
     {
         // Tab row height.
-        private float m_tabHeight;
+        private float _tabHeight;
 
         /// <summary>
         /// Gets the tab height.
         /// </summary>
-        public float TabHeight => m_tabHeight;
+        public float TabHeight => _tabHeight;
 
         /// <summary>
         /// Adds an AutoTabstrip panel to the specified parent.
@@ -37,7 +37,7 @@ namespace AlgernonCommons.UI
         public static AutoTabstrip AddTabstrip(UIComponent parent, float posX, float posY, float width, float height, out UITabContainer container, float tabHeight = 25f)
         {
             AutoTabstrip newTabstrip = UITabstrips.AddTabstrip<AutoTabstrip>(parent, posX, posY, width, height, out container, tabHeight);
-            newTabstrip.m_tabHeight = tabHeight;
+            newTabstrip._tabHeight = tabHeight;
             return newTabstrip;
         }
 
@@ -68,7 +68,7 @@ namespace AlgernonCommons.UI
             // Resize tabs if appropriate.
             if (child is UIButton)
             {
-                child.height = m_tabHeight;
+                child.height = _tabHeight;
 
                 // Calculate new width.
                 float targetWidth = Mathf.Floor(width / tabCount);
