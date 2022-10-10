@@ -39,6 +39,7 @@ namespace AlgernonCommons.UI
             trackSprite.anchor = UIAnchorStyle.All;
             trackSprite.size = trackSprite.parent.size;
             trackSprite.fillDirection = UIFillDirection.Vertical;
+            trackSprite.atlas = UITextures.InGameAtlas;
             trackSprite.spriteName = "ScrollbarTrack";
             newScrollbar.trackObject = trackSprite;
 
@@ -48,6 +49,7 @@ namespace AlgernonCommons.UI
             thumbSprite.fillDirection = UIFillDirection.Vertical;
             thumbSprite.autoSize = true;
             thumbSprite.width = thumbSprite.parent.width;
+            thumbSprite.atlas = UITextures.InGameAtlas;
             thumbSprite.spriteName = "ScrollbarThumb";
             newScrollbar.thumbObject = thumbSprite;
 

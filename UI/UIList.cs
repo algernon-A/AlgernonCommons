@@ -624,6 +624,7 @@ namespace AlgernonCommons.UI
             _contentPanel.autoLayout = false;
             _contentPanel.relativePosition = Vector2.zero;
             _contentPanel.clipChildren = true;
+            _contentPanel.atlas = UITextures.InGameAtlas;
             _contentPanel.backgroundSprite = "UnlockingPanel";
 
             // Scrollbar.

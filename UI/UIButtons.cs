@@ -36,6 +36,7 @@ namespace AlgernonCommons.UI
 
             // Appearance.
             button.textScale = scale;
+            button.atlas = UITextures.InGameAtlas;
             button.normalBgSprite = "ButtonMenu";
             button.hoveredBgSprite = "ButtonMenuHovered";
             button.pressedBgSprite = "ButtonMenuPressed";

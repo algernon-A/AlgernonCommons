@@ -69,6 +69,7 @@ namespace AlgernonCommons.UI
         {
             // Create dropdown menu.
             UIDropDown dropDown = parent.AddUIComponent<UIDropDown>();
+            dropDown.atlas = UITextures.InGameAtlas;
             dropDown.listBackground = "GenericPanelLight";
             dropDown.itemHover = "ListItemHover";
             dropDown.itemHighlight = "ListItemHighlight";

@@ -7,6 +7,8 @@ namespace AlgernonCommons.UI
 {
     using System;
     using AlgernonCommons;
+    using AlgernonCommons.UI;
+    using ColossalFramework;
     using ColossalFramework.UI;
     using UnityEngine;
 
@@ -35,6 +37,7 @@ namespace AlgernonCommons.UI
             isInteractive = true;
 
             // Appearance.
+            atlas = UITextures.InGameAtlas;
             backgroundSprite = "UnlockingPanel2";
             opacity = PanelOpacity;
 

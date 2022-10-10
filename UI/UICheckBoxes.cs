@@ -64,12 +64,14 @@ namespace AlgernonCommons.UI
 
             // Unchecked sprite.
             UISprite sprite = checkBox.AddUIComponent<UISprite>();
+            sprite.atlas = UITextures.InGameAtlas;
             sprite.spriteName = "check-unchecked";
             sprite.size = checkBox.size;
             sprite.relativePosition = Vector2.zero;
 
             // Checked sprite.
             checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite)checkBox.checkedBoxObject).atlas = UITextures.InGameAtlas;
             ((UISprite)checkBox.checkedBoxObject).spriteName = "check-checked";
             checkBox.checkedBoxObject.size = new Vector2(size, size);
             checkBox.checkedBoxObject.relativePosition = Vector2.zero;

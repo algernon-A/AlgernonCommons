@@ -26,6 +26,7 @@ namespace AlgernonCommons.UI
             spacerPanel.width = width;
             spacerPanel.height = 5f;
             spacerPanel.relativePosition = new Vector2(xPos, yPos);
+            spacerPanel.atlas = UITextures.InGameAtlas;
             spacerPanel.backgroundSprite = "ContentManagerItemBackground";
         }
 

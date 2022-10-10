@@ -41,6 +41,7 @@ namespace AlgernonCommons.UI
             _background.relativePosition = Vector2.zero;
             _background.autoSize = false;
             _background.zOrder = 0;
+            _background.atlas = UITextures.InGameAtlas;
         }
 
         /// <summary>

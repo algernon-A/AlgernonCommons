@@ -79,6 +79,7 @@ namespace AlgernonCommons.UI
             UIButton tabButton = tabstrip.AddTab(tabName);
 
             // Sprites.
+            tabButton.atlas = UITextures.InGameAtlas;
             tabButton.normalBgSprite = "SubBarButtonBase";
             tabButton.disabledBgSprite = "SubBarButtonBaseDisabled";
             tabButton.focusedBgSprite = "SubBarButtonBaseFocused";
