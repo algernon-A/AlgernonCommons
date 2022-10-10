@@ -58,6 +58,7 @@ namespace AlgernonCommons.UI
             // Close button.
             UIButton closeButton = AddUIComponent<UIButton>();
             closeButton.relativePosition = new Vector2(width - 35, 2);
+            closeButton.atlas = UITextures.InGameAtlas;
             closeButton.normalBgSprite = "buttonclose";
             closeButton.hoveredBgSprite = "buttonclosehover";
             closeButton.pressedBgSprite = "buttonclosepressed";

@@ -133,6 +133,7 @@ namespace AlgernonCommons.UI
             textField.color = new Color32(255, 255, 255, 255);
             textField.textColor = new Color32(0, 0, 0, 255);
             textField.disabledTextColor = new Color32(0, 0, 0, 128);
+            textField.atlas = UITextures.InGameAtlas;
             textField.selectionSprite = "EmptySprite";
             textField.selectionBackgroundColor = new Color32(0, 172, 234, 255);
             textField.normalBgSprite = "TextFieldPanelHovered";
