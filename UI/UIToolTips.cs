@@ -43,11 +43,6 @@ namespace AlgernonCommons.UI
             tooltipGameObject.transform.parent = UIView.Find("DefaultTooltip").gameObject.transform.parent;
             UILabel tipBox = tooltipGameObject.AddComponent<UILabel>();
 
-            // Size.
-            tipBox.autoSize = true;
-            tipBox.minimumSize = new Vector2(500f, 12f);
-            tipBox.wordWrap = true;
-
             // Mimic game's default tooltop.
             tipBox.padding = new RectOffset(23, 23, 5, 5);
             tipBox.verticalAlignment = UIVerticalAlignment.Middle;
@@ -55,13 +50,48 @@ namespace AlgernonCommons.UI
             tipBox.arbitraryPivotOffset = new Vector2(-3, 6);
 
             // Appearance.
+            tipBox.atlas = UITextures.InGameAtlas;
             tipBox.backgroundSprite = "InfoDisplay";
 
             // Start hidden and off to the side.
             tipBox.transformPosition = new Vector2(-2f, -2f);
             tipBox.isVisible = false;
 
+            // Calculate size.
+            WordWrapToolTipBoxResize(tipBox);
+            tipBox.eventTextChanged += (c, v) => WordWrapToolTipBoxResize(c as UILabel);
+
             return tipBox;
+        }
+
+        /// <summary>
+        /// Calculates the size of a word-wrap tooltip box.
+        /// </summary>
+        /// <param name="label">Word-wrap tooltip box.</param>
+        private static void WordWrapToolTipBoxResize(UILabel label)
+        {
+            // Maximum width.
+            const float MaximumWidth = 700f;
+
+            // Null check.
+            if (label == null)
+            {
+                return;
+            }
+
+            // Set label autosize.
+            label.wordWrap = false;
+            label.autoSize = true;
+            label.PerformLayout();
+
+            // If autosized label is wider than the maximum, truncate the width and turn on word-wrapping.
+            if (label.width > MaximumWidth)
+            {
+                label.autoSize = false;
+                label.autoHeight = true;
+                label.wordWrap = true;
+                label.width = MaximumWidth;
+            }
         }
     }
 }
