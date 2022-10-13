@@ -52,6 +52,7 @@ namespace AlgernonCommons.Notifications
             width = Width;
             height = Height;
             color = new Color32(58, 88, 104, 255);
+            atlas = UITextures.InGameAtlas;
             backgroundSprite = "MenuPanel";
 
             // Add components.
@@ -275,6 +276,7 @@ namespace AlgernonCommons.Notifications
 
             // Close button.
             UIButton closeButton = _titleBar.AddUIComponent<UIButton>();
+            closeButton.atlas = UITextures.InGameAtlas;
             closeButton.normalBgSprite = "buttonclose";
             closeButton.hoveredBgSprite = "buttonclosehover";
             closeButton.pressedBgSprite = "buttonclosepressed";
