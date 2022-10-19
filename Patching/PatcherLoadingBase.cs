@@ -34,12 +34,14 @@ namespace AlgernonCommons.Patching
             {
                 // Harmony 2 wasn't loaded; display warning notification and exit.
                 ListNotification harmonyNotification = NotificationBase.ShowNotification<ListNotification>();
+                if (harmonyNotification != null)
+                {
+                    // Key text items.
+                    harmonyNotification.AddParas(Translations.Translate("HARMONY_ERROR"), Translations.Translate("UNABLE_TO_OPERATE"), Translations.Translate("HARMONY_PROBLEM_CAUSES"));
 
-                // Key text items.
-                harmonyNotification.AddParas(Translations.Translate("HARMONY_ERROR"), Translations.Translate("UNABLE_TO_OPERATE"), Translations.Translate("HARMONY_PROBLEM_CAUSES"));
-
-                // List of dot points.
-                harmonyNotification.AddList(Translations.Translate("HARMONY_NOT_INSTALLED"), Translations.Translate("HARMONY_MOD_ERROR"), Translations.Translate("HARMONY_MOD_CONFLICT"));
+                    // List of dot points.
+                    harmonyNotification.AddList(Translations.Translate("HARMONY_NOT_INSTALLED"), Translations.Translate("HARMONY_MOD_ERROR"), Translations.Translate("HARMONY_MOD_CONFLICT"));
+                }
 
                 // Exit - don't call base.
                 return;

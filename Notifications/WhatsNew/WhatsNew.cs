@@ -58,9 +58,12 @@ namespace AlgernonCommons.Notifications
                 {
                     // Show notification.
                     WhatsNewNotification notification = NotificationBase.ShowNotification<WhatsNewNotification>();
-                    notification.Title = ModBase.Instance.Name;
-                    notification.DSAButton.eventClicked += (component, clickEvent) => DontShowAgain();
-                    notification.SetMessages(LastNotifiedVersion, messages);
+                    if (notification != null)
+                    {
+                        notification.Title = ModBase.Instance.Name;
+                        notification.DSAButton.eventClicked += (component, clickEvent) => DontShowAgain();
+                        notification.SetMessages(LastNotifiedVersion, messages);
+                    }
                 }
             }
         }

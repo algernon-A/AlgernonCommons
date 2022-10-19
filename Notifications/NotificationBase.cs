@@ -96,29 +96,51 @@ namespace AlgernonCommons.Notifications
                 return null;
             }
 
-            // Create new gameobject and attach the notification.
-            GameObject gameObject = new GameObject();
-            gameObject.name = "AlgernonCommons.Notification";
-            gameObject.transform.parent = view.transform;
-            NotificationBase notification = gameObject.AddComponent<T>();
-
-            // Display modal norification.
-            UIView.PushModal(notification);
-            notification.Show(true);
-            notification.Focus();
-
-            // Apply modal view effects.
-            if (view.panelsLibraryModalEffect is UIComponent modalEffect)
+            // Create notification.
+            GameObject gameObject = new GameObject
             {
-                modalEffect.FitTo(null);
-                if (!modalEffect.isVisible || modalEffect.opacity != 1f)
-                {
-                    modalEffect.Show(false);
-                    ValueAnimator.Animate("ModalEffect67419", (value) => modalEffect.opacity = value, new AnimatedFloat(0f, 1f, 0.7f, EasingType.CubicEaseOut));
-                }
-            }
+                name = "AlgernonCommons.Notification",
+            };
+            gameObject.transform.parent = view.transform;
+            NotificationBase notification = null;
+            try
+            {
+                // Create new gameobject and attach the notification.
+                notification = gameObject.AddComponent<T>();
 
-            return notification as T;
+                // Display modal norification.
+                UIView.PushModal(notification);
+                notification.Show(true);
+                notification.Focus();
+
+                // Apply modal view effects.
+                if (view.panelsLibraryModalEffect is UIComponent modalEffect)
+                {
+                    modalEffect.FitTo(null);
+                    if (!modalEffect.isVisible || modalEffect.opacity != 1f)
+                    {
+                        modalEffect.Show(false);
+                        ValueAnimator.Animate("ModalEffect67419", (value) => modalEffect.opacity = value, new AnimatedFloat(0f, 1f, 0.7f, EasingType.CubicEaseOut));
+                    }
+                }
+
+                return notification as T;
+            }
+            catch (Exception e)
+            {
+                Logging.LogException(e, "exception creating notification type ", typeof(T));
+
+                // Cleanup if possible.
+                CloseNotification(notification);
+
+                if (gameObject != null)
+                {
+                    GameObject.Destroy(gameObject);
+                    gameObject = null;
+                }
+
+                return null;
+            }
         }
 
         /// <summary>

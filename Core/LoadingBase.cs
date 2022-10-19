@@ -120,15 +120,17 @@ namespace AlgernonCommons
             {
                 // Mod conflict detected - display warning notification and exit.
                 ListNotification modConflictNotification = NotificationBase.ShowNotification<ListNotification>();
+                if (modConflictNotification != null)
+                {
+                    // Key text items.
+                    modConflictNotification.AddParas(Translations.Translate("CONFLICT_DETECTED"), Translations.Translate("UNABLE_TO_OPERATE"), Translations.Translate("CONFLICTING_MODS"));
 
-                // Key text items.
-                modConflictNotification.AddParas(Translations.Translate("CONFLICT_DETECTED"), Translations.Translate("UNABLE_TO_OPERATE"), Translations.Translate("CONFLICTING_MODS"));
+                    // Add conflicting mod name(s).
+                    modConflictNotification.AddList(_conflictingMods.ToArray());
 
-                // Add conflicting mod name(s).
-                modConflictNotification.AddList(_conflictingMods.ToArray());
-
-                // Closing para.
-                modConflictNotification.AddParas(ConflictRemovedText);
+                    // Closing para.
+                    modConflictNotification.AddParas(ConflictRemovedText);
+                }
             }
 
             // Don't do anything else if mod isn't enabled.
