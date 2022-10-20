@@ -6,7 +6,6 @@
 namespace AlgernonCommons.Notifications
 {
     using System;
-    using AlgernonCommons.Translation;
 
     /// <summary>
     /// "What's new" notification.  Based on macsergey's code in Intersection Marking Tool (Node Markup) mod.
@@ -57,6 +56,7 @@ namespace AlgernonCommons.Notifications
                 if (LastNotifiedVersion < messages[0].Version)
                 {
                     // Show notification.
+                    Logging.Message("showing what's new notification: last notified version was ", LastNotifiedVersionString);
                     WhatsNewNotification notification = NotificationBase.ShowNotification<WhatsNewNotification>();
                     if (notification != null)
                     {
