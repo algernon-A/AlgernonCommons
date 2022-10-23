@@ -135,5 +135,32 @@ namespace AlgernonCommons
             Logging.Message("didn't find enabled assembly ", assemblyName);
             return null;
         }
+
+        /// <summary>
+        /// Checks to see if another mod is installed, based on a provided assembly name.
+        /// Case-sensitive!  PloppableRICO is not the same as ploppablerico.
+        /// </summary>
+        /// <param name="assemblyName">Name of the mod assembly.</param>
+        /// <returns>True if target is found, null otherwise.</returns>
+        public static bool IsAssemblyPresent(string assemblyName)
+        {
+            // Iterate through the full list of plugins.
+            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            {
+                // Look at each assembly in plugin.
+                foreach (Assembly assembly in plugin.GetAssemblies())
+                {
+                    if (assembly.GetName().Name.Equals(assemblyName))
+                    {
+                        Logging.Message("found mod assembly ", assemblyName, ", version ", assembly.GetName().Version);
+                        return true;
+                    }
+                }
+            }
+
+            // If we've made it here, then we haven't found a matching assembly.
+            Logging.Message("didn't find assembly ", assemblyName);
+            return false;
+        }
     }
 }
