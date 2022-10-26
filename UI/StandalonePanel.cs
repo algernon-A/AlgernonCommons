@@ -50,10 +50,11 @@ namespace AlgernonCommons.UI
 
             // Drag bar.
             UIDragHandle dragHandle = AddUIComponent<UIDragHandle>();
-            dragHandle.width = width - 50f;
+            dragHandle.width = width;
             dragHandle.height = height;
             dragHandle.relativePosition = Vector3.zero;
             dragHandle.target = this;
+            dragHandle.SendToBack();
 
             // Close button.
             UIButton closeButton = AddUIComponent<UIButton>();
