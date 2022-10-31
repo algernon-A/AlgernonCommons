@@ -8,14 +8,14 @@ namespace AlgernonCommons.Utils
     /// <summary>
     /// Prefab-related utilities.
     /// </summary>
-    internal static class PrefabUtils
+    public static class PrefabUtils
     {
         /// <summary>
         /// Sanitises a raw prefab name for display.
         /// </summary>
-        /// <param name="prefab">Original (raw) prefab.</param>
+        /// <param name="prefab">Prefab.</param>
         /// <returns>Cleaned display name.</returns>
-        internal static string GetDisplayName(PrefabInfo prefab)
+        public static string GetDisplayName(PrefabInfo prefab)
         {
             // Null check.
             if (prefab?.name == null)
@@ -23,10 +23,27 @@ namespace AlgernonCommons.Utils
                 return "null";
             }
 
-            // Otherwise, try getting any localized name, omit any package number, and trim off any trailing _Data.
+            // Try getting any localized name, omit any package number, and trim off any trailing _Data.
             string localizedName = prefab.GetUncheckedLocalizedTitle();
             int index = localizedName.IndexOf('.');
             return localizedName.Substring(index + 1).Replace("_Data", string.Empty);
+        }
+
+        /// <summary>
+        /// Checks if this asset is a workshop asset (ie. has a workshop ID associated with it).
+        /// </summary>
+        /// <param name="prefab">Prefab.</param>
+        /// <returns>True if this is a workshop asset, false otherwise.</returns>
+        public static bool IsWorkshopAsset(PrefabInfo prefab)
+        {
+            // Null check.
+            if (prefab?.name == null)
+            {
+                return false;
+            }
+
+            // Check for a package number (name contains period).
+            return prefab.name.IndexOf('.') >= 0;
         }
     }
 }
