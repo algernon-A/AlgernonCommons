@@ -24,11 +24,12 @@ namespace AlgernonCommons.Notifications
         // Layout constants.
         private const float Width = 600f;
         private const float Height = 200f;
-        private const float TitleBarHeight = 40f;
+        private const float TitleBarHeight = 50f;
         private const float ButtonHeight = 45f;
         private const float Padding = 16f;
         private const float ButtonSpacing = 15f;
         private const float MaxContentHeight = 400f;
+        private const float ScrollWidth = 12f;
 
         // Reference constants.
         private const int DefaultButton = 1;
@@ -38,6 +39,7 @@ namespace AlgernonCommons.Notifications
         private UIDragHandle _titleBar;
         private UIScrollablePanel _mainPanel;
         private UIPanel _buttonPanel;
+        private UIScrollbar _scrollBar;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationBase"/> class.
@@ -51,9 +53,9 @@ namespace AlgernonCommons.Notifications
             isInteractive = true;
             width = Width;
             height = Height;
-            color = new Color32(58, 88, 104, 255);
+            color = new Color32(192, 192, 192, 255);
             atlas = UITextures.InGameAtlas;
-            backgroundSprite = "MenuPanel";
+            backgroundSprite = "MenuPanel2";
 
             // Add components.
             AddTitleBar();
@@ -278,6 +280,9 @@ namespace AlgernonCommons.Notifications
 
             // Position button panel under main panel.
             _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
+
+            // Set scrollbar.
+            _scrollBar.maxValue = _mainPanel.height - 400f;
         }
 
         /// <summary>
@@ -327,8 +332,8 @@ namespace AlgernonCommons.Notifications
             // Basic setup.
             _mainPanel = AddUIComponent<UIScrollablePanel>();
             _mainPanel.relativePosition = new Vector2(0, _titleBar.height);
-            _mainPanel.minimumSize = new Vector2(Width, 5f);
-            _mainPanel.maximumSize = new Vector2(Width, MaxContentHeight);
+            _mainPanel.minimumSize = new Vector2(Width - ScrollWidth, 5f);
+            _mainPanel.maximumSize = new Vector2(Width - ScrollWidth, MaxContentHeight);
             _mainPanel.autoSize = true;
             _mainPanel.autoLayoutStart = LayoutStart.TopLeft;
             _mainPanel.autoLayoutDirection = LayoutDirection.Vertical;
@@ -339,7 +344,9 @@ namespace AlgernonCommons.Notifications
             _mainPanel.scrollWheelDirection = UIOrientation.Vertical;
 
             // Add scrollbar.
-            UIScrollbars.AddScrollbar(this, _mainPanel);
+            _scrollBar = UIScrollbars.AddScrollbar(this, _mainPanel);
+
+
 
             // Event handlers to add/remove event handlers for resizing when child components re resized.
             _mainPanel.eventComponentAdded += (container, child) => AddChildEvents(child);

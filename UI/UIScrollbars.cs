@@ -70,7 +70,7 @@ namespace AlgernonCommons.UI
             newScrollbar.height = scrollPanel.height;
 
             // Event handler to handle resize of scroll panel.
-            scrollPanel.eventSizeChanged += (component, newSize) =>
+            scrollPanel.eventSizeChanged += (c, newSize) =>
             {
                 newScrollbar.relativePosition = new Vector2(scrollPanel.relativePosition.x + scrollPanel.width, scrollPanel.relativePosition.y);
                 newScrollbar.height = scrollPanel.height;

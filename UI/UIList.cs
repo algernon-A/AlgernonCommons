@@ -19,9 +19,6 @@ namespace AlgernonCommons.UI
         /// </summary>
         public const float DefaultRowHeight = 20f;
 
-        // Private layout constants.
-        private const float ScrollBarWidth = 10f;
-
         // UI components.
         private UIPanel _contentPanel;
         private UIScrollbar _scrollbar;
@@ -462,7 +459,7 @@ namespace AlgernonCommons.UI
             }
 
             // Resize content panel.
-            _contentPanel.width = width - ScrollBarWidth;
+            _contentPanel.width = width;
             _contentPanel.height = height;
 
             // Reesize and position scrollbar.

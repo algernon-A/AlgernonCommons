@@ -37,11 +37,12 @@ namespace AlgernonCommons.UI
             // Appearance.
             button.textScale = scale;
             button.atlas = UITextures.InGameAtlas;
-            button.normalBgSprite = "ButtonMenu";
-            button.hoveredBgSprite = "ButtonMenuHovered";
-            button.pressedBgSprite = "ButtonMenuPressed";
-            button.disabledBgSprite = "ButtonMenuDisabled";
-            button.disabledTextColor = new Color32(128, 128, 128, 255);
+            button.normalBgSprite = "ButtonWhite";
+            button.hoveredBgSprite = "ButtonWhiteHovered";
+            button.pressedBgSprite = "ButtonWhitePressed";
+            button.disabledBgSprite = "ButtonWhiteDisabled";
+            button.textColor = Color.black;
+            button.disabledTextColor = Color.grey;
             button.canFocus = false;
 
             // Add tooltip.
