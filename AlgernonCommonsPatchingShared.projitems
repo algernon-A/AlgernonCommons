@@ -66,6 +66,12 @@
     <Content Include="$(MSBuildThisFileDirectory)LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Translations\de-DE.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\en-EN.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\fr-FR.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\ja-JP.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\pt-BR.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\ru-RU.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\zh-CN.csv" />
   </ItemGroup>
 </Project>
