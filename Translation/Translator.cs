@@ -358,8 +358,24 @@ namespace AlgernonCommons.Translation
                 return;
             }
 
-            // Load each file in directory and attempt to deserialise as a translation file.
-            string[] translationFiles = Directory.GetFiles(translationsPath, "*.csv", SearchOption.AllDirectories);
+            // Load translation files in top directory.
+            LoadLanguages(Directory.GetFiles(translationsPath, "*.csv", SearchOption.TopDirectoryOnly), true);
+
+            // Load translation files in lower directories, but only add entries if there's a corresponding top-level translation..
+            foreach (string directory in Directory.GetDirectories(translationsPath))
+            {
+                LoadLanguages(Directory.GetFiles(directory, "*.csv", SearchOption.AllDirectories), false);
+            }
+        }
+
+        /// <summary>
+        /// Loads languages from CSV files.
+        /// </summary>
+        /// <param name="translationFiles">List of files to translate.</param>
+        /// <param name="createNew">True if new translations can be created from this list of files, false to only add to new translations.</param>
+        private void LoadLanguages(string[] translationFiles, bool createNew)
+        {
+            // Load each file and attempt to deserialise as a translation file.
             foreach (string translationFile in translationFiles)
             {
                 // Read file.
@@ -525,20 +541,30 @@ namespace AlgernonCommons.Translation
                         {
                             Logging.Message("read translation file ", translationFile, " with language ", thisLanguage.Code, " (", thisLanguage.Name, ") with ", addedEntries, " added entries");
 
-                            // If there's no existing entry for this language, add it (done here instead of earlier to avoid adding any languages without any valid translations).
+                            // Do we have an existing entry for this language?
                             if (!_languages.ContainsKey(thisLanguage.Code))
                             {
-                                Logging.Message("adding new language entry");
-
-                                // If we didn't get a readable name, use the key instead.
-                                if (thisLanguage.Name.IsNullOrWhiteSpace())
+                                // No - if we're not creating new language entries, then skip this and go to the next file.
+                                if (!createNew)
                                 {
-                                    Logging.Error("no language name provided; using language code instead");
-                                    thisLanguage.Name = thisLanguage.Code;
+                                    continue;
                                 }
 
-                                _languages.Add(thisLanguage.Code, thisLanguage);
+                                // Add new language here (done here instead of earlier to avoid adding any languages without any valid translations).
+                                {
+                                    Logging.Message("adding new language entry");
+
+                                    // If we didn't get a readable name, use the key instead.
+                                    if (thisLanguage.Name.IsNullOrWhiteSpace())
+                                    {
+                                        Logging.Error("no language name provided; using language code instead");
+                                        thisLanguage.Name = thisLanguage.Code;
+                                    }
+                                }
                             }
+
+                            // Add language.
+                            _languages.Add(thisLanguage.Code, thisLanguage);
                         }
                         else
                         {

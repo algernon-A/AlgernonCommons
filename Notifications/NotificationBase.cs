@@ -346,8 +346,6 @@ namespace AlgernonCommons.Notifications
             // Add scrollbar.
             _scrollBar = UIScrollbars.AddScrollbar(this, _mainPanel);
 
-
-
             // Event handlers to add/remove event handlers for resizing when child components re resized.
             _mainPanel.eventComponentAdded += (container, child) => AddChildEvents(child);
             _mainPanel.eventComponentRemoved += (container, child) => RemoveChildEvents(child);
