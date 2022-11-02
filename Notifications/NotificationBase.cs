@@ -53,7 +53,7 @@ namespace AlgernonCommons.Notifications
             isInteractive = true;
             width = Width;
             height = Height;
-            color = new Color32(192, 192, 192, 255);
+            color = new Color32(128, 128, 128, 255);
             atlas = UITextures.InGameAtlas;
             backgroundSprite = "MenuPanel2";
 
