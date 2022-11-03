@@ -561,10 +561,10 @@ namespace AlgernonCommons.Translation
                                         thisLanguage.Name = thisLanguage.Code;
                                     }
                                 }
-                            }
 
-                            // Add language.
-                            _languages.Add(thisLanguage.Code, thisLanguage);
+                                // Add language.
+                                _languages.Add(thisLanguage.Code, thisLanguage);
+                            }
                         }
                         else
                         {
