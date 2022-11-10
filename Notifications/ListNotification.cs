@@ -160,8 +160,8 @@ namespace AlgernonCommons.Notifications
                 _textLabel.autoHeight = true;
 
                 // Set list panel height.
-                _textLabel.width = this.width - MessageX - Padding;
-                this.height = _textLabel.height + (Padding * 2);
+                _textLabel.width = width - MessageX - Padding;
+                height = _textLabel.height + (Padding * 2);
             }
 
             /// <summary>
@@ -178,8 +178,8 @@ namespace AlgernonCommons.Notifications
 
                 if (_textLabel != null)
                 {
-                    _textLabel.width = this.width - MessageX - Padding;
-                    this.height = _textLabel.height + (Padding * 2);
+                    _textLabel.width = width - MessageX - Padding;
+                    height = _textLabel.height + (Padding * 2);
                 }
             }
         }
