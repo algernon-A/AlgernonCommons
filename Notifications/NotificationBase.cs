@@ -39,7 +39,6 @@ namespace AlgernonCommons.Notifications
         private UIDragHandle _titleBar;
         private UIScrollablePanel _mainPanel;
         private UIPanel _buttonPanel;
-        private UIScrollbar _scrollBar;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationBase"/> class.
@@ -280,9 +279,6 @@ namespace AlgernonCommons.Notifications
 
             // Position button panel under main panel.
             _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
-
-            // Set scrollbar.
-            _scrollBar.maxValue = _mainPanel.height - 400f;
         }
 
         /// <summary>
@@ -344,7 +340,13 @@ namespace AlgernonCommons.Notifications
             _mainPanel.scrollWheelDirection = UIOrientation.Vertical;
 
             // Add scrollbar.
-            _scrollBar = UIScrollbars.AddScrollbar(this, _mainPanel);
+            UIScrollbars.AddScrollbar(this, _mainPanel);
+
+            // Workaround to prevent scroll movement wrapping.
+            _mainPanel.eventSizeChanged += (c, value) =>
+            {
+                _mainPanel.scrollPadding.top = 1;
+            };
 
             // Event handlers to add/remove event handlers for resizing when child components re resized.
             _mainPanel.eventComponentAdded += (container, child) => AddChildEvents(child);
