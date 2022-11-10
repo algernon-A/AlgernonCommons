@@ -39,9 +39,13 @@ namespace AlgernonCommons.UI
             button.atlas = UITextures.InGameAtlas;
             button.normalBgSprite = "ButtonWhite";
             button.hoveredBgSprite = "ButtonWhiteHovered";
+            button.focusedBgSprite = "ButtonWhiteHovered";
             button.pressedBgSprite = "ButtonWhitePressed";
             button.disabledBgSprite = "ButtonWhiteDisabled";
             button.textColor = Color.black;
+            button.hoveredTextColor = Color.blue;
+            button.pressedTextColor = Color.green;
+            button.focusedTextColor = Color.black;
             button.disabledTextColor = Color.grey;
             button.canFocus = false;
 
