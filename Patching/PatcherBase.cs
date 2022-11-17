@@ -215,7 +215,7 @@ namespace AlgernonCommons.Patching
                 }
 
                 // Print out patch indexes and types.
-                foreach (var prefix in patches.Prefixes)
+                foreach (Patch prefix in patches.Prefixes)
                 {
                     logMessage.Append("        Prefix ");
                     logMessage.Append(prefix.index);
@@ -223,7 +223,7 @@ namespace AlgernonCommons.Patching
                     logMessage.AppendLine(prefix.owner);
                 }
 
-                foreach (var postfix in patches.Prefixes)
+                foreach (Patch postfix in patches.Prefixes)
                 {
                     logMessage.Append("        Prefix ");
                     logMessage.Append(postfix.index);
@@ -231,7 +231,7 @@ namespace AlgernonCommons.Patching
                     logMessage.AppendLine(postfix.owner);
                 }
 
-                foreach (var transpiler in patches.Prefixes)
+                foreach (Patch transpiler in patches.Prefixes)
                 {
                     logMessage.Append("        Transpiler ");
                     logMessage.Append(transpiler.index);
@@ -239,7 +239,7 @@ namespace AlgernonCommons.Patching
                     logMessage.AppendLine(transpiler.owner);
                 }
 
-                foreach (var finalizer in patches.Finalizers)
+                foreach (Patch finalizer in patches.Finalizers)
                 {
                     logMessage.Append("        Finalizer ");
                     logMessage.Append(finalizer.index);
@@ -253,7 +253,7 @@ namespace AlgernonCommons.Patching
         }
 
         /// <summary>
-        /// Peforms any additional actions (such as custom patching) after PatchAll is called.
+        /// Performs any additional actions (such as custom patching) after PatchAll is called.
         /// </summary>
         /// <param name="harmonyInstance">Haromny instance for patching.</param>
         protected virtual void OnPatchAll(Harmony harmonyInstance)
