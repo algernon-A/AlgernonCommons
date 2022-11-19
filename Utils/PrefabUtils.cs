@@ -11,7 +11,7 @@ namespace AlgernonCommons.Utils
     public static class PrefabUtils
     {
         /// <summary>
-        /// Sanitises a raw prefab name for display.
+        /// Returns a cleaned-up display name for the given prefab.
         /// </summary>
         /// <param name="prefab">Prefab.</param>
         /// <returns>Cleaned display name.</returns>
@@ -23,10 +23,23 @@ namespace AlgernonCommons.Utils
                 return "null";
             }
 
-            // Try getting any localized name, omit any package number, and trim off any trailing _Data.
+            // Try getting any localized name first.
             string localizedName = prefab.GetUncheckedLocalizedTitle();
-            int index = localizedName.IndexOf('.');
-            return localizedName.Substring(index + 1).Replace("_Data", string.Empty);
+
+            // Perform cleanup.
+            return GetDisplayName(localizedName);
+        }
+
+        /// <summary>
+        /// Sanitises a raw prefab name for display.
+        /// </summary>
+        /// <param name="prefabName">Prefab name.</param>
+        /// <returns>Cleaned display name.</returns>
+        public static string GetDisplayName(string prefabName)
+        {
+            // Omit any package number, and trim off any trailing _Data.
+            int index = prefabName.IndexOf('.');
+            return prefabName.Substring(index + 1).Replace("_Data", string.Empty);
         }
 
         /// <summary>
