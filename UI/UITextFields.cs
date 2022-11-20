@@ -71,7 +71,7 @@ namespace AlgernonCommons.UI
             label.wordWrap = false;
 
             // Event handler to set position on text change.
-            label.eventTextChanged += (c, newText) => { label.relativePosition = new Vector2(-(label.width + 5f), (height - label.height) / 2); };
+            label.eventTextChanged += (c, newText) => { label.relativePosition = new Vector2(-(label.width + 5f), ((height - label.height) / 2) + (vertPad / 2f)); };
 
             // Set text.
             label.text = text;
