@@ -7,8 +7,6 @@ namespace AlgernonCommons.UI
 {
     using System;
     using AlgernonCommons;
-    using AlgernonCommons.UI;
-    using ColossalFramework;
     using ColossalFramework.UI;
     using UnityEngine;
 
@@ -21,6 +19,9 @@ namespace AlgernonCommons.UI
         /// Layout margin.
         /// </summary>
         public const float Margin = 5f;
+
+        // Layout constants.
+        private const float CloseButtonSize = 35f;
 
         // Panel components.
         private readonly UILabel _titleLabel;
@@ -45,7 +46,7 @@ namespace AlgernonCommons.UI
             size = new Vector2(PanelWidth, PanelHeight);
 
             // Title label.
-            _titleLabel = UILabels.AddLabel(this, 0f, 13f, PanelTitle, PanelWidth, alignment: UIHorizontalAlignment.Center);
+            _titleLabel = UILabels.AddLabel(this, TitleXPos, 13f, PanelTitle, PanelWidth - TitleXPos - CloseButtonSize, alignment: UIHorizontalAlignment.Center);
             _titleLabel.text = PanelTitle;
 
             // Drag bar.
@@ -58,7 +59,7 @@ namespace AlgernonCommons.UI
 
             // Close button.
             UIButton closeButton = AddUIComponent<UIButton>();
-            closeButton.relativePosition = new Vector2(width - 35, 2);
+            closeButton.relativePosition = new Vector2(width - CloseButtonSize, 2);
             closeButton.atlas = UITextures.InGameAtlas;
             closeButton.normalBgSprite = "buttonclose";
             closeButton.hoveredBgSprite = "buttonclosehover";
@@ -103,6 +104,11 @@ namespace AlgernonCommons.UI
         /// Sets the panel's title text.
         /// </summary>
         protected string TitleText { set => _titleLabel.text = value; }
+
+        /// <summary>
+        /// Gets the title label X-position.
+        /// </summary>
+        protected virtual float TitleXPos => CloseButtonSize;
 
         /// <summary>
         /// Closes the panel.
