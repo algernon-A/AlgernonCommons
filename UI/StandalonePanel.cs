@@ -45,10 +45,6 @@ namespace AlgernonCommons.UI
             // Size.
             size = new Vector2(PanelWidth, PanelHeight);
 
-            // Title label.
-            _titleLabel = UILabels.AddLabel(this, TitleXPos, 13f, PanelTitle, PanelWidth - TitleXPos - CloseButtonSize, alignment: UIHorizontalAlignment.Center);
-            _titleLabel.text = PanelTitle;
-
             // Drag bar.
             UIDragHandle dragHandle = AddUIComponent<UIDragHandle>();
             dragHandle.width = width;
@@ -56,6 +52,11 @@ namespace AlgernonCommons.UI
             dragHandle.relativePosition = Vector3.zero;
             dragHandle.target = this;
             dragHandle.SendToBack();
+
+            // Title label.
+            _titleLabel = UILabels.AddLabel(this, TitleXPos, 13f, PanelTitle, PanelWidth - TitleXPos - CloseButtonSize, alignment: UIHorizontalAlignment.Center);
+            _titleLabel.text = PanelTitle;
+            _titleLabel.SendToBack();
 
             // Close button.
             UIButton closeButton = AddUIComponent<UIButton>();
