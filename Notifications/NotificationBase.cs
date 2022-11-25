@@ -40,6 +40,9 @@ namespace AlgernonCommons.Notifications
         private UIScrollablePanel _mainPanel;
         private UIPanel _buttonPanel;
 
+        // Event handling.
+        private bool _suspendEvents = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationBase"/> class.
         /// </summary>
@@ -256,29 +259,38 @@ namespace AlgernonCommons.Notifications
         /// </summary>
         private void Resize()
         {
-            // Main panel height indicator.
-            float maximumY = 0f;
-
-            // Set width of each component in main panel to panel width (less padding on either side).
-            foreach (UIComponent component in _mainPanel.components)
+            // Don't do anything if already processing.
+            if (!_suspendEvents)
             {
-                component.width = _mainPanel.width - (Padding * 2f);
+                _suspendEvents = true;
 
-                // Calculate component bottom relative Y-position.
-                float componentBottom = component.relativePosition.y + component.height;
-                if (componentBottom > maximumY)
+                // Main panel height indicator.
+                float maximumY = 0f;
+
+                // Set width of each component in main panel to panel width (less padding on either side).
+                foreach (UIComponent component in _mainPanel.components)
                 {
-                    // Update panel height indicator.
-                    maximumY = componentBottom;
+                    component.width = _mainPanel.width - (Padding * 2f);
+
+                    // Calculate component bottom relative Y-position.
+                    float componentBottom = component.relativePosition.y + component.height;
+                    if (componentBottom > maximumY)
+                    {
+                        // Update panel height indicator.
+                        maximumY = componentBottom;
+                    }
                 }
+
+                // Set height.
+                _mainPanel.height = Mathf.Min(maximumY, MaxContentHeight);
+                height = _titleBar.height + _mainPanel.height + _buttonPanel.height + (Padding * 2f);
+
+                // Position button panel under main panel.
+                _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
+
+                // Resume event handling.
+                _suspendEvents = false;
             }
-
-            // Set height.
-            _mainPanel.height = Mathf.Min(maximumY, MaxContentHeight);
-            height = _titleBar.height + _mainPanel.height + _buttonPanel.height + (Padding * 2f);
-
-            // Position button panel under main panel.
-            _buttonPanel.relativePosition = new Vector2(0, _titleBar.height + _mainPanel.height + Padding);
         }
 
         /// <summary>
