@@ -35,6 +35,7 @@ namespace AlgernonCommons.UI
             button.relativePosition = new Vector2(posX, posY);
 
             // Appearance.
+            button.font = UIFonts.SemiBold;
             button.textScale = scale;
             button.atlas = UITextures.InGameAtlas;
             button.normalBgSprite = "ButtonWhite";
