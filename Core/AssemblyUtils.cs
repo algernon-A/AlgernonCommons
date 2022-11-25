@@ -8,7 +8,9 @@ namespace AlgernonCommons
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using ColossalFramework;
     using ColossalFramework.Plugins;
+    using static ColossalFramework.Plugins.PluginManager;
 
     /// <summary>
     /// Core assembly-relateed utilities.
@@ -48,10 +50,10 @@ namespace AlgernonCommons
 
                 // No path cached - get list of currently active plugins.
                 Assembly thisAssembly = Assembly.GetExecutingAssembly();
-                IEnumerable<PluginManager.PluginInfo> plugins = PluginManager.instance.GetPluginsInfo();
+                IEnumerable<PluginInfo> plugins = PluginManager.instance.GetPluginsInfo();
 
                 // Iterate through list.
-                foreach (PluginManager.PluginInfo plugin in plugins)
+                foreach (PluginInfo plugin in plugins)
                 {
                     try
                     {
@@ -78,6 +80,11 @@ namespace AlgernonCommons
                 return null;
             }
         }
+
+        /// <summary>
+        /// Gets the PluginInfo of the current enabled mod assembly.
+        /// </summary>
+        public static PluginInfo ThisPlugin => Singleton<PluginManager>.instance.FindPluginInfo(Assembly.GetExecutingAssembly());
 
         /// <summary>
         /// Returns the provided version as a string, leaving off any trailing zeros versions for build and revision.
@@ -115,7 +122,7 @@ namespace AlgernonCommons
         public static Assembly GetEnabledAssembly(string assemblyName)
         {
             // Iterate through the full list of plugins.
-            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            foreach (PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 // Only looking at enabled plugins.
                 if (plugin.isEnabled)
@@ -145,7 +152,7 @@ namespace AlgernonCommons
         public static bool IsAssemblyPresent(string assemblyName)
         {
             // Iterate through the full list of plugins.
-            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            foreach (PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 // Look at each assembly in plugin.
                 foreach (Assembly assembly in plugin.GetAssemblies())
