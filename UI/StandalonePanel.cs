@@ -92,6 +92,11 @@ namespace AlgernonCommons.UI
         public abstract float PanelHeight { get; }
 
         /// <summary>
+        /// Gets a value indicating whether the panel's previous position should be remembered after closing.
+        /// </summary>
+        public bool RememberPosition => true;
+
+        /// <summary>
         /// Gets the panel opacity.
         /// </summary>
         protected virtual float PanelOpacity => 1f;
