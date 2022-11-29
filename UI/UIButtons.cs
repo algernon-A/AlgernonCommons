@@ -71,6 +71,21 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Adds a simple pushbutton.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="position">Relative postion.</param>
+        /// <param name="text">Button text.</param>
+        /// <param name="width">Button width (default 200).</param>
+        /// <param name="height">Button height (default 30).</param>
+        /// <param name="scale">Text scale (default 0.9).</param>
+        /// <param name="vertPad">Vertical text padding within button (default 4).</param>
+        /// <param name="tooltip">Tooltip, if any.</param>
+        /// <returns>New pushbutton.</returns>
+        public static UIButton AddButton(UIComponent parent, Vector3 position, string text, float width = 200f, float height = 30f, float scale = 0.9f, int vertPad = 4, string tooltip = null) =>
+            AddButton(parent, position.x, position.y, text, width, height, scale, vertPad, tooltip);
+
+        /// <summary>
         /// Adds a simple pushbutton, slightly smaller than the standard.
         /// </summary>
         /// <param name="parent">Parent component.</param>
