@@ -28,6 +28,11 @@ namespace AlgernonCommons
         private List<string> _conflictingMods;
 
         /// <summary>
+        /// Gets a value indicating whether the mod has been created.
+        /// </summary>
+        public static bool IsCreated => s_isCreated;
+
+        /// <summary>
         /// Gets a value indicating whether the mod has finished loading.
         /// </summary>
         public static bool IsLoaded => s_isLoaded;
