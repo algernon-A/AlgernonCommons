@@ -90,7 +90,7 @@ namespace AlgernonCommons.UI
             valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
 
             // Event handler to update value label.
-            newSlider.eventValueChanged += (component, value) =>
+            newSlider.eventValueChanged += (c, value) =>
             {
                 valueLabel.text = value.ToString();
             };
@@ -140,6 +140,7 @@ namespace AlgernonCommons.UI
             // Set initial values.
             newSlider.stepSize = 1f;
             newSlider.minValue = 1f;
+            newSlider.maxValue = maxValue;
 
             return newSlider;
         }

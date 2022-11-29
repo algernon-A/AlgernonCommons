@@ -65,7 +65,7 @@ namespace AlgernonCommons.UI
             closeButton.normalBgSprite = "buttonclose";
             closeButton.hoveredBgSprite = "buttonclosehover";
             closeButton.pressedBgSprite = "buttonclosepressed";
-            closeButton.eventClick += (component, clickEvent) => Close();
+            closeButton.eventClick += (c, p) => Close();
 
             // Default position - centre in screen.
             relativePosition = new Vector2(Mathf.Floor((GetUIView().fixedWidth - width) / 2), Mathf.Floor((GetUIView().fixedHeight - height) / 2));

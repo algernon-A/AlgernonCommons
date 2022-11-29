@@ -66,7 +66,7 @@ namespace AlgernonCommons.Notifications
             Resize();
 
             // Event handler for size change.
-            _mainPanel.eventSizeChanged += (component, size) => Resize();
+            _mainPanel.eventSizeChanged += (c, size) => Resize();
         }
 
         /// <summary>
@@ -319,14 +319,14 @@ namespace AlgernonCommons.Notifications
             closeButton.relativePosition = new Vector2(Width - 36f, 4f);
 
             // Event handler - resize.
-            _titleBar.eventSizeChanged += (component, newSize) =>
+            _titleBar.eventSizeChanged += (c, newSize) =>
             {
                 _titleLabel.size = newSize;
                 _titleLabel.CenterToParent();
             };
 
             // Event handler - centre title on drag handle when text changes.
-            _titleLabel.eventTextChanged += (component, text) => _titleLabel.CenterToParent();
+            _titleLabel.eventTextChanged += (c, text) => _titleLabel.CenterToParent();
 
             // Event handler - close button.
             closeButton.eventClick += (UIComponent component, UIMouseEventParameter eventParam) => Close();
