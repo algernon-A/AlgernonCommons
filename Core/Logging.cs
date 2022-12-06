@@ -18,7 +18,7 @@ namespace AlgernonCommons
         private static readonly StringBuilder MessageBuilder = new StringBuilder(128);
 
         // Private fields.
-        private static bool s_detailLogging = true;
+        private static bool s_detailLogging = false;
         private static string s_modName;
 
         /// <summary>
