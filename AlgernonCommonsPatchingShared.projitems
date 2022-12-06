@@ -70,7 +70,9 @@
     <None Include="$(MSBuildThisFileDirectory)Translations\de-DE.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\en-EN.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\es-ES.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\fi-FI.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\fr-FR.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\id-ID.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\it-IT.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\ja-JP.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\ko-KR.csv" />
@@ -79,6 +81,7 @@
     <None Include="$(MSBuildThisFileDirectory)Translations\pt-BR.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\ru-RU.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\sk-SK.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\tr-TR.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\zh-CN.csv" />
   </ItemGroup>
 </Project>
