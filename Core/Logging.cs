@@ -36,7 +36,16 @@ namespace AlgernonCommons
         /// Gets or sets a value indicating whether more detailed logging should be provided.
         /// If this is false, only errors, key messages, or exceptions will be logged (standard messages will be ignored).
         /// </summary>
-        public static bool DetailLogging { get => s_detailLogging; set => s_detailLogging = value; }
+        public static bool DetailLogging
+        {
+            get => s_detailLogging;
+
+            set
+            {
+                s_detailLogging = value;
+                KeyMessage("detailed logging ", value ? "enabled" : "disabled");
+            }
+        }
 
         /// <summary>
         /// Gets the mod's logging name (to identify each line).
