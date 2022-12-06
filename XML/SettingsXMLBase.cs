@@ -25,5 +25,11 @@ namespace AlgernonCommons.XML
         /// </summary>
         [XmlElement("WhatsNewVersion")]
         public string WhatsNewVersion { get => WhatsNew.LastNotifiedVersionString; set => WhatsNew.LastNotifiedVersionString = value; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether detailed logging is enabled.
+        /// </summary>
+        [XmlElement("DetailedLogging")]
+        public bool XMDetailedLogging { get => Logging.DetailLogging; set => Logging.DetailLogging = value; }
     }
 }
