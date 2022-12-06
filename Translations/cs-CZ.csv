@@ -14,3 +14,4 @@
 "HARMONY_NOT_INSTALLED","Vyžadován mód Harmony 2, který není nainstalován","Possible cause of Harmony error - Harmony not installed."
 "HARMONY_MOD_ERROR","Starý a (nebo) rozbitý mód brání správnému fungování Harmony 2","Possible cause of Harmony error - a broken mod (not this one) can cause things to stop working."
 "HARMONY_MOD_CONFLICT","Jiný mód se možná pokouší použít konfliktní Harmony záplatu","Possible cause of Harmony error - two mods trying to patch the same thing at once."
+"DETAIL_LOGGING","Povolit detailní ladící protokolování","Option to record more detail in game log"

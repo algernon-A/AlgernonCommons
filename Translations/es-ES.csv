@@ -14,3 +14,4 @@
 "HARMONY_NOT_INSTALLED","La dependencia del mod Harmony 2 no esta instalada","Possible cause of Harmony error - Harmony not installed."
 "HARMONY_MOD_ERROR","Un mod antiguo y/o roto impide que Harmony 2 funcione correctamente","Possible cause of Harmony error - a broken mod (not this one) can cause things to stop working."
 "HARMONY_MOD_CONFLICT","Otro mod puede estar intentando aplicar un parche de Harmony conflictivo","Possible cause of Harmony error - two mods trying to patch the same thing at once."
+"DETAIL_LOGGING","Habilitar registro de depuración detallado","Option to record more detail in game log"

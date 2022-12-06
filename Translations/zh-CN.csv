@@ -14,3 +14,4 @@
 "HARMONY_NOT_INSTALLED","本模组所需的前置模组Harmony 2并未订阅或未启用","Possible cause of Harmony error - Harmony not installed."
 "HARMONY_MOD_ERROR","存在一个旧版/损坏模组导致Harmony 2无法正常运行","Possible cause of Harmony error - a broken mod (not this one) can cause things to stop working."
 "HARMONY_MOD_CONFLICT","另一个模组可能在尝试应用冲突的Harmony补丁","Possible cause of Harmony error - two mods trying to patch the same thing at once."
+"DETAIL_LOGGING","启用详细调试日志输出","Option to record more detail in game log"

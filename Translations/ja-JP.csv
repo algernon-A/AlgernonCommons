@@ -15,3 +15,4 @@
 "HARMONY_MOD_ERROR","古いMODや壊れたMODが、Harmony2の正常な動作を阻害しています。","Possible cause of Harmony error - a broken mod (not this one) can cause things to stop working."
 "HARMONY_MOD_CONFLICT","競合する他のMODが、Harmony2のパッチを重複して適用しようとしています。
 ","Possible cause of Harmony error - two mods trying to patch the same thing at once."
+"DETAIL_LOGGING","詳細なデバッグログを有効","Option to record more detail in game log"
