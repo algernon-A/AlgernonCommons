@@ -40,14 +40,14 @@ namespace AlgernonCommons.Patching
         /// </summary>
         public override void OnEnabled()
         {
+            base.OnEnabled();
+
             // Register mod's harmony ID.
             PatcherManager<TPatcher>.HarmonyID = HarmonyID;
 
             // Apply Harmony patches via Cities Harmony.
             // Called here instead of OnCreated to allow the auto-downloader to do its work prior to launch.
             HarmonyHelper.DoOnHarmonyReady(ApplyPatches);
-
-            base.OnEnabled();
         }
 
         /// <summary>
