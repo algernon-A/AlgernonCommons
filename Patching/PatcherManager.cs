@@ -50,5 +50,10 @@ namespace AlgernonCommons.Patching
                 return s_instance;
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether the patcher has been initialized.
+        /// </summary>
+        public static bool IsReady => !string.IsNullOrEmpty(HarmonyID);
     }
 }
