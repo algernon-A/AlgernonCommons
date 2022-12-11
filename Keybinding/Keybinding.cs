@@ -111,8 +111,8 @@ namespace AlgernonCommons.Keybinding
         /// <returns>True if pressed, false otherwise.</returns>
         public override bool IsPressed(Event e)
         {
-            // Only interested in keydown events.
-            if (e.type != EventType.KeyDown)
+            // Only interested in keydown or mousedown events.
+            if (e.type != EventType.KeyDown | e.type != EventType.MouseDown)
             {
                 return false;
             }
