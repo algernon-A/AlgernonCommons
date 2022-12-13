@@ -79,5 +79,6 @@
     <None Include="$(MSBuildThisFileDirectory)Translations\sk-SK.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\tr-TR.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\zh-CN.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\zh-TW.csv" />
   </ItemGroup>
 </Project>

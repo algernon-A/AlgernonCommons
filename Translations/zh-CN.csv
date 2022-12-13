@@ -8,7 +8,7 @@
 "PRESS_ANY_KEY","请按任意键","Shown when awaiting user input when changing a key setting."
 "CONFLICT_DETECTED","检测到模组冲突！","Warning message that a mod conflict was detected."
 "UNABLE_TO_OPERATE","这表明模组无法运行且已经自动关闭","Warning message letting the user know that the mod can't work."
-"CONFLICTING_MODS","冲突模组为：","Part of the mod conflict warning notification - header for the list of conflicting mods."
+"CONFLICTING_MODS","请取消以下冲突模组：","Part of the mod conflict warning notification - header for the list of conflicting mods."
 "HARMONY_ERROR","模组无法完成必需的 Harmony库 调用","Warning message that a patching problem was detected, and the mod can't operate."
 "HARMONY_PROBLEM_CAUSES","造成该问题的原因可能是：","Header for list of possible causes of Harmony errors."
 "HARMONY_NOT_INSTALLED","本模组所需的前置模组Harmony 2并未订阅或未启用","Possible cause of Harmony error - Harmony not installed."
