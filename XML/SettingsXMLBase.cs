@@ -30,6 +30,6 @@ namespace AlgernonCommons.XML
         /// Gets or sets a value indicating whether detailed logging is enabled.
         /// </summary>
         [XmlElement("DetailedLogging")]
-        public bool XMDetailedLogging { get => Logging.DetailLogging; set => Logging.DetailLogging = value; }
+        public bool XMLDetailedLogging { get => Logging.DetailLogging; set => Logging.DetailLogging = value; }
     }
 }
