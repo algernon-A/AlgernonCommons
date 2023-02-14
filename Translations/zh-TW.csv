@@ -13,5 +13,5 @@
 "HARMONY_PROBLEM_CAUSES","導致此問題有可能包括的原因：","Header for list of possible causes of Harmony errors."
 "HARMONY_NOT_INSTALLED","“Harmony 2” 支援庫模組(Mod)沒有訂閱。","Possible cause of Harmony error - Harmony not installed."
 "HARMONY_MOD_ERROR","一些老的或壞的模組(Mod)導致 “Harmony 2” 支援庫模組(Mod)無法正常運轉。","Possible cause of Harmony error - a broken mod (not this one) can cause things to stop working."
-"HARMONY_MOD_CONFLICT","Another mod may be trying to apply a conflicting Harmony patch","Possible cause of Harmony error - two mods trying to patch the same thing at once."
-"DETAIL_LOGGING","Enable detailed debugging logging","Option to record more detail in game log"
+"HARMONY_MOD_CONFLICT","另一個模組可能在嘗試應用衝突的Harmony補丁","Possible cause of Harmony error - two mods trying to patch the same thing at once."
+"DETAIL_LOGGING","啟用詳細的除錯記錄","Option to record more detail in game log"
