@@ -110,7 +110,7 @@ namespace AlgernonCommons.UI
                 return FileCache[fileName];
             }
 
-            // Create new texture atlas for button.
+            // Create new texture atlas.
             UITextureAtlas newAtlas = ScriptableObject.CreateInstance<UITextureAtlas>();
             newAtlas.name = fileName;
             newAtlas.material = UnityEngine.Object.Instantiate(UIView.GetAView().defaultAtlas.material);
@@ -139,6 +139,87 @@ namespace AlgernonCommons.UI
 
             // Add atlas to cache and return.
             FileCache.Add(fileName, newAtlas);
+            return newAtlas;
+        }
+
+        /// <summary>
+        /// Creates an atlas from the provided list of .png filenames.
+        /// </summary>
+        /// <param name="atlasName">Atlas name.</param>
+        /// <param name="atlasSize">Atlas height and width, in pixels.</param>
+        /// <param name="spriteNames">List of sprite names (".png" will be appended to make the filenames).</param>
+        /// <returns>New texture atlas.</returns>
+        public static UITextureAtlas CreateSpriteAtlas(string atlasName, int atlasSize, string[] spriteNames)
+        {
+            // Read texture files.
+            Texture2D[] spriteTextures = new Texture2D[spriteNames.Length];
+            for (int i = 0; i < spriteNames.Length; ++i)
+            {
+                spriteTextures[i] = LoadTexture(spriteNames[i] + ".png");
+            }
+
+            return CreateSpriteAtlas(atlasName, atlasSize, spriteTextures, spriteNames);
+        }
+
+        /// <summary>
+        /// Creates an atlas from all .png files in the specified Resources sub-directory.
+        /// </summary>
+        /// <param name="atlasName">Atlas name.</param>
+        /// <param name="atlasSize">Atlas height and width, in pixels.</param>
+        /// <param name="directory">Sub-directory (under 'Resources') containing sprites in .png format.</param>
+        /// <returns>New texture atlas.</returns>
+        public static UITextureAtlas CreateSpriteAtlas(string atlasName, int atlasSize, string directory)
+        {
+            // Read texture files.
+            string[] filenames = Directory.GetFiles(Path.Combine(Path.Combine(AssemblyUtils.AssemblyPath, "Resources"), directory));
+
+            // Create texture and name arrays.
+            string[] spriteNames = new string[filenames.Length];
+            Texture2D[] spriteTextures = new Texture2D[filenames.Length];
+
+            // Read each file and populate sprite texture and name.
+            for (int i = 0; i < filenames.Length; ++i)
+            {
+                spriteNames[i] = Path.GetFileNameWithoutExtension(filenames[i]);
+                spriteTextures[i] = LoadTexture(filenames[i]);
+            }
+
+            return CreateSpriteAtlas(atlasName, atlasSize, spriteTextures, spriteNames);
+        }
+
+        /// <summary>
+        /// Creates an atlas from the provided sprite textures and names.
+        /// </summary>
+        /// <param name="atlasName">Atlas name.</param>
+        /// <param name="atlasSize">Atlas height and width, in pixels.</param>
+        /// <param name="textures">Sprite textures.</param>
+        /// <param name="spriteNames">Sprite names (in order corresponding to textures).</param>
+        /// <returns>New texture atlas.</returns>
+        public static UITextureAtlas CreateSpriteAtlas(string atlasName, int atlasSize, Texture2D[] textures, string[] spriteNames)
+        {
+            // Create sprite regions.
+            Texture2D atlasTexture = new Texture2D(atlasSize, atlasSize, TextureFormat.ARGB32, false);
+            Rect[] regions = atlasTexture.PackTextures(textures, 2, atlasSize);
+
+            // Create new texture atlas.
+            UITextureAtlas newAtlas = ScriptableObject.CreateInstance<UITextureAtlas>();
+            newAtlas.name = atlasName;
+            newAtlas.material = UnityEngine.Object.Instantiate(UIView.GetAView().defaultAtlas.material);
+            newAtlas.material.mainTexture = atlasTexture;
+
+            // Map sprites to atlas.
+            for (int i = 0; i < spriteNames.Length; ++i)
+            {
+                UITextureAtlas.SpriteInfo sprite = new UITextureAtlas.SpriteInfo()
+                {
+                    name = spriteNames[i],
+                    texture = textures[i],
+                    region = regions[i],
+                };
+
+                newAtlas.AddSprite(sprite);
+            }
+
             return newAtlas;
         }
 
