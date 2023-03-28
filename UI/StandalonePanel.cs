@@ -67,8 +67,8 @@ namespace AlgernonCommons.UI
             closeButton.pressedBgSprite = "buttonclosepressed";
             closeButton.eventClick += (c, p) => Close();
 
-            // Default position - centre in screen.
-            relativePosition = new Vector2(Mathf.Floor((GetUIView().fixedWidth - width) / 2), Mathf.Floor((GetUIView().fixedHeight - height) / 2));
+            // Set default position.
+            ApplyDefaultPosition();
         }
 
         /// <summary>
@@ -168,5 +168,13 @@ namespace AlgernonCommons.UI
         /// </summary>
         /// <returns>True if the panel can close now, false otherwise.</returns>
         protected virtual bool PreClose() => true;
+
+        /// <summary>
+        /// Gets the panel's default position.
+        /// </summary>
+        protected virtual void ApplyDefaultPosition()
+        {
+            relativePosition = new Vector2(Mathf.Floor((GetUIView().fixedWidth - width) / 2), Mathf.Floor((GetUIView().fixedHeight - height) / 2));
+        }
     }
 }
