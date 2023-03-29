@@ -14,7 +14,7 @@ namespace AlgernonCommons.UI
     /// </summary>
     /// <typeparam name="TPanel">Panel type.</typeparam>
     public static class StandalonePanelManager<TPanel>
-        where TPanel : StandalonePanel
+        where TPanel : StandalonePanelBase
     {
         // Instance references.
         private static GameObject s_gameObject;

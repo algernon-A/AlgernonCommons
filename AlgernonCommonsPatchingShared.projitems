@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\AutoTabstrip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\OptionsPanelManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\StandalonePanel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ui\StandalonePanelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\StandalonePanelManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UIButtons.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\UICheckBoxes.cs" />
