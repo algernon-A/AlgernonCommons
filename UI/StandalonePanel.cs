@@ -80,6 +80,11 @@ namespace AlgernonCommons.UI
         protected virtual float TitleXPos => CloseButtonSize;
 
         /// <summary>
+        /// Gets the panel opacity.
+        /// </summary>
+        protected override float PanelOpacity => 1f;
+
+        /// <summary>
         /// Sets the icon sprite for the decorative icon (top-left).
         /// </summary>
         /// <param name="spriteAtlas">Sprite icon atlas.</param>

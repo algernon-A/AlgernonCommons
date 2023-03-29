@@ -55,12 +55,12 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Gets a value indicating whether the panel's previous position should be remembered after closing.
         /// </summary>
-        public bool RememberPosition => true;
+        public virtual bool RememberPosition => true;
 
         /// <summary>
         /// Gets the panel opacity.
         /// </summary>
-        protected virtual float PanelOpacity => 1f;
+        protected virtual float PanelOpacity => 0f;
 
         /// <summary>
         /// Closes the panel.
