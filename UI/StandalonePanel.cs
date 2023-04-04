@@ -17,14 +17,37 @@ namespace AlgernonCommons.UI
         private const float CloseButtonSize = 35f;
 
         // Panel components.
-        private readonly UILabel _titleLabel;
+        private UILabel _titleLabel;
         private UISprite _iconSprite;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StandalonePanel"/> class.
+        /// Gets the panel's title.
         /// </summary>
-        public StandalonePanel()
+        protected abstract string PanelTitle { get; }
+
+        /// <summary>
+        /// Sets the panel's title text.
+        /// </summary>
+        protected string TitleText { set => _titleLabel.text = value; }
+
+        /// <summary>
+        /// Gets the title label X-position.
+        /// </summary>
+        protected virtual float TitleXPos => CloseButtonSize;
+
+        /// <summary>
+        /// Gets the panel opacity.
+        /// </summary>
+        protected override float PanelOpacity => 1f;
+
+        /// <summary>
+        /// Called by Unity before the first frame is displayed.
+        /// Used to perform setup.
+        /// </summary>
+        public override void Start()
         {
+            base.Start();
+
             // Basic behaviour.
             autoLayout = false;
             canFocus = true;
@@ -63,26 +86,6 @@ namespace AlgernonCommons.UI
             // Set default position.
             ApplyDefaultPosition();
         }
-
-        /// <summary>
-        /// Gets the panel's title.
-        /// </summary>
-        protected abstract string PanelTitle { get; }
-
-        /// <summary>
-        /// Sets the panel's title text.
-        /// </summary>
-        protected string TitleText { set => _titleLabel.text = value; }
-
-        /// <summary>
-        /// Gets the title label X-position.
-        /// </summary>
-        protected virtual float TitleXPos => CloseButtonSize;
-
-        /// <summary>
-        /// Gets the panel opacity.
-        /// </summary>
-        protected override float PanelOpacity => 1f;
 
         /// <summary>
         /// Sets the icon sprite for the decorative icon (top-left).

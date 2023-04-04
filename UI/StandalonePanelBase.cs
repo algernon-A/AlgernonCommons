@@ -21,18 +21,6 @@ namespace AlgernonCommons.UI
         public const float Margin = 5f;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StandalonePanelBase"/> class.
-        /// </summary>
-        public StandalonePanelBase()
-        {
-            // Size.
-            size = new Vector2(PanelWidth, PanelHeight);
-
-            // Set default position.
-            ApplyDefaultPosition();
-        }
-
-        /// <summary>
         /// Close event handler delegate.
         /// </summary>
         public delegate void CloseEventHandler();
@@ -61,6 +49,21 @@ namespace AlgernonCommons.UI
         /// Gets the panel opacity.
         /// </summary>
         protected virtual float PanelOpacity => 0f;
+
+        /// <summary>
+        /// Called by Unity before the first frame is displayed.
+        /// Used to perform setup.
+        /// </summary>
+        public override void Start()
+        {
+            base.Start();
+
+            // Size.
+            size = new Vector2(PanelWidth, PanelHeight);
+
+            // Set default position.
+            ApplyDefaultPosition();
+        }
 
         /// <summary>
         /// Closes the panel.
