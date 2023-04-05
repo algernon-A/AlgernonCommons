@@ -20,6 +20,9 @@ namespace AlgernonCommons.UI
         private UILabel _titleLabel;
         private UISprite _iconSprite;
 
+        // Title text.
+        private string _titleText = null;
+
         /// <summary>
         /// Gets the panel's title.
         /// </summary>
@@ -28,7 +31,19 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Sets the panel's title text.
         /// </summary>
-        protected string TitleText { set => _titleLabel.text = value; }
+        protected string TitleText
+        {
+            set
+            {
+                _titleText = value;
+
+                // Set label title if it's created.
+                if (_titleLabel != null)
+                {
+                    _titleLabel.text = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the title label X-position.
@@ -70,8 +85,7 @@ namespace AlgernonCommons.UI
             dragHandle.SendToBack();
 
             // Title label.
-            _titleLabel = UILabels.AddLabel(this, TitleXPos, 13f, PanelTitle, PanelWidth - TitleXPos - CloseButtonSize, alignment: UIHorizontalAlignment.Center);
-            _titleLabel.text = PanelTitle;
+            _titleLabel = UILabels.AddLabel(this, TitleXPos, 13f, _titleText ?? PanelTitle, PanelWidth - TitleXPos - CloseButtonSize, alignment: UIHorizontalAlignment.Center);
             _titleLabel.SendToBack();
 
             // Close button.
