@@ -99,6 +99,40 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Adds an options panel-style slider with a descriptive text label above and an automatically updating percentage value label immediately to the right (based on range 0.0f - 1.0f).
+        /// </summary>
+        /// <param name="parent">Panel to add the control to.</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
+        /// <param name="text">Descriptive label text.</param>
+        /// <param name="min">Slider minimum value.</param>
+        /// <param name="max">Slider maximum value.</param>
+        /// <param name="step">Slider minimum step.</param>
+        /// <param name="defaultValue">Slider initial value.</param>
+        /// <param name="width">Slider width (excluding value label to right) (default 600).</param>
+        /// <returns>New UI slider with attached labels.</returns>
+        public static UISlider AddPlainSliderWithPercentage(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f)
+        {
+            // Add slider component.
+            UISlider newSlider = AddPlainSlider(parent, xPos, yPos, text, min, max, step, defaultValue, width);
+            UIPanel sliderPanel = (UIPanel)newSlider.parent;
+
+            // Value label.
+            UILabel valueLabel = sliderPanel.AddUIComponent<UILabel>();
+            valueLabel.name = "ValueLabel";
+            valueLabel.text = newSlider.value.ToString();
+            valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
+
+            // Event handler to update value label.
+            newSlider.eventValueChanged += (c, value) =>
+            {
+                valueLabel.text = (value * 100f).RoundToNearest(1f).ToString("N0") + "%";
+            };
+
+            return newSlider;
+        }
+
+        /// <summary>
         /// Adds a budget-style slider to the specified component.
         /// </summary>
         /// <param name="parent">Parent component.</param>
