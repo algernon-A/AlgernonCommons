@@ -172,6 +172,8 @@ namespace AlgernonCommons.Patching
         {
             Harmony harmonyInstance = new Harmony(HarmonyID);
             harmonyInstance.Unpatch(target, patch);
+
+            Logging.Message("unpatched ", PrintMethod(patch), " from ", PrintMethod(target));
         }
 
         /// <summary>
