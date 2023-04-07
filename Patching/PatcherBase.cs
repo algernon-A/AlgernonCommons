@@ -125,7 +125,7 @@ namespace AlgernonCommons.Patching
         }
 
         /// <summary>
-        /// Applies a Harmony prefix to the specified method.
+        /// Applies a Harmony postfix to the specified method.
         /// </summary>
         /// <param name="target">Target method.</param>
         /// <param name="patch">Harmony Prefix patch.</param>
