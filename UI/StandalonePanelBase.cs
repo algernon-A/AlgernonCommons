@@ -51,12 +51,12 @@ namespace AlgernonCommons.UI
         protected virtual float PanelOpacity => 0f;
 
         /// <summary>
-        /// Called by Unity before the first frame is displayed.
+        /// Called by Unity when the object is created.
         /// Used to perform setup.
         /// </summary>
-        public override void Start()
+        public override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             // Size.
             size = new Vector2(PanelWidth, PanelHeight);
