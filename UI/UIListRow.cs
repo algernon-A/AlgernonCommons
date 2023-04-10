@@ -20,29 +20,11 @@ namespace AlgernonCommons.UI
         public const float Margin = 5f;
 
         // UI components.
-        private readonly UISprite _background;
+        private UISprite _background;
 
         // Selected item appearance.
         private string _selectedSpriteName = "ListItemHighlight";
         private Color _selectedColor = new Color(1f, 1f, 1f);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UIListRow"/> class.
-        /// </summary>
-        public UIListRow()
-        {
-            // Ensure basic behaviour.
-            isVisible = true;
-            canFocus = true;
-            isInteractive = true;
-
-            // Add background panel.
-            _background = AddUIComponent<UISprite>();
-            _background.relativePosition = Vector2.zero;
-            _background.autoSize = false;
-            _background.zOrder = 0;
-            _background.atlas = UITextures.InGameAtlas;
-        }
 
         /// <summary>
         /// Gets the height for this row.
@@ -97,6 +79,25 @@ namespace AlgernonCommons.UI
             get => _background.opacity;
 
             set => _background.opacity = value;
+        }
+
+        /// <summary>
+        /// Called by Unity when the object is created.
+        /// Used to perform setup.
+        /// </summary>
+        public override void Awake()
+        {
+            // Ensure basic behaviour.
+            isVisible = true;
+            canFocus = true;
+            isInteractive = true;
+
+            // Add background panel.
+            _background = AddUIComponent<UISprite>();
+            _background.relativePosition = Vector2.zero;
+            _background.autoSize = false;
+            _background.zOrder = 0;
+            _background.atlas = UITextures.InGameAtlas;
         }
 
         /// <summary>
