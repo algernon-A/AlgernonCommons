@@ -18,7 +18,7 @@ namespace AlgernonCommons.Utils
         public static string GetDisplayName(PrefabInfo prefab)
         {
             // Null check.
-            if (prefab?.name == null)
+            if (!prefab || prefab.name == null)
             {
                 return "null";
             }
@@ -50,7 +50,7 @@ namespace AlgernonCommons.Utils
         public static bool IsWorkshopAsset(PrefabInfo prefab)
         {
             // Null check.
-            if (prefab?.name == null)
+            if (!prefab || prefab.name == null)
             {
                 return false;
             }

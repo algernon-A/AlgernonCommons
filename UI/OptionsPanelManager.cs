@@ -32,12 +32,12 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Gets the panel width.
         /// </summary>
-        public static float PanelWidth => s_optionsParentPanel?.width - (PanelMargin * 2f) ?? 744f;
+        public static float PanelWidth => s_optionsParentPanel ? s_optionsParentPanel.width - (PanelMargin * 2f) : 744f;
 
         /// <summary>
         /// Gets the panel height.
         /// </summary>
-        public static float PanelHeight => s_optionsParentPanel?.height - 15f ?? 753f;
+        public static float PanelHeight => s_optionsParentPanel ? s_optionsParentPanel.height - 15f : 753f;
 
         /// <summary>
         /// Gets a value indicating whether the options panel is currently active.

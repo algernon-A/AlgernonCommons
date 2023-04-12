@@ -163,7 +163,8 @@ namespace AlgernonCommons.Notifications
             UIView.PopModal();
 
             // Clear modal view effects.
-            if (UIView.GetAView()?.panelsLibraryModalEffect is UIComponent modalEffect)
+            UIView currentView = UIView.GetAView();
+            if (currentView && currentView.panelsLibraryModalEffect is UIComponent modalEffect)
             {
                 if (!UIView.HasModalInput())
                 {

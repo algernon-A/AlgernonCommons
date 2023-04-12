@@ -228,7 +228,7 @@ namespace AlgernonCommons.UI
         /// </summary>
         public string BackgroundSprite
         {
-            get => _contentPanel?.backgroundSprite;
+            get => _contentPanel ? null : _contentPanel.backgroundSprite;
 
             set => _contentPanel.backgroundSprite = value;
         }
