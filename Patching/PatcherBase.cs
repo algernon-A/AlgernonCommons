@@ -138,6 +138,19 @@ namespace AlgernonCommons.Patching
         }
 
         /// <summary>
+        /// Applies a Harmony transpiler to the specified method.
+        /// </summary>
+        /// <param name="target">Target method.</param>
+        /// <param name="transpiler">Harmony transpiler patch.</param>
+        public void TranspileMethod(MethodInfo target, MethodInfo transpiler)
+        {
+            Harmony harmonyInstance = new Harmony(HarmonyID);
+            harmonyInstance.Patch(target, transpiler: new HarmonyMethod(transpiler));
+
+            Logging.Message("transpiled ", PrintMethod(target), " with ", PrintMethod(transpiler));
+        }
+
+        /// <summary>
         /// Applies a Harmony prefix to the given type and method name, with a patch of the same name from a different type.
         /// </summary>
         /// <param name="targetType">Target type to patch.</param>
