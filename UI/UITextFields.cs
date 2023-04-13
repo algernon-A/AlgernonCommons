@@ -20,7 +20,7 @@ namespace AlgernonCommons.UI
         /// <param name="posX">Relative X postion.</param>
         /// <param name="posY">Relative Y position.</param>
         /// <param name="width">Textfield width (default 200).</param>
-        /// <returns>New large textfield with attached label.</returns>
+        /// <returns>New textfield with attached label.</returns>
         public static UITextField AddTinyTextField(UIComponent parent, float posX, float posY, float width = 200f) => AddTextField(parent, posX, posY, width, 16f, 0.8f, 3);
 
         /// <summary>
