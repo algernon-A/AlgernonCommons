@@ -21,12 +21,23 @@ namespace AlgernonCommons.UI
         private static TPanel s_panel;
 
         // Last saved position.
-        private static Vector2 s_savedPosition = Vector2.left;
+        private static Vector3 s_savedPosition = Vector3.left;
+        private static Vector3 s_defaultPosition = Vector3.left;
 
         /// <summary>
         /// Gets the active panel instance.
         /// </summary>
         public static TPanel Panel => s_panel;
+
+        /// <summary>
+        /// Gets or sets the panel's last saved X position.
+        /// </summary>
+        public static float LastSavedXPosition { get => s_savedPosition.x; set => s_savedPosition.x = value; }
+
+        /// <summary>
+        /// Gets or sets the panel's last saved Y position.
+        /// </summary>
+        public static float LastSavedYPosition { get => s_savedPosition.y; set => s_savedPosition.y = value; }
 
         /// <summary>
         /// Creates the panel object in-game and displays it.
@@ -45,6 +56,9 @@ namespace AlgernonCommons.UI
 
                     // Create new panel instance and add it to GameObject.
                     s_panel = s_gameObject.AddComponent<TPanel>();
+
+                    // Record panel default position.
+                    s_defaultPosition = s_panel.DefaultPosition;
 
                     // Set panel relative position if saved.
                     if (s_savedPosition.x >= 0f && s_panel.RememberPosition)
@@ -68,6 +82,11 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Resets the panel's last rememembered position.
+        /// </summary>
+        public static void ResetPosition() => s_savedPosition = Vector3.left;
+
+        /// <summary>
         /// Destroys the panel and containing GameObject (removing any ongoing UI overhead).
         /// </summary>
         private static void DestroyPanel()
@@ -81,7 +100,11 @@ namespace AlgernonCommons.UI
             // Record previous position if we're doing so.
             if (s_panel.RememberPosition)
             {
-                s_savedPosition = s_panel.absolutePosition;
+                // Don't save if the position is default.
+                if (s_savedPosition != s_defaultPosition)
+                {
+                    s_savedPosition = s_panel.absolutePosition;
+                }
             }
 
             // Destroy game objects.

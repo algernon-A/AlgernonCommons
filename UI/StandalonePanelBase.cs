@@ -46,6 +46,11 @@ namespace AlgernonCommons.UI
         public virtual bool RememberPosition => true;
 
         /// <summary>
+        /// Gets the panel's default position.
+        /// </summary>
+        public virtual Vector3 DefaultPosition => new Vector2(Mathf.Floor((GetUIView().fixedWidth - width) / 2), Mathf.Floor((GetUIView().fixedHeight - height) / 2));
+
+        /// <summary>
         /// Gets the panel opacity.
         /// </summary>
         protected virtual float PanelOpacity => 0f;
@@ -96,11 +101,8 @@ namespace AlgernonCommons.UI
         protected virtual bool PreClose() => true;
 
         /// <summary>
-        /// Gets the panel's default position.
+        /// Applies the panel's default position.
         /// </summary>
-        protected virtual void ApplyDefaultPosition()
-        {
-            relativePosition = new Vector2(Mathf.Floor((GetUIView().fixedWidth - width) / 2), Mathf.Floor((GetUIView().fixedHeight - height) / 2));
-        }
+        protected virtual void ApplyDefaultPosition() => relativePosition = DefaultPosition;
     }
 }
