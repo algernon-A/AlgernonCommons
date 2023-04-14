@@ -31,6 +31,21 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Adds an options-panel-style title label.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x-position.</param>
+        /// <param name="yPos">Relative y-position.</param>
+        /// <param name="title">Title text.</param>
+        /// <returns>Title label.</returns>
+        public static UILabel AddTitle(UIComponent parent, float xPos, float yPos, string title)
+        {
+            UILabel label = UILabels.AddLabel(parent, xPos, yPos + 20f, title, textScale: 1.2f);
+            label.font = UIFonts.SemiBold;
+            return label;
+        }
+
+        /// <summary>
         /// Adds an options-panel-style spacer bar with an attached title label.
         /// </summary>
         /// <param name="parent">Parent component.</param>
@@ -42,9 +57,7 @@ namespace AlgernonCommons.UI
         public static UILabel AddTitleSpacer(UIComponent parent, float xPos, float yPos, float width, string title)
         {
             AddOptionsSpacer(parent, xPos, yPos, width);
-            UILabel label = UILabels.AddLabel(parent, xPos, yPos + 20f, title, textScale: 1.2f);
-            label.font = UIFonts.SemiBold;
-            return label;
+            return AddTitle(parent, xPos, yPos, title);
         }
     }
 }
