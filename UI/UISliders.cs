@@ -120,7 +120,7 @@ namespace AlgernonCommons.UI
             // Value label.
             UILabel valueLabel = sliderPanel.AddUIComponent<UILabel>();
             valueLabel.name = "ValueLabel";
-            valueLabel.text = newSlider.value.ToString();
+            valueLabel.text = newSlider.value.ToString("N0");
             valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
 
             // Event handler to update value label.
