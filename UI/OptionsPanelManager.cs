@@ -16,7 +16,7 @@ namespace AlgernonCommons.UI
     /// </summary>
     /// <typeparam name="TPanel">Mod option panel type.</typeparam>
     public abstract class OptionsPanelManager<TPanel>
-        where TPanel : UIPanel
+        where TPanel : OptionsPanelBase
     {
         // Panel margin.
         private const float PanelMargin = 10f;

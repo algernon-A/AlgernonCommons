@@ -9,7 +9,6 @@ namespace AlgernonCommons
     using AlgernonCommons.Notifications;
     using AlgernonCommons.Translation;
     using AlgernonCommons.UI;
-    using ColossalFramework.UI;
     using ICities;
 
     /// <summary>
@@ -17,7 +16,7 @@ namespace AlgernonCommons
     /// </summary>
     /// <typeparam name="TOptionsPanel">Options panel type for in-game.</typeparam>
     public abstract class LoadingBase<TOptionsPanel> : LoadingExtensionBase
-        where TOptionsPanel : UIPanel
+        where TOptionsPanel : OptionsPanelBase
     {
         // Status flags.
         private static bool s_isCreated = false;

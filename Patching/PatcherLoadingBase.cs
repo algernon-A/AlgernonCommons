@@ -7,7 +7,7 @@ namespace AlgernonCommons.Patching
 {
     using AlgernonCommons.Notifications;
     using AlgernonCommons.Translation;
-    using ColossalFramework.UI;
+    using AlgernonCommons.UI;
     using ICities;
 
     /// <summary>
@@ -16,7 +16,7 @@ namespace AlgernonCommons.Patching
     /// <typeparam name="TOptionsPanel">Options panel type to hook.</typeparam>
     /// <typeparam name="TPatcher">Harmony patcher type.</typeparam>
     public abstract class PatcherLoadingBase<TOptionsPanel, TPatcher> : LoadingBase<TOptionsPanel>
-        where TOptionsPanel : UIPanel
+        where TOptionsPanel : OptionsPanelBase
         where TPatcher : PatcherBase, new()
     {
         // Harmony status flag.

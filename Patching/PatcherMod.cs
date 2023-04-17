@@ -5,8 +5,8 @@
 
 namespace AlgernonCommons.Patching
 {
+    using AlgernonCommons.UI;
     using CitiesHarmony.API;
-    using ColossalFramework.UI;
 
     /// <summary>
     /// Base mod class with Harmony patching, settings file, and an options panel.
@@ -14,7 +14,7 @@ namespace AlgernonCommons.Patching
     /// <typeparam name="TOptionsPanel">Options panel type for main menu.</typeparam>
     /// <typeparam name="TPatcher">Harmony patcher type.</typeparam>
     public abstract class PatcherMod<TOptionsPanel, TPatcher> : OptionsMod<TOptionsPanel>
-        where TOptionsPanel : UIPanel
+        where TOptionsPanel : OptionsPanelBase
         where TPatcher : PatcherBase, new()
     {
         /// <summary>

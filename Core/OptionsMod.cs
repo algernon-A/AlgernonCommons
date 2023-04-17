@@ -14,7 +14,7 @@ namespace AlgernonCommons
     /// </summary>
     /// <typeparam name="TOptionsPanel">Options panel type for main menu.</typeparam>
     public abstract class OptionsMod<TOptionsPanel> : ModBase
-        where TOptionsPanel : UIPanel
+        where TOptionsPanel : OptionsPanelBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsMod{TOptionsPanel}"/> class.
