@@ -57,6 +57,10 @@ namespace AlgernonCommons.UI
             tipBox.transformPosition = new Vector2(-2f, -2f);
             tipBox.isVisible = false;
 
+            // Text.
+            tipBox.wordWrap = true;
+            tipBox.textAlignment = UIHorizontalAlignment.Left;
+
             // Calculate size.
             WordWrapToolTipBoxResize(tipBox);
             tipBox.eventTextChanged += (c, v) => WordWrapToolTipBoxResize(c as UILabel);
