@@ -103,6 +103,26 @@ namespace AlgernonCommons.Keybinding
         }
 
         /// <summary>
+        /// Adds a keymapping control.
+        /// </summary>
+        /// <param name="parent">Parent component.</param>
+        /// <param name="xPos">Relative x-position.</param>
+        /// <param name="yPos">Relative y-position.</param>
+        /// <param name="text">Label text.</param>
+        /// <param name="binding">Target <see cref="KeybindingBase"/>.</param>
+        /// <returns>New keymapping control.</returns>
+        public static OptionsKeymapping AddKeymapping(UIComponent parent, float xPos, float yPos, string text, KeybindingBase binding)
+        {
+            // Basic setup.
+            OptionsKeymapping newKeymapping = parent.gameObject.AddComponent<OptionsKeymapping>();
+            newKeymapping.Label = text;
+            newKeymapping.Binding = binding;
+            newKeymapping.Panel.relativePosition = new Vector2(xPos, yPos);
+
+            return newKeymapping;
+        }
+
+        /// <summary>
         /// KeyDown event handler to record the new hotkey.
         /// </summary>
         /// <param name="keyEvent">Keypress event parameter.</param>
