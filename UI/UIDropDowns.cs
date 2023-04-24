@@ -22,20 +22,22 @@ namespace AlgernonCommons.UI
         /// <param name="text">Text label.</param>
         /// <param name="width">Dropdown menu width, excluding label (default 220f).</param>
         /// <param name="height">Dropdown button height (default 25f).</param>
-        /// <param name="itemTextScale">Text scaling (default 0.7f).</param>
+        /// <param name="labelTextScale">Label text scaling (default 0.8f).</param>
+        /// <param name="itemTextScale">Menu item text scaling (default 0.7f).</param>
         /// <param name="itemHeight">Dropdown menu item height (default 20).</param>
+        /// <param name="vertPadding">Dropdown menu selected item vertical text padding (default 8).</param>
         /// <param name="itemVertPadding">Dropdown menu item vertical text padding (default 8).</param>
         /// <param name="accomodateLabel">True (default) to move menu to accomodate text label width, false otherwise.</param>
         /// <param name="tooltip">Tooltip, if any.</param>
         /// <returns>New dropdown menu with an attached text label and enclosing panel.</returns>
-        public static UIDropDown AddLabelledDropDown(UIComponent parent, float xPos, float yPos, string text, float width = 220f, float height = 25f, float itemTextScale = 0.7f, int itemHeight = 20, int itemVertPadding = 8, bool accomodateLabel = true, string tooltip = null)
+        public static UIDropDown AddLabelledDropDown(UIComponent parent, float xPos, float yPos, string text, float width = 220f, float height = 25f, float labelTextScale = 0.8f, float itemTextScale = 0.7f, int itemHeight = 20, int vertPadding = 8, int itemVertPadding = 8, bool accomodateLabel = true, string tooltip = null)
         {
             // Create dropdown.
-            UIDropDown dropDown = AddDropDown(parent, xPos, yPos, width, height, itemTextScale, itemHeight, itemVertPadding, tooltip);
+            UIDropDown dropDown = AddDropDown(parent, xPos, yPos, width, height, itemTextScale, itemHeight, vertPadding, itemVertPadding, tooltip);
 
             // Add label.
             UILabel label = dropDown.AddUIComponent<UILabel>();
-            label.textScale = 0.8f;
+            label.textScale = labelTextScale;
             label.text = text;
 
             // Get width and position.
@@ -56,16 +58,17 @@ namespace AlgernonCommons.UI
         /// Creates a dropdown menu without text label or enclosing panel.
         /// </summary>
         /// <param name="parent">Parent component.</param>
-        /// <param name="xPos">Relative x position (default 20).</param>
-        /// <param name="yPos">Relative y position (default 0).</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
         /// <param name="width">Dropdown menu width, excluding label (default 220f).</param>
         /// <param name="height">Dropdown button height (default 25f).</param>
         /// <param name="itemTextScale">Text scaling (default 0.7f).</param>
         /// <param name="itemHeight">Dropdown menu item height (default 20).</param>
+        /// <param name="vertPadding">Dropdown menu selected item vertical text padding (default 8).</param>
         /// <param name="itemVertPadding">Dropdown menu item vertical text padding (default 8).</param>
         /// <param name="tooltip">Tooltip, if any.</param>
         /// <returns>New dropdown menu *without* an attached text label or enclosing panel.</returns>
-        public static UIDropDown AddDropDown(UIComponent parent, float xPos, float yPos, float width = 220f, float height = 25f, float itemTextScale = 0.7f, int itemHeight = 20, int itemVertPadding = 8, string tooltip = null)
+        public static UIDropDown AddDropDown(UIComponent parent, float xPos, float yPos, float width = 220f, float height = 25f, float itemTextScale = 0.7f, int itemHeight = 20, int vertPadding = 8, int itemVertPadding = 8, string tooltip = null)
         {
             // Create dropdown menu.
             UIDropDown dropDown = parent.AddUIComponent<UIDropDown>();
@@ -87,7 +90,7 @@ namespace AlgernonCommons.UI
             dropDown.zOrder = 1;
             dropDown.verticalAlignment = UIVerticalAlignment.Middle;
             dropDown.horizontalAlignment = UIHorizontalAlignment.Left;
-            dropDown.textFieldPadding = new RectOffset(8, 0, itemVertPadding, 0);
+            dropDown.textFieldPadding = new RectOffset(8, 0, vertPadding, 0);
             dropDown.itemPadding = new RectOffset(14, 0, itemVertPadding, 0);
 
             dropDown.relativePosition = new Vector2(xPos, yPos);
@@ -136,7 +139,7 @@ namespace AlgernonCommons.UI
         /// <param name="text">Descriptive label text.</param>
         /// <param name="items">Dropdown menu item list.</param>
         /// <param name="selectedIndex">Initially selected index (default 0).</param>
-        /// <param name="width">Width of dropdown (default 60).</param>
+        /// <param name="width">Width of dropdown (default 270f).</param>
         /// <returns>New dropdown menu using game's option panel template.</returns>
         public static UIDropDown AddPlainDropDown(UIComponent parent, float xPos, float yPos, string text, string[] items, int selectedIndex = 0, float width = 270f)
         {
