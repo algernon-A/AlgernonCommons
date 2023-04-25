@@ -97,8 +97,18 @@ namespace AlgernonCommons.UI
             {
                 Logging.KeyMessage("changing locale");
 
+                // Record visibility state.
+                bool wasVisible = s_panel.isVisible;
+
                 Close();
                 Create();
+
+                // Trigger panel creation if it was already visible by toggling visibility.
+                if (wasVisible)
+                {
+                    s_panel.Hide();
+                    s_panel.Show();
+                }
             }
         }
 
