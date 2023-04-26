@@ -75,9 +75,10 @@ namespace AlgernonCommons.UI
         /// <param name="max">Slider maximum value.</param>
         /// <param name="step">Slider minimum step.</param>
         /// <param name="defaultValue">Slider initial value.</param>
+        /// <param name="format">Slider value format.</param>
         /// <param name="width">Slider width (excluding value label to right) (default 600).</param>
         /// <returns>New UI slider with attached labels.</returns>
-        public static UISlider AddPlainSliderWithValue(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f)
+        public static UISlider AddPlainSliderWithValue(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, SliderValueFormat format, float width = 600f)
         {
             // Add slider component.
             UISlider newSlider = AddPlainSlider(parent, xPos, yPos, text, min, max, step, defaultValue, width);
@@ -86,17 +87,30 @@ namespace AlgernonCommons.UI
             // Value label.
             UILabel valueLabel = sliderPanel.AddUIComponent<UILabel>();
             valueLabel.name = "ValueLabel";
-            valueLabel.text = newSlider.value.ToString();
             valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
 
-            // Event handler to update value label.
-            newSlider.eventValueChanged += (c, value) =>
-            {
-                valueLabel.text = value.ToString();
-            };
+            // Set initial value and event handler to update on value change.
+            valueLabel.text = format.FormatValue(newSlider.value);
+            newSlider.eventValueChanged += (c, value) => valueLabel.text = format.FormatValue(value);
 
             return newSlider;
         }
+
+        /// <summary>
+        /// Adds an options panel-style slider with a descriptive text label above and an automatically updating value label immediately to the right.
+        /// </summary>
+        /// <param name="parent">Panel to add the control to.</param>
+        /// <param name="xPos">Relative x position.</param>
+        /// <param name="yPos">Relative y position.</param>
+        /// <param name="text">Descriptive label text.</param>
+        /// <param name="min">Slider minimum value.</param>
+        /// <param name="max">Slider maximum value.</param>
+        /// <param name="step">Slider minimum step.</param>
+        /// <param name="defaultValue">Slider initial value.</param>
+        /// <param name="width">Slider width (excluding value label to right) (default 600).</param>
+        /// <returns>New UI slider with attached labels.</returns>
+        public static UISlider AddPlainSliderWithValue(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f) =>
+            AddPlainSliderWithValue(parent, xPos, yPos, text, min, max, step, defaultValue, new SliderValueFormat(valueMultiplier: 1, roundToNearest: step, numberFormat: "N", suffix: null), width);
 
         /// <summary>
         /// Adds an options panel-style slider with a descriptive text label above and an automatically updating integer value label immediately to the right.
@@ -111,26 +125,8 @@ namespace AlgernonCommons.UI
         /// <param name="defaultValue">Slider initial value.</param>
         /// <param name="width">Slider width (excluding value label to right) (default 600).</param>
         /// <returns>New UI slider with attached labels.</returns>
-        public static UISlider AddPlainSliderWithIntegerValue(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f)
-        {
-            // Add slider component.
-            UISlider newSlider = AddPlainSlider(parent, xPos, yPos, text, min, max, step, defaultValue, width);
-            UIPanel sliderPanel = (UIPanel)newSlider.parent;
-
-            // Value label.
-            UILabel valueLabel = sliderPanel.AddUIComponent<UILabel>();
-            valueLabel.name = "ValueLabel";
-            valueLabel.text = newSlider.value.ToString("N0");
-            valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
-
-            // Event handler to update value label.
-            newSlider.eventValueChanged += (c, value) =>
-            {
-                valueLabel.text = value.RoundToNearest(1f).ToString("N0");
-            };
-
-            return newSlider;
-        }
+        public static UISlider AddPlainSliderWithIntegerValue(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f) =>
+            AddPlainSliderWithValue(parent, xPos, yPos, text, min, max, step, defaultValue, new SliderValueFormat(valueMultiplier: 1, roundToNearest: 1f, numberFormat: "N0", suffix: null), width);
 
         /// <summary>
         /// Adds an options panel-style slider with a descriptive text label above and an automatically updating percentage value label immediately to the right (based on range 0.0f - 1.0f).
@@ -145,26 +141,8 @@ namespace AlgernonCommons.UI
         /// <param name="defaultValue">Slider initial value.</param>
         /// <param name="width">Slider width (excluding value label to right) (default 600).</param>
         /// <returns>New UI slider with attached labels.</returns>
-        public static UISlider AddPlainSliderWithPercentage(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f)
-        {
-            // Add slider component.
-            UISlider newSlider = AddPlainSlider(parent, xPos, yPos, text, min, max, step, defaultValue, width);
-            UIPanel sliderPanel = (UIPanel)newSlider.parent;
-
-            // Value label.
-            UILabel valueLabel = sliderPanel.AddUIComponent<UILabel>();
-            valueLabel.name = "ValueLabel";
-            valueLabel.text = newSlider.value.ToString();
-            valueLabel.relativePosition = UILayout.PositionRightOf(newSlider, 8f, 1f);
-
-            // Event handler to update value label.
-            newSlider.eventValueChanged += (c, value) =>
-            {
-                valueLabel.text = (value * 100f).RoundToNearest(1f).ToString("N0") + "%";
-            };
-
-            return newSlider;
-        }
+        public static UISlider AddPlainSliderWithPercentage(UIComponent parent, float xPos, float yPos, string text, float min, float max, float step, float defaultValue, float width = 600f) =>
+            AddPlainSliderWithValue(parent, xPos, yPos, text, min, max, step, defaultValue, new SliderValueFormat(valueMultiplier: 100f, roundToNearest: 1f, numberFormat: "N0", suffix: "%"), width);
 
         /// <summary>
         /// Adds a budget-style slider to the specified component.
@@ -211,6 +189,50 @@ namespace AlgernonCommons.UI
             newSlider.maxValue = maxValue;
 
             return newSlider;
+        }
+
+        /// <summary>
+        /// Provides formatting for slider value displays.
+        /// </summary>
+        public readonly struct SliderValueFormat
+        {
+            // Formatting options.
+            private readonly float _valueMultiplier;
+            private readonly float _roundToNearest;
+            private readonly string _numberFormat;
+            private readonly string _valueSuffix;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="SliderValueFormat"/> struct.
+            /// </summary>
+            /// <param name="valueMultiplier">Muliply the slider value by this amount before displaying (default 1f).</param>
+            /// <param name="roundToNearest">Round the displayed value to the nearest increment of this amount (default 1f).</param>
+            /// <param name="numberFormat">Use this number format string to format the displayed number (default 'N').</param>
+            /// <param name="suffix">An optional suffix to display immediately after the displayed number (default <c>null</c> for none).</param>
+            public SliderValueFormat(float valueMultiplier = 1f, float roundToNearest = 1f, string numberFormat = "N", string suffix = null)
+            {
+                // Populate required fields.
+                _valueSuffix = suffix;
+                _numberFormat = numberFormat;
+                _roundToNearest = roundToNearest;
+                _valueMultiplier = valueMultiplier;
+            }
+
+            /// <summary>
+            /// Formats the given slider value according to current settings.
+            /// </summary>
+            /// <param name="value">Slider value to format.</param>
+            /// <returns>Formatted value string for display.</returns>
+            public string FormatValue(float value)
+            {
+                string valueText = (value * _valueMultiplier).RoundToNearest(_roundToNearest).ToString(_numberFormat);
+                if (!string.IsNullOrEmpty(_valueSuffix))
+                {
+                    valueText += _valueSuffix;
+                }
+
+                return valueText;
+            }
         }
     }
 }
