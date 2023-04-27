@@ -162,16 +162,22 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
-        /// Creates an atlas from all .png files in the specified Resources sub-directory.
+        /// Creates a <see cref="UITextureAtlas"/> from all <c>.png</c> files in the specified Resources sub-directory.
         /// </summary>
         /// <param name="atlasName">Atlas name.</param>
         /// <param name="atlasSize">Atlas height and width, in pixels.</param>
-        /// <param name="directory">Sub-directory (under 'Resources') containing sprites in .png format.</param>
+        /// <param name="directory">Sub-directory (under 'Resources') containing sprites in .png format (<c>null</c> or empty for no sub-directory).</param>
         /// <returns>New texture atlas.</returns>
         public static UITextureAtlas CreateSpriteAtlas(string atlasName, int atlasSize, string directory)
         {
             // Read texture files.
-            string[] filenames = Directory.GetFiles(Path.Combine(Path.Combine(AssemblyUtils.AssemblyPath, "Resources"), directory));
+            string path = Path.Combine(AssemblyUtils.AssemblyPath, "Resources");
+            if (!directory.IsNullOrWhiteSpace())
+            {
+                path = Path.Combine(path, directory);
+            }
+
+            string[] filenames = Directory.GetFiles(path);
 
             // Create texture and name arrays.
             string[] spriteNames = new string[filenames.Length];
