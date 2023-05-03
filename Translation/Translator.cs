@@ -326,7 +326,7 @@ namespace AlgernonCommons.Translation
             catch (Exception e)
             {
                 // Don't care.  Just log the exception, as we really should have a default language.
-                Logging.LogException(e, "exception attempting fallback translation");
+                Logging.LogException(e, "exception attempting fallback translation for key ", key, " at: ", Environment.NewLine, Environment.StackTrace);
             }
 
             // At this point we've failed; just return the key.
