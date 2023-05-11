@@ -95,14 +95,14 @@ namespace AlgernonCommons.UI
         }
 
         /// <summary>
+        /// Applies the panel's default position.
+        /// </summary>
+        public virtual void ApplyDefaultPosition() => relativePosition = DefaultPosition;
+
+        /// <summary>
         /// Performs any actions required before closing the panel and checks that it's safe to do so.
         /// </summary>
         /// <returns>True if the panel can close now, false otherwise.</returns>
         protected virtual bool PreClose() => true;
-
-        /// <summary>
-        /// Applies the panel's default position.
-        /// </summary>
-        protected virtual void ApplyDefaultPosition() => relativePosition = DefaultPosition;
     }
 }

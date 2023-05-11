@@ -84,7 +84,19 @@ namespace AlgernonCommons.UI
         /// <summary>
         /// Resets the panel's last rememembered position.
         /// </summary>
-        public static void ResetPosition() => s_savedPosition = Vector3.left;
+        public static void ResetSavedPosition() => s_savedPosition = Vector3.left;
+
+        /// <summary>
+        /// Reset's the panel's current and last remembered positions.
+        /// </summary>
+        public static void ResetPosition()
+        {
+            // Reset saved position.
+            ResetSavedPosition();
+
+            // Reset current panel position.
+            Panel?.ApplyDefaultPosition();
+        }
 
         /// <summary>
         /// Destroys the panel and containing GameObject (removing any ongoing UI overhead).
