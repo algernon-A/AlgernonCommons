@@ -13,30 +13,16 @@ namespace AlgernonCommons.UI
     /// </summary>
     public static class UIToolTips
     {
-        // Cache.
-        private static UILabel _wordWrapTooltip;
-
         /// <summary>
         /// Gets a word-wrapping text-label tooltip box.
         /// </summary>
-        public static UILabel WordWrapToolTip
-        {
-            get
-            {
-                if (_wordWrapTooltip == null)
-                {
-                    _wordWrapTooltip = WordWrapToolTipBox();
-                }
-
-                return _wordWrapTooltip;
-            }
-        }
+        public static UILabel WordWrapToolTip => WordWrapToolTipBox();
 
         /// <summary>
         /// Creates a word-wrapping tooltip box.
         /// </summary>
         /// <returns>New tooltip box.</returns>
-        private static UILabel WordWrapToolTipBox()
+        public static UILabel WordWrapToolTipBox()
         {
             // Create GameObject and attach new UILabel.
             GameObject tooltipGameObject = new GameObject("AlgernonWordWrapTooltip");
