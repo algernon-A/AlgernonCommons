@@ -1,4 +1,4 @@
-﻿"LANGUAGE","English","Language name (in native language)."
+﻿"LANGUAGE","English","Language name (in native language).  This means the NAME OF THE LANGUAGE BEING TRANSLATED INTO, and should NOT be a translation of the word 'English'"
 "LANGUAGE_CHOICE","Choose language","Heading for language selection menu."
 "LANGUAGE_GAME","Use game language","Default selection in language selection menu."
 "NOTE_CLOSE","Close","Notification button text - closes the notification."
