@@ -74,6 +74,7 @@
     <None Include="$(MSBuildThisFileDirectory)Translations\es-ES.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\fi-FI.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\fr-FR.csv" />
+    <None Include="$(MSBuildThisFileDirectory)Translations\hu-HU.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\id-ID.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\it-IT.csv" />
     <None Include="$(MSBuildThisFileDirectory)Translations\ja-JP.csv" />
