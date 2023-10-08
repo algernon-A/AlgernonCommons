@@ -112,7 +112,7 @@ namespace AlgernonCommons.Notifications
                 // Create new gameobject and attach the notification.
                 notification = gameObject.AddComponent<T>();
 
-                // Display modal norification.
+                // Display modal notification.
                 UIView.PushModal(notification);
                 notification.Show(true);
                 notification.Focus();
@@ -202,7 +202,7 @@ namespace AlgernonCommons.Notifications
             int zeroedNumber = buttonNumber - 1;
 
             // Calculate size and position based on this button number and total number of buttons.
-            // Width of button is avalable space divided by number of buttons, less spacing at both sides of button.
+            // Width of button is available space divided by number of buttons, less spacing at both sides of button.
             float buttonPlaceWidth = this.width / totalButtons;
             float buttonWidth = buttonPlaceWidth - (ButtonSpacing * 2f);
             float buttonXpos = ((buttonNumber - 1) * buttonPlaceWidth) + ButtonSpacing;
