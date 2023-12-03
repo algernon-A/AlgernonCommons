@@ -87,7 +87,7 @@ namespace AlgernonCommons.XML
         /// Serializes settings as XML to a byte array.
         /// </summary>
         /// <typeparam name="TFile">XML file type.</typeparam>
-        /// <returns>Byte array containing XML file as binary data (empty array if error occured).</returns>
+        /// <returns>Byte array containing XML file as binary data (empty array if error occurred).</returns>
         public static byte[] SerializeBinary<TFile>()
             where TFile : new()
         {
