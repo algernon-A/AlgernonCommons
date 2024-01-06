@@ -13,7 +13,7 @@ namespace AlgernonCommons
     using static ColossalFramework.Plugins.PluginManager;
 
     /// <summary>
-    /// Core assembly-relateed utilities.
+    /// Core assembly-related utilities.
     /// </summary>
     public static class AssemblyUtils
     {
@@ -36,7 +36,7 @@ namespace AlgernonCommons
         public static string TrimmedCurrentVersion => TrimVersion(CurrentVersion);
 
         /// <summary>
-        /// Gets the mod directory filepath of the currently executing mod assembly.
+        /// Gets the mod directory file path of the currently executing mod assembly.
         /// </summary>
         public static string AssemblyPath
         {
