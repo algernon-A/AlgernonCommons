@@ -1,4 +1,4 @@
-﻿"LANGUAGE","한국어","Language name (in native language)."
+﻿"LANGUAGE","한국어","Language name (in native language).  This means the NAME OF THE LANGUAGE BEING TRANSLATED INTO, and should NOT be a translation of the word 'English'"
 "LANGUAGE_CHOICE","언어 선택","Heading for language selection menu."
 "LANGUAGE_GAME","게임 언어 사용","Default selection in language selection menu."
 "NOTE_CLOSE","닫기","Notification button text - closes the notification."

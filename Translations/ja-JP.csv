@@ -1,4 +1,4 @@
-﻿"LANGUAGE","日本語","Language name (in native language)."
+﻿"LANGUAGE","日本語","Language name (in native language).  This means the NAME OF THE LANGUAGE BEING TRANSLATED INTO, and should NOT be a translation of the word 'English'"
 "LANGUAGE_CHOICE","言語を選択","Heading for language selection menu."
 "LANGUAGE_GAME","ゲームの言語を使用","Default selection in language selection menu."
 "NOTE_CLOSE","閉じる","Notification button text - closes the notification."
